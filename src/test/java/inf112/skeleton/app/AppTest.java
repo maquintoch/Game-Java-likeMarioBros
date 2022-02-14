@@ -6,6 +6,8 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import javafx.scene.paint.Color;
+
 public class AppTest {
 	/**
 	 * Static method run before everything else
@@ -54,5 +56,11 @@ public class AppTest {
 	@ParameterizedTest(name = "{0}+{1} == {2}")
 	void addTest(int a, int b, int c) {
 		assertEquals(c, a + b);
+	}
+	
+	@Test
+	void ballTest() {
+		Ball ball = new Ball(Color.BLACK, 10, null);
+		assertEquals(10, ball.getRadius());
 	}
 }

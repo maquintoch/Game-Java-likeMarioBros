@@ -6,7 +6,7 @@
 	<!-- FIXME - set group id -->
 	<groupId>inf112.skeleton.app</groupId>
 	<!-- FIXME - set artifact name -->
-	<artifactId>mvn-app</artifactId>
+	<artifactId>javafx-app</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -18,32 +18,21 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.release>17</maven.compiler.release>
-		<libgdx.version>1.10.0</libgdx.version>
 		<!-- FIXME - set to app's main class' -->
+		<main.module>inf112.skeleton.app</main.module>
 		<main.class>inf112.skeleton.app.Main</main.class>
 	</properties>
 
 	<dependencies>
-		<!--libGDX graphics library – https://libgdx.com/ -->
-		<dependency>
-			<groupId>com.badlogicgames.gdx</groupId>
-			<artifactId>gdx</artifactId>
-			<version>${libgdx.version}</version>
-		</dependency>
-
-		<!-- Platform-specific libraries -->
-		<dependency>
-			<groupId>com.badlogicgames.gdx</groupId>
-			<artifactId>gdx-platform</artifactId>
-			<version>${libgdx.version}</version>
-			<classifier>natives-desktop</classifier>
-		</dependency>
+		<!--OpenJFX graphics library -->
+		<!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
 
 		<dependency>
-			<groupId>com.badlogicgames.gdx</groupId>
-			<artifactId>gdx-backend-lwjgl3</artifactId>
-			<version>${libgdx.version}</version>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>17.0.2</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -61,6 +50,14 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<configuration>
 					<mainClass>${main.class}</mainClass>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<version>0.0.8</version>
+				<configuration>
+					<mainClass>${main.module}/${main.class}</mainClass>
 				</configuration>
 			</plugin>
 			<!-- Build a fat uber-jar with all dependencies -->
