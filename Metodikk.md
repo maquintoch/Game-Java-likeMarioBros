@@ -61,5 +61,6 @@ Etter at du har verifisert at implementasjonen oppfyller kravet:
 `git merge feature/IssueId`
 
 Flytt issue fra Controll til Completed
+# Remember we have a Planner app...
 
 
