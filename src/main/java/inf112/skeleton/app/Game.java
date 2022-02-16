@@ -13,6 +13,7 @@ public class Game extends Application {
 
     private GraphicsContext context;
     private GameWorld gameWorld;
+    private IDrawable healthUI;
 
     public static void launchGame(String[] args) {
         launch(args);
@@ -32,13 +33,15 @@ public class Game extends Application {
 
         context = canvas.getGraphicsContext2D();
         gameWorld = new GameWorld(context);
+        healthUI = new HealthUIService(context);
 
         var timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
-            gameWorld.Update();
-            gameWorld.Draw();
+                gameWorld.Update();
+                healthUI.Draw();
+                gameWorld.Draw();
             }
 
         };
