@@ -60,7 +60,7 @@ public class AppTest {
 	
 	@Test
 	void ballTest() {
-		Ball ball = new Ball(Color.BLACK, 10, null);
-		assertEquals(10, ball.getRadius());
+		Player player = new Player(Color.BLACK, 10, (BallDemo) null);
+		assertEquals(10, player.getRadius());
 	}
 }

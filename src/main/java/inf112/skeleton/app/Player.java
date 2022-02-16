@@ -5,7 +5,7 @@ import javafx.scene.paint.Paint;
 /**
  * A class to represent bouncing balls
  */
-public class Ball {
+public class Player {
 	private double x, y, dx, dy;
 
 	/** Color of the ball's surface */
@@ -17,7 +17,7 @@ public class Ball {
 	/**
 	 * Link back to demo
 	 */
-	private BallDemo demo;
+	private Playerdemo demo;
 
 	/**
 	 * Number of steps taken
@@ -26,13 +26,20 @@ public class Ball {
 	
 	/**
 	 * Create a new ball with position and velocity (0,0)
-	 * 
 	 * @param color
 	 *            The color
 	 * @param radius
-	 *            The radius
+	 * @param demo
 	 */
-	public Ball(Paint color, double radius, BallDemo demo) {
+	public Player(Paint color, double radius, BallDemo demo) {
+		if (radius < 0)
+			throw new IllegalArgumentException("Radius should not be negative");
+		this.color = color;
+		this.radius = radius;
+		//	this.demo = demo;
+	}
+
+	public Player(Paint color, double radius, Playerdemo demo) {
 		if (radius < 0)
 			throw new IllegalArgumentException("Radius should not be negative");
 		this.color = color;
@@ -121,11 +128,11 @@ public class Ball {
 	public void step() {
 		x += dx;
 		y += dy;
-		
+		/**
 	    if (steps >= 100) {
 	        demo.addExplosion(this);
 	        steps = 0;
-        }
+        }*/
 
 		steps++;
 	}
