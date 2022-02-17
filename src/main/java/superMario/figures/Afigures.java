@@ -1,8 +1,8 @@
 package superMario.figures;
 
 import javafx.scene.image.Image;
-import javafx.scene.shape.Rectangle;
 import javafx.geometry.Dimension2D;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 
 public abstract class Afigures {
@@ -37,15 +37,6 @@ public abstract class Afigures {
         if(style != null){
             g.drawImage(style, x, y);
         }
-
-        //for debugging
-        /*Graphics2D g2 = (Graphics2D)g;
-        g2.setColor(Color.WHITE);
-
-        g2.draw(getTopBounds());
-        g2.draw(getBottomBounds());
-        g2.draw(getRightBounds());
-        g2.draw(getLeftBounds());*/
     }
 
     public void updateLocation() {
@@ -131,24 +122,24 @@ public abstract class Afigures {
         this.gravityAcc = gravityAcc;
     }
 
-    public Rectangle getTopBounds(){
-        return new Rectangle(x+dimension.getWidth()/6, y, 2*dimension.getWidth()/3, dimension.getHeight()/2);
+    public Rectangle2D getTopBounds(){
+        return new Rectangle2D(x+dimension.getWidth()/6, y, 2*dimension.getWidth()/3, dimension.getHeight()/2);
     }
 
-    public Rectangle getBottomBounds(){
-        return new Rectangle(x+dimension.getWidth()/6, y + dimension.getHeight()/2, 2*dimension.getWidth()/3, dimension.getHeight()/2);
+    public Rectangle2D getBottomBounds(){
+        return new Rectangle2D(x+dimension.getWidth()/6, y + dimension.getHeight()/2, 2*dimension.getWidth()/3, dimension.getHeight()/2);
     }
 
-    public Rectangle getLeftBounds(){
-        return new Rectangle(x, y + dimension.getHeight()/4, dimension.getWidth()/4, dimension.getHeight()/2);
+    public Rectangle2D getLeftBounds(){
+        return new Rectangle2D(x, y + dimension.getHeight()/4, dimension.getWidth()/4, dimension.getHeight()/2);
     }
 
-    public Rectangle getRightBounds(){
-        return new Rectangle(x + 3*dimension.getWidth()/4, y + dimension.getHeight()/4, dimension.getWidth()/4, dimension.getHeight()/2);
+    public Rectangle2D getRightBounds(){
+        return new Rectangle2D(x + 3*dimension.getWidth()/4, y + dimension.getHeight()/4, dimension.getWidth()/4, dimension.getHeight()/2);
     }
 
-    public Rectangle getBounds(){
-        return new Rectangle(x, y, dimension.getWidth(), dimension.getHeight());
+    public Rectangle2D getBounds(){
+        return new Rectangle2D(x, y, dimension.getWidth(), dimension.getHeight());
     }
 
     public boolean isFalling() {
