@@ -1,7 +1,6 @@
 package superMario.manager;
 
 import superMario.figures.Afigures;
-
 import superMario.maps.Map;
 import superMario.figures.brick.Brick;
 import superMario.figures.brick.OrdinaryBrick;
@@ -15,8 +14,8 @@ import superMario.view.ImageLoader;
 
 import java.util.ArrayList;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.shape.Rectangle;
 
 public class MapManager {
 
@@ -116,22 +115,22 @@ public class MapManager {
         ArrayList<Enemy> enemies = map.getEnemies();
         ArrayList<Afigures> toBeRemoved = new ArrayList<>();
 
-        Rectangle marioBottomBounds = mario.getBottomBounds();
+        Rectangle2D marioBottomBounds = mario.getBottomBounds();
 
         if (!mario.isJumping())
             mario.setFalling(true);
 
         for (Brick brick : bricks) {
-            Rectangle brickTopBounds = brick.getTopBounds();
+            Rectangle2D brickTopBounds = brick.getTopBounds();
             if (marioBottomBounds.intersects(brickTopBounds)) {
-                mario.setY(brick.getY() - mario.getDimension().height + 1);
+                mario.setY(brick.getY() - mario.getDimension().getHeight() + 1);
                 mario.setFalling(false);
                 mario.setVelY(0);
             }
         }
 
         for (Enemy enemy : enemies) {
-            Rectangle enemyTopBounds = enemy.getTopBounds();
+            Rectangle2D enemyTopBounds = enemy.getTopBounds();
             if (marioBottomBounds.intersects(enemyTopBounds)) {
                 mario.acquirePoints(100);
                 toBeRemoved.add(enemy);
@@ -152,12 +151,12 @@ public class MapManager {
         Mario mario = getMario();
         ArrayList<Brick> bricks = map.getAllBricks();
 
-        Rectangle marioTopBounds = mario.getTopBounds();
+        Rectangle2D marioTopBounds = mario.getTopBounds();
         for (Brick brick : bricks) {
-            Rectangle brickBottomBounds = brick.getBottomBounds();
+            Rectangle2D brickBottomBounds = brick.getBottomBounds();
             if (marioTopBounds.intersects(brickBottomBounds)) {
                 mario.setVelY(0);
-                mario.setY(brick.getY() + brick.getDimension().height);
+                mario.setY(brick.getY() + brick.getDimension().getHeight());
                 Prize prize = brick.reveal(engine);
                 if(prize != null)
                     map.addRevealedPrize(prize);
@@ -174,10 +173,10 @@ public class MapManager {
         boolean marioDies = false;
         boolean toRight = mario.getToRight();
 
-        Rectangle marioBounds = toRight ? mario.getRightBounds() : mario.getLeftBounds();
+        Rectangle2D marioBounds = toRight ? mario.getRightBounds() : mario.getLeftBounds();
 
         for (Brick brick : bricks) {
-            Rectangle brickBounds = !toRight ? brick.getRightBounds() : brick.getLeftBounds();
+            Rectangle2D brickBounds = !toRight ? brick.getRightBounds() : brick.getLeftBounds();
             if (marioBounds.intersects(brickBounds)) {
                 mario.setVelX(0);
                 if(toRight)
@@ -188,7 +187,7 @@ public class MapManager {
         }
 
         for(Enemy enemy : enemies){
-            Rectangle enemyBounds = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
+            Rectangle2D enemyBounds = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
             if (marioBounds.intersects(enemyBounds)) {
                 marioDies = mario.onTouchEnemy(engine);
                 toBeRemoved.add(enemy);
@@ -215,11 +214,11 @@ public class MapManager {
             boolean standsOnBrick = false;
 
             for (Brick brick : bricks) {
-                Rectangle enemyBounds = enemy.getLeftBounds();
-                Rectangle brickBounds = brick.getRightBounds();
+                Rectangle2D enemyBounds = enemy.getLeftBounds();
+                Rectangle2D brickBounds = brick.getRightBounds();
 
-                Rectangle enemyBottomBounds = enemy.getBottomBounds();
-                Rectangle brickTopBounds = brick.getTopBounds();
+                Rectangle2D enemyBottomBounds = enemy.getBottomBounds();
+                Rectangle2D brickTopBounds = brick.getTopBounds();
 
                 if (enemy.getVelX() > 0) {
                     enemyBounds = enemy.getRightBounds();
@@ -257,13 +256,13 @@ public class MapManager {
         for (Prize prize : prizes) {
             if (prize instanceof BoostItem) {
                 BoostItem boost = (BoostItem) prize;
-                Rectangle prizeBottomBounds = boost.getBottomBounds();
-                Rectangle prizeRightBounds = boost.getRightBounds();
-                Rectangle prizeLeftBounds = boost.getLeftBounds();
+                Rectangle2D prizeBottomBounds = boost.getBottomBounds();
+                Rectangle2D prizeRightBounds = boost.getRightBounds();
+                Rectangle2D prizeLeftBounds = boost.getLeftBounds();
                 boost.setFalling(true);
 
                 for (Brick brick : bricks) {
-                    Rectangle brickBounds;
+                    Rectangle2D brickBounds;
 
                     if (boost.isFalling()) {
                         brickBounds = brick.getTopBounds();
@@ -308,9 +307,9 @@ public class MapManager {
         ArrayList<Prize> prizes = map.getRevealedPrizes();
         ArrayList<Afigures> toBeRemoved = new ArrayList<>();
 
-        Rectangle marioBounds = getMario().getBounds();
+        Rectangle2D marioBounds = getMario().getBounds();
         for(Prize prize : prizes){
-            Rectangle prizeBounds = prize.getBounds();
+            Rectangle2D prizeBounds = prize.getBounds();
             if (prizeBounds.intersects(marioBounds)) {
                 prize.onTouch(getMario(), engine);
                 toBeRemoved.add((Afigures) prize);
@@ -329,10 +328,10 @@ public class MapManager {
         ArrayList<Afigures> toBeRemoved = new ArrayList<>();
 
         for(Fireball fireball : fireballs){
-            Rectangle fireballBounds = fireball.getBounds();
+            Rectangle2D fireballBounds = fireball.getBounds();
 
             for(Enemy enemy : enemies){
-                Rectangle enemyBounds = enemy.getBounds();
+                Rectangle2D enemyBounds = enemy.getBounds();
                 if (fireballBounds.intersects(enemyBounds)) {
                     acquirePoints(100);
                     toBeRemoved.add(enemy);
@@ -341,7 +340,7 @@ public class MapManager {
             }
 
             for(Brick brick : bricks){
-                Rectangle brickBounds = brick.getBounds();
+                Rectangle2D brickBounds = brick.getBounds();
                 if (fireballBounds.intersects(brickBounds)) {
                     toBeRemoved.add(fireball);
                 }

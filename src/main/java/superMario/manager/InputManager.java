@@ -1,66 +1,64 @@
 package superMario.manager;
 
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent; 
 
 
-public class InputManager implements KeyListener, MouseListener{
+public class InputManager{
 
     private GameEngine engine;
 
     InputManager(GameEngine engine) {
-        this.engine = engine; }
+        this.engine = engine; 
+    }
 
-    @Override
     public void keyTyped(KeyEvent event) {
-        int keyCode = event.getKeyCode();
+        int keyCode = event.getCode().getCode();
         GameStatus status = engine.getGameStatus();
         ButtonAction currentAction = ButtonAction.NO_ACTION;
 
-        if (keyCode == KeyEvent.VK_UP) {
+        if (keyCode == KeyCode.UP.getCode()) {
             if(status == GameStatus.START_SCREEN || status == GameStatus.MAP_SELECTION)
                 currentAction = ButtonAction.GO_UP;
             else
                 currentAction = ButtonAction.JUMP;
         }
-        else if(keyCode == KeyEvent.VK_DOWN){
+        else if(keyCode == KeyCode.DOWN.getCode()){
             if(status == GameStatus.START_SCREEN || status == GameStatus.MAP_SELECTION)
                 currentAction = ButtonAction.GO_DOWN;
         }
-        else if (keyCode == KeyEvent.VK_RIGHT) {
+        else if (keyCode == KeyCode.RIGHT.getCode()) {
             currentAction = ButtonAction.M_RIGHT;
         }
-        else if (keyCode == KeyEvent.VK_LEFT) {
+        else if (keyCode == KeyCode.LEFT.getCode()) {
             currentAction = ButtonAction.M_LEFT;
         }
-        else if (keyCode == KeyEvent.VK_ENTER) {
+        else if (keyCode == KeyCode.ENTER.getCode()) {
             currentAction = ButtonAction.SELECT;
         }
-        else if (keyCode == KeyEvent.VK_ESCAPE) {
+        else if (keyCode == KeyCode.ESCAPE.getCode()) {
             if(status == GameStatus.RUNNING || status == GameStatus.PAUSED )
                 currentAction = ButtonAction.PAUSE_RESUME;
             else
                 currentAction = ButtonAction.GO_TO_START_SCREEN;
 
         }
-        else if (keyCode == KeyEvent.VK_SPACE){
+        else if (keyCode == KeyCode.SPACE.getCode()){
             currentAction = ButtonAction.FIRE;
         }
-
 
         notifyInput(currentAction);
     }
 
-    @Override
     public void mousePressed(MouseEvent e) {
         if(engine.getGameStatus() == GameStatus.MAP_SELECTION){
             engine.selectMapViaMouse();
         }
     }
-
-    @Override
+   
     public void keyReleased(KeyEvent event) {
-        if(event.getKeyCode() == KeyEvent.VK_RIGHT || event.getKeyCode() == KeyEvent.VK_LEFT)
+        if(event.getCode().getCode() == KeyCode.RIGHT.getCode() || event.getCode().getCode() == KeyCode.LEFT.getCode())
             notifyInput(ButtonAction.ACTION_COMPLETED);
     }
 
@@ -68,5 +66,6 @@ public class InputManager implements KeyListener, MouseListener{
         if(action != ButtonAction.NO_ACTION)
             engine.receiveInput(action);
     }
+}
 
 
