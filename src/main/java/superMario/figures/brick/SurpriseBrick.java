@@ -17,7 +17,7 @@ public class SurpriseBrick extends Brick{
 
     @Override
     public Prize reveal(GameEngine engine){
-        Image newStyle = engine.getImageLoader().loadImage("/sprite.png");
+        Image newStyle = engine.getImageLoader().loadImage("/superMario/media/sprite.png");
         newStyle = engine.getImageLoader().getSubImage(newStyle, 1, 2, 48, 48);
 
         if(prize != null){
