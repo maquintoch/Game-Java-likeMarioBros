@@ -19,6 +19,8 @@ public class CanvasFactory {
         double height = 500;
         Group root = new Group();
         Scene scene = new Scene(root, width, height, Color.LIGHTSKYBLUE);
+        stage.setRenderScaleX(2);
+        stage.setRenderScaleY(2);
         stage.setScene(scene);
 
         var canvas = new Canvas(width, height);

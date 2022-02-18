@@ -1,7 +1,9 @@
 package inf112.skeleton.app;
 
-<<<<<<< HEAD
+
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 
@@ -27,9 +29,10 @@ public class LevelFactory implements ILevelFactory {
         for(var y = 0; y < level.length; y++) {
             for(var x = 0; x < level[y].length(); x++) {
                 if(level[y].charAt(x) == 'b') {
+                    System.out.println(canvas.getHeight());
                     var gridPosition = new GridPosition(x, y);
-                    var tileSize = new TileSize(16, 16);
-                    var tile = new Tile(gridPosition, tileSize, context);
+                    var tileSize = new TileSize(20, 20);
+                    var tile = new Tile(gridPosition, tileSize, context,canvas);
                     Tiles.add(tile);
                 }
             }
