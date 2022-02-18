@@ -9,10 +9,13 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+
 public class Game extends Application {
 
+//<<<<<<< HEAD
+//=======
     private GraphicsContext context;
-
+//>>>>>>> 647752630c418469d8d8916453ebbdff15d4c475
     private GameWorld gameWorld;
 
     public static void launchGame(String[] args) {
