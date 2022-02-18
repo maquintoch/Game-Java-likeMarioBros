@@ -26,14 +26,13 @@ public class Game extends Application {
         Group root = new Group();
         Scene scene = new Scene(root, width, height, Color.LIGHTSKYBLUE);
         stage.setScene(scene);
-
         var canvas = new Canvas(width, height);
         canvas.widthProperty().bind(scene.widthProperty());
         canvas.heightProperty().bind(scene.heightProperty());
 
         context = canvas.getGraphicsContext2D();
         gameWorld = new GameWorld(context);
-        healthUI = new HealthUIService(context);
+        healthUI = new HealthUIService(context);//Player.health
 
         var timer = new AnimationTimer() {
 

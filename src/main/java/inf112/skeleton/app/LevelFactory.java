@@ -8,11 +8,12 @@ public class LevelFactory {
 
     public static ArrayList<Tile> GetTiles(GraphicsContext context) {
         String[] level = {
-            "..............b.....",
-            "......bb............",
-            "....p......bbbb..b..",
-            "..........b.........",
-            "bbbbbbbbbbbbbbbbbbbb"
+                "...........................................................................",
+                "...........................................................................",
+                "...........................................................................",
+                "...........................................................................",
+                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "........................b...................b.........b...................."
             };
 
         ArrayList<Tile> Tiles = new ArrayList<Tile>();
