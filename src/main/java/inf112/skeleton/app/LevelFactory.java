@@ -1,6 +1,5 @@
 package inf112.skeleton.app;
 
-<<<<<<< HEAD
 import javafx.scene.canvas.Canvas;
 
 import java.util.ArrayList;
