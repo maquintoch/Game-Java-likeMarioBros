@@ -1,24 +1,32 @@
 package inf112.skeleton.app;
 
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 public class GameWorld implements IDrawable, IUpdateable {
 
-    private IDrawable backgroundDrawService;
-    private ArrayList<Tile> Tiles;
+    private Collection<IDrawable> drawPipeline;
 
-    public GameWorld(GraphicsContext context) {
-        Tiles = LevelFactory.GetTiles(context);
-        backgroundDrawService = new GameBackgroundDrawService(context);
+    public GameWorld(Canvas canvas) {
+        var levelFactory = new LevelFactory(canvas);
+        var factoryTiles = levelFactory.GetTiles();
+        var Tiles = new TileCollection(factoryTiles);
+        var backgroundDrawService = new GameBackgroundDrawService(canvas);
+
+        drawPipeline = new ArrayList<IDrawable>();
+
+        drawPipeline.add(backgroundDrawService);
+        drawPipeline.add(Tiles);
     }
 
     @Override
     public void Draw() {
-        backgroundDrawService.Draw();
-        for (Tile tile : Tiles) {
-            tile.Draw();
+        for(IDrawable drawable : drawPipeline) {
+            drawable.Draw();
         }
     }
 

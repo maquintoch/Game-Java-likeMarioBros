@@ -1,12 +1,18 @@
 package inf112.skeleton.app;
 
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.canvas.Canvas;
 
 import java.util.ArrayList;
 
-public class LevelFactory {
+public class LevelFactory implements ILevelFactory {
 
-    public static ArrayList<Tile> GetTiles(GraphicsContext context) {
+    private Canvas canvas;
+
+    public LevelFactory(Canvas canvas) {
+        this.canvas = canvas;
+    }
+
+    public ArrayList<Tile> GetTiles() {
         String[] level = {
             "..............b.....",
             "......bb............",
@@ -16,6 +22,7 @@ public class LevelFactory {
             };
 
         ArrayList<Tile> Tiles = new ArrayList<Tile>();
+        var context = canvas.getGraphicsContext2D();
         for(var y = 0; y < level.length; y++) {
             for(var x = 0; x < level[y].length(); x++) {
                 if(level[y].charAt(x) == 'b') {

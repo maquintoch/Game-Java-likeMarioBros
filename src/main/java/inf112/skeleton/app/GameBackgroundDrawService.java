@@ -1,13 +1,13 @@
 package inf112.skeleton.app;
 
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.canvas.Canvas;
 
 public class GameBackgroundDrawService implements IDrawable {
 
-    GraphicsContext context;
+    private Canvas canvas;
 
-    public GameBackgroundDrawService(GraphicsContext context) {
-        this.context = context;
+    public GameBackgroundDrawService(Canvas canvas) {
+        this.canvas = canvas;
     }
 
     @Override
