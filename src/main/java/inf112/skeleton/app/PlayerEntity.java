@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class PlayerEntity extends Entity {
 
+    private Speed acceleration;
     private Speed speed;
     private IInputHandler inputHandler;
     private ArrayList<Tile> collideableCollection;
@@ -15,7 +16,8 @@ public class PlayerEntity extends Entity {
         super(canvas);
         this.position = new Position(1, 2);
         this.boundingBox = new Rectangle(16, 16);
-        this.speed = new Speed(1, 0.1f);
+        this.speed = new Speed(0, 0);
+        this.acceleration = new Speed(0, 1);
         this.inputHandler = inputHandler;
 
         this.collideableCollection = collideables;
@@ -24,11 +26,13 @@ public class PlayerEntity extends Entity {
     @Override
     public void Update() {
 
-        speed = new Speed(0, 0);
-        if(inputHandler.isActive(KeyCode.W)) speed.velocityY = -1;
-        if(inputHandler.isActive(KeyCode.S)) speed.velocityY = 1;
-        if(inputHandler.isActive(KeyCode.A)) speed.velocityX = -1;
-        if(inputHandler.isActive(KeyCode.D)) speed.velocityX = 1;
+        if(inputHandler.isActive(KeyCode.W)) speed.velocityY = -4;
+        else if(inputHandler.isActive(KeyCode.A)) speed.velocityX = -1;
+        else if(inputHandler.isActive(KeyCode.D)) speed.velocityX = 1;
+        else speed.velocityX = 0;
+
+        speed.velocityY += acceleration.velocityY;
+        speed.velocityX += acceleration.velocityX;
 
         position.x += speed.velocityX;
         for(var collidable : collideableCollection) {
