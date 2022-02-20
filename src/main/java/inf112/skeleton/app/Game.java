@@ -25,7 +25,6 @@ public class Game extends Application {
         Group root = new Group();
         Scene scene = new Scene(root, width, height, Color.LIGHTSKYBLUE);
         stage.setScene(scene);
-
         var canvas = new Canvas(width, height);
         canvas.widthProperty().bind(scene.widthProperty());
         canvas.heightProperty().bind(scene.heightProperty());
@@ -44,7 +43,7 @@ public class Game extends Application {
         });
         gameWorld = new GameWorld(canvas, inputHandler);
         var context = canvas.getGraphicsContext2D();
-        healthUI = new HealthUIService(context);
+        healthUI = new HealthUIService(context);//Player.health
 
         var timer = new AnimationTimer() {
 
