@@ -66,18 +66,18 @@ public class Mario extends PlayerEntity{
     	if(inputButtons.contains("RIGHT")) {
     		direction = "RIGHT";
     		xAxis += moveLength;
-    		getGraphicsContext().drawImage(imageRight[0], xAxis, yAxis);
+    		getGraphicsContext().drawImage(imageRight[1], xAxis, yAxis);
        	}
 		// check whether LEFT key is pressed
     	else if(inputButtons.contains("LEFT")) {
     		direction = "LEFT";
     		xAxis -= moveLength;
-    		getGraphicsContext().drawImage(imageLeft[0], xAxis, yAxis);
+    		getGraphicsContext().drawImage(imageLeft[1], xAxis, yAxis);
     	}
 		// check whether UP key is pressed
     	else if(inputButtons.contains("UP")) {
-       		if(direction=="RIGHT") getGraphicsContext().drawImage(imageRight[0], xAxis, yAxis-jumpHeight);
-       		else getGraphicsContext().drawImage(imageLeft[0], xAxis, yAxis-jumpHeight);
+       		if(direction=="RIGHT") getGraphicsContext().drawImage(imageRight[1], xAxis, yAxis-jumpHeight);
+       		else getGraphicsContext().drawImage(imageLeft[1], xAxis, yAxis-jumpHeight);
        	}
 		// check direction of Mario when no key is pressed
        	else {
