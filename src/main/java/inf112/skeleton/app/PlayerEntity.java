@@ -14,10 +14,10 @@ public class PlayerEntity extends Entity {
 
     public PlayerEntity(Canvas canvas, ArrayList<Tile> collideables, IInputHandler inputHandler) {
         super(canvas);
-        this.position = new Position(1, 2);
+        this.position = new Position(3, 10);
         this.boundingBox = new Rectangle(16, 16);
         this.speed = new Speed(0, 0);
-        this.acceleration = new Speed(0, 1);
+        this.acceleration = new Speed(0, -0.5f);
         this.inputHandler = inputHandler;
 
         this.collideableCollection = collideables;
@@ -26,8 +26,8 @@ public class PlayerEntity extends Entity {
     @Override
     public void Update() {
 
-        if(inputHandler.isActive(KeyCode.W)) speed.velocityY = -4;
-        else if(inputHandler.isActive(KeyCode.A)) speed.velocityX = -1;
+        if(inputHandler.isActive(KeyCode.W)) speed.velocityY = 4;
+        if(inputHandler.isActive(KeyCode.A)) speed.velocityX = -1;
         else if(inputHandler.isActive(KeyCode.D)) speed.velocityX = 1;
         else speed.velocityX = 0;
 

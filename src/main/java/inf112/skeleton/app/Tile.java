@@ -1,19 +1,21 @@
 package inf112.skeleton.app;
 
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class Tile implements IDrawable, ICollideable {
 
     private IDrawBehavior drawHandler;
-
+    private Canvas canvas;
     private GridPosition gridPosition;
     private TileSize tileSize;
 
-    public Tile(GridPosition gridPosition, TileSize tileSize, GraphicsContext context) {
+    public Tile(GridPosition gridPosition, TileSize tileSize, GraphicsContext context, Canvas canvas) {
+        this.canvas = canvas;
         this.gridPosition = gridPosition;
         this.tileSize = tileSize;
-        drawHandler = new DrawColorBehavior(context, Color.CORAL);
+        drawHandler = new DrawColorBehavior(this.canvas, Color.CORAL);
     }
 
     public void Draw() {
