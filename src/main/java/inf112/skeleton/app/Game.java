@@ -12,6 +12,7 @@ public class Game extends Application {
 
     private GameWorld gameWorld;
     private IInputHandler inputHandler;
+    private IDrawable healthUI;
 
     public static void launchGame(String[] args) {
         launch(args);
@@ -42,12 +43,15 @@ public class Game extends Application {
             inputHandler.setInactive(keyCode);
         });
         gameWorld = new GameWorld(canvas, inputHandler);
+        var context = canvas.getGraphicsContext2D();
+        healthUI = new HealthUIService(context);
 
         var timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
                 gameWorld.Update();
+                healthUI.Draw();
                 gameWorld.Draw();
             }
 
