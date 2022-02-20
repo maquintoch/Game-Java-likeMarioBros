@@ -87,7 +87,6 @@ public class Mario extends PlayerEntity{
 		
 	}
 
-	
     @Override
     public void Update() {
     }
