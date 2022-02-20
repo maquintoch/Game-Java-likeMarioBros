@@ -9,7 +9,10 @@ public class PlayerEntity extends Entity {
 
     @Override
     public void Update() {
-
     }
+
+	@Override
+	public void Draw() {		
+	}
 
 }
