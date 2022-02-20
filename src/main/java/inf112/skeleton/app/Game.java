@@ -5,17 +5,13 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Game extends Application {
 
-<<<<<<< HEAD
-=======
-    private GraphicsContext context;
->>>>>>> 647752630c418469d8d8916453ebbdff15d4c475
     private GameWorld gameWorld;
+    private IInputHandler inputHandler;
 
     public static void launchGame(String[] args) {
         launch(args);
@@ -23,10 +19,29 @@ public class Game extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        var canvasFactory = new CanvasFactory(stage);
-        var canvas = canvasFactory.getCanvas();
+        double width = 500;
+        double height = 500;
+        Group root = new Group();
+        Scene scene = new Scene(root, width, height, Color.LIGHTSKYBLUE);
+        stage.setScene(scene);
 
-        gameWorld = new GameWorld(canvas);
+        var canvas = new Canvas(width, height);
+        canvas.widthProperty().bind(scene.widthProperty());
+        canvas.heightProperty().bind(scene.heightProperty());
+        root.getChildren().add(canvas);
+
+        inputHandler = new InputHandler();
+
+        scene.setOnKeyPressed(event -> {
+            var keyCode = event.getCode();
+            inputHandler.setActive(keyCode);
+        });
+
+        scene.setOnKeyReleased(event -> {
+            var keyCode = event.getCode();
+            inputHandler.setInactive(keyCode);
+        });
+        gameWorld = new GameWorld(canvas, inputHandler);
 
         var timer = new AnimationTimer() {
 

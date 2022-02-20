@@ -9,9 +9,9 @@ public class DrawColorBehavior implements IDrawBehavior {
     private GraphicsContext context;
     private Paint color;
 
-    public DrawColorBehavior(GraphicsContext context) {
+    public DrawColorBehavior(GraphicsContext context, Paint color) {
         this.context = context;
-        color = Color.LIGHTCORAL;
+        this.color = color;
     }
 
     public void Draw(Position position, Rectangle boundingBox) {
