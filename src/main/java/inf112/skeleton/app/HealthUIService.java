@@ -9,15 +9,17 @@ public class HealthUIService implements IDrawable {
 
     private GraphicsContext context;
     private IHealthManager healthManager;
-    private Health currenthealth = healthManager.GetHealth();
-    private Health maxHealth = healthManager.GetMaxHealth();
 
     public HealthUIService(GraphicsContext context) {
         this.context = context;
+        this.healthManager = new HealthManager();
     }
 
     @Override
     public void Draw() {
+        Health currenthealth = healthManager.GetHealth();
+        Health maxHealth = healthManager.GetMaxHealth();
+
         context.setFill(Color.RED);
         context.fillRect(0,0,maxHealth.amount,10);
         context.setFill(Color.GREEN);
