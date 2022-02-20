@@ -1,5 +1,5 @@
 package inf112.skeleton.app;
-
+/*
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -139,3 +139,4 @@ public class Mario extends PlayerEntity{
     	return this.coins;
     }
 }
+ */
