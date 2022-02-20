@@ -3,7 +3,6 @@ package inf112.skeleton.app;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
-
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
