@@ -3,7 +3,7 @@ Yilin:
 1. Har gjort:
 • Nå lager jeg en enkel Mario figur på en enkel skjermen. 
 • Mario kan bevege ved LEFT, RIGHT, UP.
-• Mario har egen klasse som skal oppdateres ettpå.
+• Mario har egen klasse som skal oppdateres etterpå.
 
 2. Skal gjøre:
 • Skal oppdatere Marios funksjoner.
