@@ -1,5 +1,7 @@
 package inf112.skeleton.app;
 
+import java.io.File;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
