@@ -1,24 +1,39 @@
 package inf112.skeleton.app;
 
 import javafx.scene.canvas.Canvas;
-import javafx.scene.paint.Color;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.*;
+import javafx.scene.canvas.*;
+import javafx.scene.effect.*;
 import javafx.scene.image.Image;
+import javafx.scene.paint.*;
+import javafx.stage.Stage;
+
 
 public class GameBackgroundDrawService implements IDrawable {
 
     private Canvas canvas;
-    private IDrawBehavior drawBehavior;
 
     public GameBackgroundDrawService(Canvas canvas) {
         this.canvas = canvas;
-        drawBehavior = new DrawColorBehavior(canvas, Color.WHITE);
     }
 
     @Override
     public void Draw() {
-        var position = new Position(0, 0);
-        var rectangle = new Rectangle(((int) canvas.getWidth()), ((int) canvas.getHeight()));
-        drawBehavior.Draw(position, rectangle);
+    	
+        String imagePath = "https://previews.123rf.com/images/vitaliyvill/vitaliyvill1609/vitaliyvill160900011/62999356-seamless-game-background-flat-style-2d-game-application.jpg?fbclid=IwAR3RCBjcR9G8fWr7rEk2YYcwQ5N_LlzQq6XVwgJ5yG0-j-QL0sQJLF4wmAA";
+        
+        Image image = new Image(imagePath);
+        
+        final GraphicsContext gc = canvas.getGraphicsContext2D();
+        
+        double canvasWidth = canvas.getWidth();
+        double canvasHeight = canvas.getHeight();
+
+        //Draw image on screen
+        gc.drawImage(image, 0, 0, canvasWidth, canvasHeight);
+       
+        
+        
+        
     }
 }
