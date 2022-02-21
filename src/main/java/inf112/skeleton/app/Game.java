@@ -58,10 +58,19 @@ public class Game extends Application {
         var context = canvas.getGraphicsContext2D();
         healthUI = new HealthUIService(context);//Player.health
 
+        // Add sound of background game and game over
+        String soundGameTheme = "src/main/java/inf112/skeleton/app/GameTheme.mp3";
+        Media media = new Media(new File(soundGameTheme).toURI().toString());
+        MediaPlayer mp = new MediaPlayer(media);
+
         var timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
+                // cycling music in background
+                mp.setCycleCount(MediaPlayer.INDEFINITE);
+                mp.play();
+
                 gameWorld.Update();
                 gameWorld.Draw();
                 healthUI.Draw();
