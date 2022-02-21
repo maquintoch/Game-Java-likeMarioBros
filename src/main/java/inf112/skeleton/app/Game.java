@@ -63,8 +63,8 @@ public class Game extends Application {
             @Override
             public void handle(long now) {
                 gameWorld.Update();
-                healthUI.Draw();
                 gameWorld.Draw();
+                healthUI.Draw();
             }
 
         };

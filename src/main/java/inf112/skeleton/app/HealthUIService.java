@@ -19,7 +19,6 @@ public class HealthUIService implements IDrawable {
     public void Draw() {
         Health currenthealth = healthManager.GetHealth();
         Health maxHealth = healthManager.GetMaxHealth();
-
         context.setFill(Color.RED);
         context.fillRect(0,0,maxHealth.amount,10);
         context.setFill(Color.GREEN);
