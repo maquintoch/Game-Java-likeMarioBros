@@ -2,7 +2,7 @@ package inf112.skeleton.app;
 
 public class HealthManager implements IHealthManager {
 
-    private Health health = new Health(10);
+    private Health health = new Health(100);
 
     @Override
     public Health GetHealth() {
@@ -11,6 +11,6 @@ public class HealthManager implements IHealthManager {
 
     @Override
     public Health GetMaxHealth() {
-        return new Health(10);
+        return new Health(100);
     }
 }
