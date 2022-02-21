@@ -44,7 +44,6 @@ Når du mener issuen er løst, må du merge det inn i development branch.
 Du kan nå flytte issuen til Controll
 
 
-
 Til personen som tester implementasjonen:
 
 For å se remote branches:
@@ -62,5 +61,6 @@ Etter at du har verifisert at implementasjonen oppfyller kravet:
 `git merge feature/IssueId`
 
 Flytt issue fra Controll til Completed
+# Dette er en test - marco
 
 
