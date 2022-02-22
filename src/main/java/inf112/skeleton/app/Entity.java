@@ -13,6 +13,7 @@ public abstract class Entity implements IDrawable, IUpdateable, IMoveable, IColl
 
     public Entity(Canvas canvas) {
         drawHandler = new DrawColorBehavior(canvas, Color.BLUE);
+        
     }
 
     @Override

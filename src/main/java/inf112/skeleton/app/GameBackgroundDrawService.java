@@ -12,17 +12,18 @@ import javafx.stage.Stage;
 public class GameBackgroundDrawService implements IDrawable {
 
     private Canvas canvas;
+    
+    private Image image;
 
     public GameBackgroundDrawService(Canvas canvas) {
         this.canvas = canvas;
+        String imagePath = "https://previews.123rf.com/images/vitaliyvill/vitaliyvill1609/vitaliyvill160900011/62999356-seamless-game-background-flat-style-2d-game-application.jpg?fbclid=IwAR3RCBjcR9G8fWr7rEk2YYcwQ5N_LlzQq6XVwgJ5yG0-j-QL0sQJLF4wmAA";
+        this.image = new Image(imagePath);
+
     }
 
     @Override
     public void Draw() {
-    	
-        String imagePath = "https://previews.123rf.com/images/vitaliyvill/vitaliyvill1609/vitaliyvill160900011/62999356-seamless-game-background-flat-style-2d-game-application.jpg?fbclid=IwAR3RCBjcR9G8fWr7rEk2YYcwQ5N_LlzQq6XVwgJ5yG0-j-QL0sQJLF4wmAA";
-        
-        Image image = new Image(imagePath);
         
         final GraphicsContext gc = canvas.getGraphicsContext2D();
         
