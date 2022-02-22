@@ -13,6 +13,7 @@ public class Game extends Application {
     private GameWorld gameWorld;
     private IInputHandler inputHandler;
     private IDrawable healthUI;
+    private IDrawable coinUI;
 
     public static void launchGame(String[] args) {
         launch(args);
@@ -44,6 +45,7 @@ public class Game extends Application {
         gameWorld = new GameWorld(canvas, inputHandler);
         var context = canvas.getGraphicsContext2D();
         healthUI = new HealthUIService(context);//Player.health
+        coinUI = new CoinUIService(context); //Keeping track of coins picked up. 
 
         var timer = new AnimationTimer() {
 
@@ -52,6 +54,7 @@ public class Game extends Application {
                 gameWorld.Update();
                 gameWorld.Draw();
                 healthUI.Draw();
+                coinUI.Draw();
             }
 
         };

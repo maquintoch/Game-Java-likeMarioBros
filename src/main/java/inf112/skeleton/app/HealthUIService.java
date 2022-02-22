@@ -23,5 +23,6 @@ public class HealthUIService implements IDrawable {
         context.fillRect(0,0,maxHealth.amount,10);
         context.setFill(Color.GREEN);
         context.fillRect(0,0, currenthealth.amount, 10);
+        
     }
 }
