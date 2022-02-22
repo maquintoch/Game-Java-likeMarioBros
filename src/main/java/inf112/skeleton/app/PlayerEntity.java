@@ -25,7 +25,6 @@ public class PlayerEntity extends Entity {
 
     @Override
     public void Update() {
-
         if(inputHandler.isActive(KeyCode.W)) speed.velocityY = 4;
         if(inputHandler.isActive(KeyCode.A)) speed.velocityX = -1;
         else if(inputHandler.isActive(KeyCode.D)) speed.velocityX = 1;
