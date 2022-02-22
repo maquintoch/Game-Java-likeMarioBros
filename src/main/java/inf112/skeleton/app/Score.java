@@ -6,5 +6,17 @@ public class Score {
 	public Score(int amount) {
         this.amount = amount;
     }
+	
+	public int getScore() {
+		return amount;
+	}
+	
+	public void AddOneToScore() {
+		amount++;
+	}
+	
+	public void SubtractOneFromScore() {
+		amount--;
+	}
 
 }
