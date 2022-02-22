@@ -13,7 +13,9 @@ public class GameWorld implements IDrawable, IUpdateable {
     public GameWorld(Canvas canvas, IInputHandler inputHandler) {
         var levelFactory = new LevelFactory(canvas);
         var factoryTiles = levelFactory.GetTiles();
+        var factoryCoins = levelFactory.GetCoins();
         var Tiles = new TileCollection(factoryTiles);
+        var Coins = new CoinCollection(factoryCoins);
         var backgroundDrawService = new GameBackgroundDrawService(canvas);
 
         var player = new PlayerEntity(canvas, factoryTiles, inputHandler);
@@ -23,6 +25,7 @@ public class GameWorld implements IDrawable, IUpdateable {
 
         drawPipeline.add(backgroundDrawService);
         drawPipeline.add(Tiles);
+        drawPipeline.add(Coins);
         drawPipeline.add(player);
 
         updatePipeline.add(player);

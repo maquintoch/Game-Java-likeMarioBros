@@ -45,6 +45,7 @@ public class LevelFactory implements ILevelFactory {
         Collections.reverse(level);
 
         ArrayList<Tile> Tiles = new ArrayList<Tile>();
+        ArrayList<Coin> Coins = new ArrayList<Coin>();
         var context = canvas.getGraphicsContext2D();
         for(var y = 0; y < level.size(); y++) {
             for(var x = 0; x < level.get(y).length(); x++) {
@@ -57,5 +58,46 @@ public class LevelFactory implements ILevelFactory {
             }
         }
         return Tiles;
+    }
+    public ArrayList<Coin> GetCoins() {
+        List<String> level = Arrays.asList(
+                "...............................",
+                "...............................",
+                "...............................",
+                "..............c................",
+                "...............................",
+                "...............................",
+                ".......bbbbbbbbbbb.cbbbbbbb.bbb",
+                "...............................",
+                "..bbb....c.....................",
+                "...............................",
+                "...........b......c..........bb",
+                "...............................",
+                ".....................bb........",
+                "..........c....................",
+                "...............................",
+                "...........bbbb................",
+                "...............................",
+                "...............................",
+                "..bbbbbb.......................",
+                "...b..b.........bbbb...........",
+                "...............................",
+                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+                );
+        Collections.reverse(level);
+
+        ArrayList<Coin> Coins = new ArrayList<Coin>();
+        var context = canvas.getGraphicsContext2D();
+        for(var y = 0; y < level.size(); y++) {
+            for(var x = 0; x < level.get(y).length(); x++) {
+                if(level.get(y).charAt(x) == 'c') {
+                    var gridPosition = new GridPosition(x, y);
+                    var tileSize = new TileSize(16, 16);
+                    var coin = new Coin(gridPosition, tileSize, context,canvas);
+                    Coins.add(coin);
+                }
+            }
+        }
+        return Coins;
     }
 }
