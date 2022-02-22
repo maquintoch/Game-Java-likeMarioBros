@@ -35,57 +35,63 @@ public class Game extends Application {
         launch(args);
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-    	stage.setTitle("Mario");
-        double width = 500;
-        double height = 500;
-        Group root = new Group();
-        Scene scene = new Scene(root, width, height, Color.LIGHTSKYBLUE);
-        stage.setScene(scene);
-        var canvas = new Canvas(width, height);
-        canvas.widthProperty().bind(scene.widthProperty());
-        canvas.heightProperty().bind(scene.heightProperty());
-        root.getChildren().add(canvas);
+    public void start(Stage stage){
 
-        inputHandler = new InputHandler();
 
-        scene.setOnKeyPressed(event -> {
-            var keyCode = event.getCode();
-            inputHandler.setActive(keyCode);
-        });
+        startGame(stage);
 
-        scene.setOnKeyReleased(event -> {
-            var keyCode = event.getCode();
-            inputHandler.setInactive(keyCode);
-        });
-        gameWorld = new GameWorld(canvas, inputHandler);
-        var context = canvas.getGraphicsContext2D();
-        healthUI = new HealthUIService(context);//Player.health
+    }
 
-        // Add sound of background game and game over
-        String soundGameTheme = "src/main/java/inf112/skeleton/app/GameTheme.mp3";
-        Media media = new Media(new File(soundGameTheme).toURI().toString());
-        MediaPlayer mp = new MediaPlayer(media);
+    public void startGame(Stage stage){
+            stage.setTitle("Mario");
+            double width = 500;
+            double height = 500;
+            Group root = new Group();
+            Scene scene = new Scene(root, width, height, Color.LIGHTSKYBLUE);
+            stage.setScene(scene);
+            var canvas = new Canvas(width, height);
+            canvas.widthProperty().bind(scene.widthProperty());
+            canvas.heightProperty().bind(scene.heightProperty());
+            root.getChildren().add(canvas);
 
-        var timer = new AnimationTimer() {
+            inputHandler = new InputHandler();
 
-            @Override
-            public void handle(long now) {
-                // cycling music in background
-                mp.setCycleCount(MediaPlayer.INDEFINITE);
-                mp.play();
+            scene.setOnKeyPressed(event -> {
+                var keyCode = event.getCode();
+                inputHandler.setActive(keyCode);
+            });
 
-                gameWorld.Update();
-                gameWorld.Draw();
-                healthUI.Draw();
-            }
+            scene.setOnKeyReleased(event -> {
+                var keyCode = event.getCode();
+                inputHandler.setInactive(keyCode);
+            });
+            gameWorld = new GameWorld(canvas, inputHandler);
+            var context = canvas.getGraphicsContext2D();
+            healthUI = new HealthUIService(context);//Player.health
 
-        };
+            // Add sound of background game and game over
+            String soundGameTheme = "src/main/java/inf112/skeleton/app/GameTheme.mp3";
+            Media media = new Media(new File(soundGameTheme).toURI().toString());
+            MediaPlayer mp = new MediaPlayer(media);
 
-        timer.start();
+            var timer = new AnimationTimer() {
+
+                @Override
+                public void handle(long now) {
+                    // cycling music in background
+                    mp.setCycleCount(MediaPlayer.INDEFINITE);
+                    mp.play();
+
+                    gameWorld.Update();
+                    gameWorld.Draw();
+                    healthUI.Draw();
+                }
+
+            };
+
+            timer.start();
 //		stage.setFullScreen(true);
-        stage.show();
+            stage.show();
 
     }
 }
