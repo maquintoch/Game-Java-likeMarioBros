@@ -12,7 +12,7 @@ Daniel(Referent/Tester): Har hatt INF100, INF101 og INF102. Derfor vil jeg si at
 
 Yilin(Utvikler): Er 2. år på Datateknologi. Jeg har tatt INF100, INF101, INF102, INF122, INF115. Så har jeg kunnskaper i python, java, haskell og databaser. Har benytet meg av git i enkelte av emnene jeg har hatt tidligere i studiene. Lite erfaring med å jobbe i team fra tidligere.
 
-Lars Andreas(Git-Ansvarlig/Dokumentasjon):
+Lars Andreas(Git-Ansvarlig/Dokumentasjon): INF100, INF101, INF102, INF161 og INF142. Har jobbet en del i python, java, javascript, typescript, haskell og mye i csharp. Har jobb som systemutvikler, og har derfor litt erfaring med git og hvordan vi skal videre utvikle applikasjonen. 
 
 Tord(Prosjektleder/Arkitekt):  INF0135, INFO100, INFO180, INFO 284. Jeg har jobbet en del med python, særlig med maskinlæring og web scraping. Java har jeg ingen erfaring med.
 
