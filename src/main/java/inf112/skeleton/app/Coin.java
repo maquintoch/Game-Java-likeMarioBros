@@ -4,7 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Coin implements IDrawable{
+public class Coin implements IDrawable, ICollideable{
 	
 	private IDrawBehavior drawHandler;
     private Canvas canvas;
@@ -29,5 +29,40 @@ public class Coin implements IDrawable{
         drawHandler.Draw(position, boundingBox);
 		
 	}
+	
+	@Override
+    public Position GetPosition() {
+        return new Position(gridPosition, tileSize);
+    }
+
+    @Override
+    public CollisionBox GetCollisionBox() {
+        var positionA = new Position(gridPosition, tileSize);
+        var positionB = new Position(positionA);
+        positionB.Add(new Rectangle(tileSize));
+        return new CollisionBox(positionA, positionB);
+    }
+    
+    public double GetClosestYPosition(Position position) {
+        var bottomY = position.y;
+        var topY = position.y + tileSize.height;
+
+        if(Math.abs(bottomY - position.y) > Math.abs(topY - position.y)) {
+            return topY;
+        } else {
+            return bottomY;
+        }
+    }
+
+    public double GetClosestXPosition(Position position) {
+        var bottomX = position.x;
+        var topX = position.x + tileSize.width;
+
+        if(Math.abs(bottomX - position.x) > Math.abs(topX - position.x)) {
+            return topX;
+        } else {
+            return bottomX;
+        }
+    }
 
 }

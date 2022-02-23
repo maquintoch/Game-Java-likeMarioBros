@@ -6,16 +6,17 @@ public class CoinUIService implements IDrawable{
 	
 	 private GraphicsContext context;
 	 private CoinManager coinManager;
+	 public Score currentscore;
 
 	 public CoinUIService(GraphicsContext context) {
 		 
 	     this.context = context;
 	     this.coinManager = new CoinManager();
+	     this.currentscore = coinManager.GetScore();
 	 }
 
 	@Override
 	public void Draw() {
-		Score currentscore = coinManager.GetScore();
 	
 		context.fillText("You have: " + currentscore.amount + " coins!", 0, 25);
 		

@@ -45,7 +45,7 @@ public class Game extends Application {
         gameWorld = new GameWorld(canvas, inputHandler);
         var context = canvas.getGraphicsContext2D();
         healthUI = new HealthUIService(context);//Player.health
-        coinUI = new CoinUIService(context); //Keeping track of coins picked up. 
+        //coinUI = new CoinUIService(context); //Keeping track of coins picked up. 
 
         var timer = new AnimationTimer() {
 
@@ -54,7 +54,7 @@ public class Game extends Application {
                 gameWorld.Update();
                 gameWorld.Draw();
                 healthUI.Draw();
-                coinUI.Draw();
+                //coinUI.Draw();
             }
 
         };

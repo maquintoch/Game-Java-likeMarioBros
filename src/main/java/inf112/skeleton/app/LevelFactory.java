@@ -15,7 +15,7 @@ public class LevelFactory implements ILevelFactory {
     
     List<String> level = Arrays.asList(
             "...............................",
-            "...........c...................",
+            "...........ccc.................",
             "...............................",
             "................c..............",
             "...............................",
@@ -37,6 +37,7 @@ public class LevelFactory implements ILevelFactory {
             "...............................",
             "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
             );
+    
 
     public LevelFactory(Canvas canvas) {
         this.canvas = canvas;
@@ -46,7 +47,6 @@ public class LevelFactory implements ILevelFactory {
         Collections.reverse(level);
 
         ArrayList<Tile> Tiles = new ArrayList<Tile>();
-        ArrayList<Coin> Coins = new ArrayList<Coin>();
         var context = canvas.getGraphicsContext2D();
         for(var y = 0; y < level.size(); y++) {
             for(var x = 0; x < level.get(y).length(); x++) {
@@ -62,7 +62,7 @@ public class LevelFactory implements ILevelFactory {
     }
     public ArrayList<Coin> GetCoins() {
 
-        Collections.reverse(level);
+        //Collections.reverse(level);
 
         ArrayList<Coin> Coins = new ArrayList<Coin>();
         var context = canvas.getGraphicsContext2D();

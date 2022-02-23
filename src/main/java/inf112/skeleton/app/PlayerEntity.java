@@ -11,14 +11,19 @@ public class PlayerEntity extends Entity {
     private Speed speed;
     private IInputHandler inputHandler;
     private ArrayList<Tile> collideableCollection;
+    private ArrayList<Coin> coins;
+    private CoinUIService CoinUI;
 
-    public PlayerEntity(Canvas canvas, ArrayList<Tile> collideables, IInputHandler inputHandler) {
+    public PlayerEntity(Canvas canvas, ArrayList<Tile> collideables, ArrayList<Coin> coins, CoinUIService coinUI, IInputHandler inputHandler) {
         super(canvas);
         this.position = new Position(3, 10);
         this.boundingBox = new Rectangle(16, 16);
         this.speed = new Speed(0, 0);
         this.acceleration = new Speed(0, -0.5f);
         this.inputHandler = inputHandler;
+        this.coins = coins;
+        this.CoinUI = coinUI;
+        
 
         this.collideableCollection = collideables;
     }
@@ -56,6 +61,15 @@ public class PlayerEntity extends Entity {
                 position.y = collidable.GetClosestYPosition(position);
             }
         }
+        
+        for(var coin : coins) {
+            if (GetCollisionBox().overlap(coin)) {
+            	CoinUI.currentscore.amount++;
+            	
+            }
+        }
+        
+        
 
     }
 

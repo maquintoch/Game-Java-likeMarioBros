@@ -17,8 +17,9 @@ public class GameWorld implements IDrawable, IUpdateable {
         var Tiles = new TileCollection(factoryTiles);
         var Coins = new CoinCollection(factoryCoins);
         var backgroundDrawService = new GameBackgroundDrawService(canvas);
+        var coinUI = new CoinUIService(canvas.getGraphicsContext2D());
 
-        var player = new PlayerEntity(canvas, factoryTiles, inputHandler);
+        var player = new PlayerEntity(canvas, factoryTiles, factoryCoins, coinUI, inputHandler);
 
         drawPipeline = new ArrayList<IDrawable>();
         updatePipeline = new ArrayList<IUpdateable>();
@@ -26,6 +27,7 @@ public class GameWorld implements IDrawable, IUpdateable {
         drawPipeline.add(backgroundDrawService);
         drawPipeline.add(Tiles);
         drawPipeline.add(Coins);
+        drawPipeline.add(coinUI);
         drawPipeline.add(player);
 
         updatePipeline.add(player);
