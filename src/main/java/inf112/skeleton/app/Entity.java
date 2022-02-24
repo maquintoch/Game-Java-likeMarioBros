@@ -11,8 +11,9 @@ public abstract class Entity implements IDrawable, IUpdateable, IMoveable, IColl
     protected Position position;
     protected Rectangle boundingBox;
 
-    public Entity(Canvas canvas) {
-        drawHandler = new DrawColorBehavior(canvas, Color.BLUE);
+    public Entity(Canvas canvas, IDrawBehavior drawHandler) {
+    	this.drawHandler = drawHandler;
+        //drawHandler = new DrawColorBehavior(canvas, Color.BLUE);
         
     }
 

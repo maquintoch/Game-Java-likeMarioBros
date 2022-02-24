@@ -17,12 +17,12 @@ public class Tile implements IDrawable, ICollideable {
     private Image image = new Image(imagePath);
    
 
-    public Tile(GridPosition gridPosition, TileSize tileSize, GraphicsContext context, Canvas canvas) {
+    public Tile(GridPosition gridPosition, TileSize tileSize, GraphicsContext context, Canvas canvas, IDrawBehavior drawHandler) {
         this.canvas = canvas;
         this.gridPosition = gridPosition;
         this.tileSize = tileSize;
-        //drawHandler = new DrawColorBehavior(this.canvas, Color.CORAL);
-        drawHandler = new DrawImageBehavior(this.canvas, image);
+        this.drawHandler = drawHandler;
+        
     }
 
     public void Draw() {

@@ -14,10 +14,10 @@ public class PlayerEntity extends Entity {
     private ArrayList<Tile> collideableCollection;
     private CoinCollection coins;
     private CoinUIService CoinUI;
-  
+ 
 
-    public PlayerEntity(Canvas canvas, ArrayList<Tile> collideables, CoinCollection coins, CoinUIService coinUI, IInputHandler inputHandler) {
-        super(canvas);
+    public PlayerEntity(Canvas canvas, ArrayList<Tile> collideables, CoinCollection coins, CoinUIService coinUI, IInputHandler inputHandler, IDrawBehavior drawhandler) {
+        super(canvas, drawhandler);
         this.position = new Position(3, 10);
         this.boundingBox = new Rectangle(16, 16);
         this.speed = new Speed(0, 0);

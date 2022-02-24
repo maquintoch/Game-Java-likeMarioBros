@@ -8,7 +8,7 @@ public class CoinCollection implements IDrawable, IDestroyable, IWorldRemoveable
 	
 	private final HashMap<GridPosition, Coin> coins;
 
-    public CoinCollection(ArrayList<Coin> coins) {
+    public CoinCollection(ArrayList<Coin> coins) {		
         this.coins = new HashMap<GridPosition, Coin>();
         for(Coin coin : coins) {
             this.coins.put(coin.getGridPosition(), coin);

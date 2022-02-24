@@ -16,6 +16,8 @@ public class LevelFactory implements ILevelFactory {
 
     private Canvas canvas;
     private GameWorld gameWorld;
+    private IDrawBehavior coinDrawBehavior;
+    private IDrawBehavior tileDrawBehavior;
     
     public List<String> level = Arrays.asList(
             "...............................",
@@ -43,9 +45,11 @@ public class LevelFactory implements ILevelFactory {
             );
     
 
-    public LevelFactory(Canvas canvas, GameWorld gameWorld) {
+    public LevelFactory(Canvas canvas, GameWorld gameWorld,IDrawBehavior coinDrawBehavior, IDrawBehavior tileDrawBehavior) {
         this.canvas = canvas;
         this.gameWorld = gameWorld;
+        this.coinDrawBehavior = coinDrawBehavior;
+        this.tileDrawBehavior = tileDrawBehavior;
     }
     
     public List<String> removeCoin(List<String> inputLevel, int y, int x){
@@ -110,7 +114,7 @@ public class LevelFactory implements ILevelFactory {
                 if(level.get(y).charAt(x) == 'b') {
                     var gridPosition = new GridPosition(x, y);
                     var tileSize = new TileSize(16, 16);
-                    var tile = new Tile(gridPosition, tileSize, context,canvas);
+                    var tile = new Tile(gridPosition, tileSize, context,canvas, tileDrawBehavior);
                     Tiles.add(tile);
                 }
             }
@@ -128,7 +132,7 @@ public class LevelFactory implements ILevelFactory {
                 if(level.get(y).charAt(x) == 'c') {
                     var gridPosition = new GridPosition(x, y);
                     var tileSize = new TileSize(16, 16);
-                    var coin = new Coin(gameWorld, gridPosition, tileSize, context,canvas);
+                    var coin = new Coin(gameWorld, gridPosition, tileSize, coinDrawBehavior);
                     Coins.add(coin);
                 }
             }

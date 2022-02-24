@@ -10,17 +10,19 @@ public class DrawImageBehavior implements IDrawBehavior {
 	private GraphicsContext context;
     private Canvas canvas;
     private Image image;
+    private ICamera camera;
     
-    public DrawImageBehavior(Canvas canvas, Image image) {
+    public DrawImageBehavior(Canvas canvas, Image image, ICamera camera) {
     	this.canvas = canvas;
         this.context = canvas.getGraphicsContext2D();
         this.image = image;
+        this.camera = camera;
     }
 
 	@Override
 	public void Draw(Position position, Rectangle boundingBox) {
 		context.save();
-		context.drawImage(image, position.x, canvas.getHeight() - position.y - boundingBox.height, boundingBox.width, boundingBox.height);
+		context.drawImage(image, position.x - camera.getx(), canvas.getHeight() - position.y - boundingBox.height + camera.gety(), boundingBox.width, boundingBox.height);
 		context.restore();
 		
 	}

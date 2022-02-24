@@ -60,7 +60,7 @@ public class Game extends Application {
         };
 
         timer.start();
-		stage.setFullScreen(true);
+		//stage.setFullScreen(true);
         stage.show();
     }
 }
