@@ -1,6 +1,7 @@
 package inf112.skeleton.app;
 
 import javafx.scene.canvas.Canvas;
+import java.util.List;
 import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
@@ -11,10 +12,11 @@ public class PlayerEntity extends Entity {
     private Speed speed;
     private IInputHandler inputHandler;
     private ArrayList<Tile> collideableCollection;
-    private ArrayList<Coin> coins;
+    private CoinCollection coins;
     private CoinUIService CoinUI;
+  
 
-    public PlayerEntity(Canvas canvas, ArrayList<Tile> collideables, ArrayList<Coin> coins, CoinUIService coinUI, IInputHandler inputHandler) {
+    public PlayerEntity(Canvas canvas, ArrayList<Tile> collideables, CoinCollection coins, CoinUIService coinUI, IInputHandler inputHandler) {
         super(canvas);
         this.position = new Position(3, 10);
         this.boundingBox = new Rectangle(16, 16);
@@ -23,6 +25,7 @@ public class PlayerEntity extends Entity {
         this.inputHandler = inputHandler;
         this.coins = coins;
         this.CoinUI = coinUI;
+       
         
 
         this.collideableCollection = collideables;
@@ -62,12 +65,17 @@ public class PlayerEntity extends Entity {
             }
         }
         
-        for(var coin : coins) {
+        
+        for(var coin : coins.getAll()) {
             if (GetCollisionBox().overlap(coin)) {
             	CoinUI.currentscore.amount++;
+            	coin.destroy();
+            	
+            	
             	
             }
         }
+        
         
         
 

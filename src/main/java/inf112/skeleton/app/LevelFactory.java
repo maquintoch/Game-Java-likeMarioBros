@@ -1,6 +1,7 @@
 package inf112.skeleton.app;
 
 import javafx.scene.Scene;
+import java.lang.StringBuilder;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.GridPane;
 
@@ -9,11 +10,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+//import com.sun.javafx.collections.FloatArraySyncer;
+
 public class LevelFactory implements ILevelFactory {
 
     private Canvas canvas;
+    private GameWorld gameWorld;
     
-    List<String> level = Arrays.asList(
+    public List<String> level = Arrays.asList(
             "...............................",
             "...........ccc.................",
             "...............................",
@@ -39,8 +43,61 @@ public class LevelFactory implements ILevelFactory {
             );
     
 
-    public LevelFactory(Canvas canvas) {
+    public LevelFactory(Canvas canvas, GameWorld gameWorld) {
         this.canvas = canvas;
+        this.gameWorld = gameWorld;
+    }
+    
+    public List<String> removeCoin(List<String> inputLevel, int y, int x){
+    	List<String> newlevel = Arrays.asList(
+                "...............................",
+                "...........ccc.................",
+                "...............................",
+                "................c..............",
+                "...............................",
+                "...............................",
+                ".......bbbbbbbbbbb..bbbbbbb.bbb",
+                "...............................",
+                "..bbb..........cc..............",
+                "...............................",
+                "...........b..c..............bb",
+                ".....c.........................",
+                ".....................bb........",
+                "..................c............",
+                "...............................",
+                "...........bbbb..c.............",
+                "...............................",
+                "...............................",
+                "..bbbbbb.......................",
+                "...b..b.........bbbb...........",
+                "...............................",
+                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+                );
+
+    	int i = 0;
+    	for(String s : inputLevel) {
+    		if(i == y && s.charAt(x) == 'c') {
+    			
+    			StringBuilder sb = new StringBuilder(s);
+    			
+    			sb.setCharAt(x, '.');
+    			String newString = sb.toString();
+    			newlevel.set(i, newString);
+    			i++;
+    		
+    		}
+    		else {
+    			newlevel.set(i, s);
+    			i++;
+    			
+    		}
+    		
+    	
+    	}
+    	//Collections.reverse(newlevel);
+    	return newlevel;
+    	
+    	
     }
 
     public ArrayList<Tile> GetTiles() {
@@ -71,7 +128,7 @@ public class LevelFactory implements ILevelFactory {
                 if(level.get(y).charAt(x) == 'c') {
                     var gridPosition = new GridPosition(x, y);
                     var tileSize = new TileSize(16, 16);
-                    var coin = new Coin(gridPosition, tileSize, context,canvas);
+                    var coin = new Coin(gameWorld, gridPosition, tileSize, context,canvas);
                     Coins.add(coin);
                 }
             }
