@@ -8,6 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -15,15 +16,18 @@ import javafx.scene.paint.Paint;
 import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
-
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import javafx.scene.layout.Pane;
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+
 
 public class Game extends Application {
 
@@ -35,14 +39,46 @@ public class Game extends Application {
         launch(args);
     }
 
-    public void start(Stage stage){
+    @Override
+    public void start(Stage stage) throws Exception {
+        StartScreen(stage);
+    }
 
+    public void StartScreen(Stage stage){
 
-        startGame(stage);
+        stage.setTitle("Hello Super World!");
+        Button btn = new Button();
+        btn.setText("Start Spill!");
+
+        System.out.println("Herrrriirr");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Heeeer");
+                try {
+                    startGame(stage);
+                    System.out.println("Herrrrrr");
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Pane root = new Pane();
+        btn.setLayoutX(250);
+        btn.setLayoutY(250);
+        root.getChildren().add(btn);
+        stage.setScene(new Scene(root, 500, 500));
+        stage.show();
+        //startGame(stage);
 
     }
 
     public void startGame(Stage stage){
+
             stage.setTitle("Mario");
             double width = 500;
             double height = 500;
@@ -85,6 +121,8 @@ public class Game extends Application {
                     gameWorld.Update();
                     gameWorld.Draw();
                     healthUI.Draw();
+
+
                 }
 
             };
@@ -94,4 +132,9 @@ public class Game extends Application {
             stage.show();
 
     }
+
+   // @Override
+   //public void start(Stage stage) throws Exception {
+
+   //}
 }
