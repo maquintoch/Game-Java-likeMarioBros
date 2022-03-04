@@ -22,7 +22,6 @@ public class Tile implements IDrawable, ICollideable {
         this.gridPosition = gridPosition;
         this.tileSize = tileSize;
         this.drawHandler = drawHandler;
-        
     }
 
     public void Draw() {
