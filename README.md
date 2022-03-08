@@ -1,4 +1,4 @@
-# sixth-antler
+# sixth-ant
 # Obligatorisk oppgave 1: Prosjekt Plattformspill – oppstart
 
 *«Kurt-Mario er i trøbbel igjen! Han er sent ute til eksamen, han har ikke lest nok – og hvor er egentlig eksamenslokalet? Hjelp Kurt-Mario å hoppe fra etasje til etasje på Høyteknologisenteret, plukke opp viktig kunnskap (og snacks!) på veien og nå frem til eksamen i tide. Men pass opp for de skumle professorene – vi har ikke tid til å høre om flere teoremer nå!»*
