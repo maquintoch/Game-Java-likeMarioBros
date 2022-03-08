@@ -111,7 +111,7 @@ public class Game extends Application {
             healthUI = new HealthUIService(context);//Player.health
 
             // Add sound of background game and game over
-            String soundGameTheme = "src/main/java/inf112/skeleton/app/GameTheme.mp3";
+            String soundGameTheme = "src/main/java/inf112/skeleton/app/Resources/GameTheme.mp3";
             Media media = new Media(new File(soundGameTheme).toURI().toString());
             MediaPlayer mp = new MediaPlayer(media);
 
