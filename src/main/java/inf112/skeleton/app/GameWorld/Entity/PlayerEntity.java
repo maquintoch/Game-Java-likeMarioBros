@@ -1,15 +1,17 @@
-package inf112.skeleton.app.Entity;
+package inf112.skeleton.app.GameWorld.Entity;
 
 import javafx.scene.canvas.Canvas;
 import java.util.List;
 
-import inf112.skeleton.app.CoinUIService;
-import inf112.skeleton.app.Entity.EntityAttributes.Position;
-import inf112.skeleton.app.Entity.EntityAttributes.Rectangle;
-import inf112.skeleton.app.Entity.EntityAttributes.Speed;
+import inf112.skeleton.app.Graphics.CoinUIService;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Rectangle;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Speed;
+import inf112.skeleton.app.DrawBehavior.IDrawBehavior;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.CollisionBox;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
 import inf112.skeleton.app.Input.IInputHandler;
-import inf112.skeleton.app.Tiles.Tile;
-import inf112.skeleton.app.Tiles.TileCollections.CoinCollection;
+import inf112.skeleton.app.GameWorld.Tiles.Tile;
+import inf112.skeleton.app.GameWorld.Tiles.TileCollections.CoinCollection;
 import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
@@ -75,7 +77,7 @@ public class PlayerEntity extends Entity {
         
         for(var coin : coins.getAll()) {
             if (GetCollisionBox().overlap(coin)) {
-            	CoinUI.currentscore.amount++;
+            	CoinUI.currentscore.AddOneToScore();;
             	coin.destroy();
             	
             	

@@ -1,6 +1,6 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Services;
 
-import inf112.skeleton.app.Entity.EntityAttributes.Score;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Score;
 
 public class CoinManager {
 	private Score score = new Score(0);

@@ -1,4 +1,4 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Resources;
 /*
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

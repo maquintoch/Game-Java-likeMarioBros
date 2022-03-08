@@ -1,13 +1,13 @@
-package inf112.skeleton.app.Tiles;
+package inf112.skeleton.app.GameWorld.Tiles;
 
 import inf112.skeleton.app.DrawBehavior.IDrawBehavior;
 import inf112.skeleton.app.DrawBehavior.IDrawable;
-import inf112.skeleton.app.Entity.ICollideable;
-import inf112.skeleton.app.Entity.EntityAttributes.CollisionBox;
-import inf112.skeleton.app.Entity.EntityAttributes.GridPosition;
-import inf112.skeleton.app.Entity.EntityAttributes.Position;
-import inf112.skeleton.app.Entity.EntityAttributes.Rectangle;
-import inf112.skeleton.app.Entity.EntityAttributes.TileSize;
+import inf112.skeleton.app.GameWorld.Entity.ICollideable;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.CollisionBox;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.GridPosition;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Rectangle;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.TileSize;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

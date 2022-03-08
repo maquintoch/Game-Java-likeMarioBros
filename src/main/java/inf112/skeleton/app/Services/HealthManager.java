@@ -1,6 +1,6 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Services;
 
-import inf112.skeleton.app.Entity.EntityAttributes.Health;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Health;
 
 public class HealthManager implements IHealthManager {
 

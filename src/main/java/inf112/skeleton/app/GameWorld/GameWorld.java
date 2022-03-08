@@ -5,20 +5,21 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import inf112.skeleton.app.IUpdateable;
-import inf112.skeleton.app.IWorldRemoveable;
+import inf112.skeleton.app.GameWorld.IUpdateable;
+import inf112.skeleton.app.GameWorld.IWorldRemoveable;
 import inf112.skeleton.app.Camera.FollowEntityCamera;
 import inf112.skeleton.app.DrawBehavior.DrawColorBehavior;
 import inf112.skeleton.app.DrawBehavior.DrawImageBehavior;
 import inf112.skeleton.app.DrawBehavior.GameBackgroundDrawService;
 import inf112.skeleton.app.DrawBehavior.IDrawable;
-import inf112.skeleton.app.Entity.PlayerEntity;
-import inf112.skeleton.app.Entity.EntityAttributes.GridPosition;
+import inf112.skeleton.app.GameWorld.Entity.PlayerEntity;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.GridPosition;
 import inf112.skeleton.app.GameSetup.LevelFactory;
 import inf112.skeleton.app.Input.IInputHandler;
-import inf112.skeleton.app.Tiles.Coin;
-import inf112.skeleton.app.Tiles.TileCollections.CoinCollection;
-import inf112.skeleton.app.Tiles.TileCollections.TileCollection;
+import inf112.skeleton.app.GameWorld.Tiles.Coin;
+import inf112.skeleton.app.GameWorld.Tiles.TileCollections.CoinCollection;
+import inf112.skeleton.app.GameWorld.Tiles.TileCollections.TileCollection;
+import inf112.skeleton.app.Graphics.CoinUIService;
 import javafx.scene.paint.Color;
 
 public class GameWorld implements IDrawable, IUpdateable, IWorldRemoveable<Coin> {

@@ -1,7 +1,8 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Graphics;
 
 import inf112.skeleton.app.DrawBehavior.IDrawable;
-import inf112.skeleton.app.Entity.EntityAttributes.Score;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Score;
+import inf112.skeleton.app.Services.CoinManager;
 import javafx.scene.canvas.GraphicsContext;
 
 public class CoinUIService implements IDrawable{
@@ -20,7 +21,7 @@ public class CoinUIService implements IDrawable{
 	@Override
 	public void Draw() {
 	
-		context.fillText("You have: " + currentscore.amount + " coins!", 0, 25);
+		context.fillText("You have: " + currentscore.getScore() + " coins!", 0, 25);
 		
 	}
 

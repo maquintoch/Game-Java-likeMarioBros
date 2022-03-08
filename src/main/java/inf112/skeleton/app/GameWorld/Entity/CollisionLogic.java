@@ -1,8 +1,8 @@
-package inf112.skeleton.app.Entity;
+package inf112.skeleton.app.GameWorld.Entity;
 
 import java.util.ArrayList;
 
-import inf112.skeleton.app.Entity.EntityAttributes.Speed;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Speed;
 
 public class CollisionLogic implements ICollisionLogic {
 

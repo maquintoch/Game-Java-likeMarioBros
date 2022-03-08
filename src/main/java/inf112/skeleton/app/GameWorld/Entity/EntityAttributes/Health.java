@@ -1,4 +1,4 @@
-package inf112.skeleton.app.Entity.EntityAttributes;
+package inf112.skeleton.app.GameWorld.Entity.EntityAttributes;
 
 public class Health {
     int amount;
@@ -6,4 +6,8 @@ public class Health {
     public Health(int amount) {
         this.amount = amount;
     }
+    
+    public int getHealth() {
+		return amount;
+	}
 }

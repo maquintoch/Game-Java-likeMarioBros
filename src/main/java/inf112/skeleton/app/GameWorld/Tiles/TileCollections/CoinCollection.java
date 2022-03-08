@@ -1,15 +1,15 @@
-package inf112.skeleton.app.Tiles.TileCollections;
+package inf112.skeleton.app.GameWorld.Tiles.TileCollections;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import inf112.skeleton.app.IDestroyable;
-import inf112.skeleton.app.IWorldGettable;
-import inf112.skeleton.app.IWorldRemoveable;
-import inf112.skeleton.app.IWorldSettable;
+import inf112.skeleton.app.GameWorld.IDestroyable;
+import inf112.skeleton.app.GameWorld.IWorldGettable;
+import inf112.skeleton.app.GameWorld.IWorldRemoveable;
+import inf112.skeleton.app.GameWorld.IWorldSettable;
 import inf112.skeleton.app.DrawBehavior.IDrawable;
-import inf112.skeleton.app.Entity.EntityAttributes.GridPosition;
-import inf112.skeleton.app.Tiles.Coin;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.GridPosition;
+import inf112.skeleton.app.GameWorld.Tiles.Coin;
 
 import java.util.Collection;
 

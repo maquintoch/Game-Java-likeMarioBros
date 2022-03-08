@@ -1,7 +1,8 @@
 package inf112.skeleton.app.Camera;
-import inf112.skeleton.app.Entity.Entity;
-import inf112.skeleton.app.Entity.EntityAttributes.Position;
-import inf112.skeleton.app.GameWorld;
+import inf112.skeleton.app.GameWorld.Entity.Entity;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
+import inf112.skeleton.app.GameWorld.IUpdateable;
+
 import javafx.scene.canvas.Canvas;
 
 public class FollowEntityCamera implements ICamera, IUpdateable{
@@ -33,8 +34,8 @@ public class FollowEntityCamera implements ICamera, IUpdateable{
 
 	@Override
 	public void Update() {
-		cameraPosition.x = cameraPosition.x + ((entity.position.x - (canvas.getWidth()/2)) - cameraPosition.x) * 0.1;
-		cameraPosition.y = cameraPosition.y + ((entity.position.y - (canvas.getHeight()/2)) - cameraPosition.y) * 0.1;
+		cameraPosition.x = cameraPosition.x + ((entity.GetPosition().x - (canvas.getWidth()/2)) - cameraPosition.x) * 0.1;
+		cameraPosition.y = cameraPosition.y + ((entity.GetPosition().y - (canvas.getHeight()/2)) - cameraPosition.y) * 0.1;
 
 	}
 

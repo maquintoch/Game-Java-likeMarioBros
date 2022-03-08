@@ -1,7 +1,7 @@
 package inf112.skeleton.app.Input;
 
-import inf112.skeleton.app.Entity.EntityAttributes.Position;
-import inf112.skeleton.app.Entity.EntityAttributes.Speed;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Speed;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
 
 public interface IMoveHandler {
 

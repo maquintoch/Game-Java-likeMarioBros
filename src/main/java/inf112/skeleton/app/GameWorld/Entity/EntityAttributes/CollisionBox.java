@@ -1,6 +1,6 @@
-package inf112.skeleton.app.Entity.EntityAttributes;
+package inf112.skeleton.app.GameWorld.Entity.EntityAttributes;
 
-import inf112.skeleton.app.Entity.ICollideable;
+import inf112.skeleton.app.GameWorld.Entity.ICollideable;
 
 public class CollisionBox {
     private Position CornerAPosition;

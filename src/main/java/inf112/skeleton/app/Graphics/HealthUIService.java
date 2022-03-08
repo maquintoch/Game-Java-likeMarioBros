@@ -1,7 +1,10 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.Graphics;
 
+
+import inf112.skeleton.app.Services.HealthManager;
+import inf112.skeleton.app.Services.IHealthManager;
 import inf112.skeleton.app.DrawBehavior.IDrawable;
-import inf112.skeleton.app.Entity.EntityAttributes.Health;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Health;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,9 +25,9 @@ public class HealthUIService implements IDrawable {
         Health currenthealth = healthManager.GetHealth();
         Health maxHealth = healthManager.GetMaxHealth();
         context.setFill(Color.RED);
-        context.fillRect(0,0,maxHealth.amount,10);
+        context.fillRect(0,0,maxHealth.getHealth(),10);
         context.setFill(Color.GREEN);
-        context.fillRect(0,0, currenthealth.amount, 10);
+        context.fillRect(0,0, currenthealth.getHealth(), 10);
         
     }
 }

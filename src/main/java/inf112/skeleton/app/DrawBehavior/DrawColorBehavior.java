@@ -1,8 +1,8 @@
 package inf112.skeleton.app.DrawBehavior;
 
 import inf112.skeleton.app.Camera.ICamera;
-import inf112.skeleton.app.Entity.EntityAttributes.Position;
-import inf112.skeleton.app.Entity.EntityAttributes.Rectangle;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Rectangle;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

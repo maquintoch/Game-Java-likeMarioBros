@@ -2,9 +2,9 @@ package inf112.skeleton.app.GameSetup;
 
 import java.io.File;
 
-import inf112.skeleton.app.HealthUIService;
 import inf112.skeleton.app.DrawBehavior.IDrawable;
 import inf112.skeleton.app.GameWorld.GameWorld;
+import inf112.skeleton.app.Graphics.HealthUIService;
 import inf112.skeleton.app.Input.IInputHandler;
 import inf112.skeleton.app.Input.InputHandler;
 import javafx.animation.AnimationTimer;

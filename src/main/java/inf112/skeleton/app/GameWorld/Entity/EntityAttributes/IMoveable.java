@@ -1,4 +1,4 @@
-package inf112.skeleton.app.Entity.EntityAttributes;
+package inf112.skeleton.app.GameWorld.Entity.EntityAttributes;
 
 public interface IMoveable {
     Position GetPosition();

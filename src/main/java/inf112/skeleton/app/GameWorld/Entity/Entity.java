@@ -1,11 +1,11 @@
-package inf112.skeleton.app.Entity;
+package inf112.skeleton.app.GameWorld.Entity;
 
-import inf112.skeleton.app.IUpdateable;
+import inf112.skeleton.app.GameWorld.IUpdateable;
 import inf112.skeleton.app.DrawBehavior.IDrawBehavior;
 import inf112.skeleton.app.DrawBehavior.IDrawable;
-import inf112.skeleton.app.Entity.EntityAttributes.IMoveable;
-import inf112.skeleton.app.Entity.EntityAttributes.Position;
-import inf112.skeleton.app.Entity.EntityAttributes.Rectangle;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.IMoveable;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Rectangle;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

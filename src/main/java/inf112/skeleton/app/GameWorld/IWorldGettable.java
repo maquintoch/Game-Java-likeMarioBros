@@ -1,6 +1,6 @@
-package inf112.skeleton.app;
+package inf112.skeleton.app.GameWorld;
 
-import inf112.skeleton.app.Entity.EntityAttributes.GridPosition;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.GridPosition;
 
 public interface IWorldGettable<TWorldObject> {
 	

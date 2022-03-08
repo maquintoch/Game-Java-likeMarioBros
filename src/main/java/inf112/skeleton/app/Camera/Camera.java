@@ -1,6 +1,6 @@
 package inf112.skeleton.app.Camera;
 
-import inf112.skeleton.app.IUpdateable;
+import inf112.skeleton.app.GameWorld.IUpdateable;
 
 public class Camera implements ICamera, IUpdateable{
 	private float x;

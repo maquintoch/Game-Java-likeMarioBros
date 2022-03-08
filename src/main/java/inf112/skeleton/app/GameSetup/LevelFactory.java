@@ -14,10 +14,11 @@ import java.util.Collections;
 import java.util.List;
 
 import inf112.skeleton.app.DrawBehavior.IDrawBehavior;
-import inf112.skeleton.app.Entity.EntityAttributes.TileSize;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.TileSize;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.GridPosition;
 import inf112.skeleton.app.GameWorld.GameWorld;
-import inf112.skeleton.app.Tiles.Coin;
-import inf112.skeleton.app.Tiles.Tile;
+import inf112.skeleton.app.GameWorld.Tiles.Coin;
+import inf112.skeleton.app.GameWorld.Tiles.Tile;
 
 //import com.sun.javafx.collections.FloatArraySyncer;
 

@@ -1,7 +1,7 @@
-package inf112.skeleton.app.Entity;
+package inf112.skeleton.app.GameWorld.Entity;
 
-import inf112.skeleton.app.Entity.EntityAttributes.CollisionBox;
-import inf112.skeleton.app.Entity.EntityAttributes.Position;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.CollisionBox;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
 
 public interface ICollideable {
     Position GetPosition();
