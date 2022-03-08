@@ -50,15 +50,15 @@ public class Game extends Application {
         Button btn = new Button();
         btn.setText("Start Spill!");
 
-        System.out.println("Herrrriirr");
+
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Heeeer");
+
                 try {
                     startGame(stage);
-                    System.out.println("Herrrrrr");
+
                 }
                 catch (Exception e)
                 {
