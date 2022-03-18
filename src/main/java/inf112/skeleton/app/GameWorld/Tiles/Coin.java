@@ -78,4 +78,11 @@ public class Coin implements IDrawable, ICollideable, IDestroyable{
         }
     }
 
+    @Override
+	public void destroy() {
+		this.gameWorld.Remove(this);
+		
+	}
+
+
 }

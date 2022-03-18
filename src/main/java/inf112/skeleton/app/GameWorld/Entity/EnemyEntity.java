@@ -17,9 +17,9 @@ public class EnemyEntity extends Entity implements ICollideable {
 	private ArrayList<Tile> collideableCollection;
 	private Speed acceleration;
 
-	public EnemyEntity(Canvas canvas, ArrayList<Tile> collideables, IDrawBehavior drawHandler) {
+	public EnemyEntity(Canvas canvas, ArrayList<Tile> collideables, IDrawBehavior drawHandler, int xPosition, int yPosition) {
 		super(canvas, drawHandler);
-		this.position = new Position(100, 10);
+		this.position = new Position(xPosition, yPosition);
         this.boundingBox = new Rectangle(16, 16);
         this.speed = new Speed(0.5f, 0);
         this.acceleration = new Speed(0, -0.5f);

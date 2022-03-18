@@ -50,7 +50,7 @@ public class GameWorld implements IDrawable, IUpdateable, IWorldRemoveable<Coin>
         var coinUI = new CoinUIService(canvas.getGraphicsContext2D());
         var healthUI = new HealthUIService(canvas.getGraphicsContext2D());//Player.health
         
-        var enemy = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior);
+        var enemy = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior, 100, 10);
         var enemies = new ArrayList<EnemyEntity>();
         enemies.add(enemy);
         
