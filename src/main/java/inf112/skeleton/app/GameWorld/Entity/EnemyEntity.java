@@ -3,6 +3,7 @@ package inf112.skeleton.app.GameWorld.Entity;
 import java.util.ArrayList;
 
 import inf112.skeleton.app.DrawBehavior.IDrawBehavior;
+import inf112.skeleton.app.GameWorld.IDestroyable;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.CollisionBox;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Rectangle;
@@ -78,5 +79,7 @@ public class EnemyEntity extends Entity implements ICollideable {
         }
 		
 	}
+
+	
 
 }

@@ -14,10 +14,12 @@ public class HealthUIService implements IDrawable {
 
     private GraphicsContext context;
     private IHealthManager healthManager;
+    public Health currentHealth;
 
     public HealthUIService(GraphicsContext context) {
         this.context = context;
         this.healthManager = new HealthManager();
+        this.currentHealth = healthManager.GetHealth();
     }
 
     @Override

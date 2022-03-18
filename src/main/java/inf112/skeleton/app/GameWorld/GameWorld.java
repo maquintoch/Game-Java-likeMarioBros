@@ -21,6 +21,7 @@ import inf112.skeleton.app.GameWorld.Tiles.Coin;
 import inf112.skeleton.app.GameWorld.Tiles.TileCollections.CoinCollection;
 import inf112.skeleton.app.GameWorld.Tiles.TileCollections.TileCollection;
 import inf112.skeleton.app.Graphics.CoinUIService;
+import inf112.skeleton.app.Graphics.HealthUIService;
 import javafx.scene.paint.Color;
 
 public class GameWorld implements IDrawable, IUpdateable, IWorldRemoveable<Coin> {
@@ -34,6 +35,7 @@ public class GameWorld implements IDrawable, IUpdateable, IWorldRemoveable<Coin>
     private Image tileImage = new Image(tileImagePath);
 
     public GameWorld(Canvas canvas, IInputHandler inputHandler) {
+    	
     	FollowEntityCamera camera = new FollowEntityCamera(canvas);
     	var CoinDrawBehavior = new DrawImageBehavior(canvas, coinImage, camera);
     	var tileDrawBehavior = new DrawImageBehavior(canvas, tileImage, camera);
@@ -46,10 +48,14 @@ public class GameWorld implements IDrawable, IUpdateable, IWorldRemoveable<Coin>
         this.coins = new CoinCollection(factoryCoins);
         var backgroundDrawService = new GameBackgroundDrawService(canvas);
         var coinUI = new CoinUIService(canvas.getGraphicsContext2D());
+        var healthUI = new HealthUIService(canvas.getGraphicsContext2D());//Player.health
+        
+        var enemy = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior);
+        var enemies = new ArrayList<EnemyEntity>();
+        enemies.add(enemy);
         
 
-        var player = new PlayerEntity(canvas, factoryTiles, coins, coinUI, inputHandler, playerDrawBehavior);
-        var enemy = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior);
+        var player = new PlayerEntity(canvas, factoryTiles, enemies, coins, coinUI, healthUI, inputHandler, playerDrawBehavior);
         camera.setTargetEntity(player);
 
         drawPipeline = new ArrayList<IDrawable>();
@@ -60,6 +66,7 @@ public class GameWorld implements IDrawable, IUpdateable, IWorldRemoveable<Coin>
         drawPipeline.add(Tiles);
         drawPipeline.add(coins);
         drawPipeline.add(coinUI);
+        drawPipeline.add(healthUI);
         drawPipeline.add(player);
         drawPipeline.add(enemy);
 

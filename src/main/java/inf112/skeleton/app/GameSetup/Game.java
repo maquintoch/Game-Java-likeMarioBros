@@ -108,7 +108,7 @@ public class Game extends Application {
             });
             gameWorld = new GameWorld(canvas, inputHandler);
             var context = canvas.getGraphicsContext2D();
-            healthUI = new HealthUIService(context);//Player.health
+            //healthUI = new HealthUIService(context);//Player.health
 
             // Add sound of background game and game over
             String soundGameTheme = "src/main/java/inf112/skeleton/app/Resources/GameTheme.mp3";
@@ -125,7 +125,7 @@ public class Game extends Application {
 
                     gameWorld.Update();
                     gameWorld.Draw();
-                    healthUI.Draw();
+                    //healthUI.Draw();
 
 
                 }

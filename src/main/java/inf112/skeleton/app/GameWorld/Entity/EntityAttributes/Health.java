@@ -10,4 +10,7 @@ public class Health {
     public int getHealth() {
 		return amount;
 	}
+    public void loseHealth() {
+    	amount--;
+    }
 }

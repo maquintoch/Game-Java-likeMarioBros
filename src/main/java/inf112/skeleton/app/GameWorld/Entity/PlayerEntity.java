@@ -4,6 +4,7 @@ import javafx.scene.canvas.Canvas;
 import java.util.List;
 
 import inf112.skeleton.app.Graphics.CoinUIService;
+import inf112.skeleton.app.Graphics.HealthUIService;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Rectangle;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Speed;
 import inf112.skeleton.app.DrawBehavior.IDrawBehavior;
@@ -23,10 +24,12 @@ public class PlayerEntity extends Entity {
     private IInputHandler inputHandler;
     private ArrayList<Tile> collideableCollection;
     private CoinCollection coins;
-    private CoinUIService CoinUI;
+    private CoinUIService coinUI;
+    private HealthUIService healthUI;
+    private ArrayList<EnemyEntity> enemies;
  
 
-    public PlayerEntity(Canvas canvas, ArrayList<Tile> collideables, CoinCollection coins, CoinUIService coinUI, IInputHandler inputHandler, IDrawBehavior drawhandler) {
+    public PlayerEntity(Canvas canvas, ArrayList<Tile> collideables, ArrayList<EnemyEntity> enemies, CoinCollection coins, CoinUIService coinUI, HealthUIService healthUI, IInputHandler inputHandler, IDrawBehavior drawhandler) {
         super(canvas, drawhandler);
         this.position = new Position(3, 10);
         this.boundingBox = new Rectangle(16, 16);
@@ -34,7 +37,9 @@ public class PlayerEntity extends Entity {
         this.acceleration = new Speed(0, -0.5f);
         this.inputHandler = inputHandler;
         this.coins = coins;
-        this.CoinUI = coinUI;
+        this.coinUI = coinUI;
+        this.healthUI = healthUI;
+        this.enemies = enemies;
        
         
 
@@ -73,11 +78,20 @@ public class PlayerEntity extends Entity {
                 position.y = collidable.GetClosestYPosition(position);
             }
         }
+        for(var enemy : enemies) {
+            if (GetCollisionBox().overlap(enemy)) {
+                position.x -= speed.velocityX;
+                position.y -= speed.velocityY;
+                healthUI.currentHealth.loseHealth();
+                
+                //position.x = enemy.GetClosestXPosition(position);
+            }
+        }
         
         
         for(var coin : coins.getAll()) {
             if (GetCollisionBox().overlap(coin)) {
-            	CoinUI.currentscore.AddOneToScore();;
+            	coinUI.currentscore.AddOneToScore();;
             	coin.destroy();
             	
             	
