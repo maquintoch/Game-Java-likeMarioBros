@@ -50,7 +50,7 @@ public class LevelFactory implements ILevelFactory {
             "...............................",
             "..bbbbbb.......................",
             "...b..b.........bbbb...........",
-            "...............................",
+            "...b..............b..........b.",
             "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
             );
     

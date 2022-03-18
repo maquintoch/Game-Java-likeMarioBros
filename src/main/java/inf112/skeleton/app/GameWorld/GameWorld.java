@@ -12,6 +12,7 @@ import inf112.skeleton.app.DrawBehavior.DrawColorBehavior;
 import inf112.skeleton.app.DrawBehavior.DrawImageBehavior;
 import inf112.skeleton.app.DrawBehavior.GameBackgroundDrawService;
 import inf112.skeleton.app.DrawBehavior.IDrawable;
+import inf112.skeleton.app.GameWorld.Entity.EnemyEntity;
 import inf112.skeleton.app.GameWorld.Entity.PlayerEntity;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.GridPosition;
 import inf112.skeleton.app.GameSetup.LevelFactory;
@@ -37,6 +38,7 @@ public class GameWorld implements IDrawable, IUpdateable, IWorldRemoveable<Coin>
     	var CoinDrawBehavior = new DrawImageBehavior(canvas, coinImage, camera);
     	var tileDrawBehavior = new DrawImageBehavior(canvas, tileImage, camera);
     	var playerDrawBehavior = new DrawColorBehavior(canvas, Color.DARKGREEN, camera);
+    	var enemyDrawBehavior = new DrawColorBehavior(canvas, Color.RED, camera);
         var levelFactory = new LevelFactory(canvas,this, CoinDrawBehavior, tileDrawBehavior);
         var factoryTiles = levelFactory.GetTiles();
         var factoryCoins = levelFactory.GetCoins();
@@ -47,6 +49,7 @@ public class GameWorld implements IDrawable, IUpdateable, IWorldRemoveable<Coin>
         
 
         var player = new PlayerEntity(canvas, factoryTiles, coins, coinUI, inputHandler, playerDrawBehavior);
+        var enemy = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior);
         camera.setTargetEntity(player);
 
         drawPipeline = new ArrayList<IDrawable>();
@@ -58,9 +61,11 @@ public class GameWorld implements IDrawable, IUpdateable, IWorldRemoveable<Coin>
         drawPipeline.add(coins);
         drawPipeline.add(coinUI);
         drawPipeline.add(player);
+        drawPipeline.add(enemy);
 
         updatePipeline.add(player);
         updatePipeline.add(camera);
+        updatePipeline.add(enemy);
         
         //destroyPipeline.add(Coins);
         
