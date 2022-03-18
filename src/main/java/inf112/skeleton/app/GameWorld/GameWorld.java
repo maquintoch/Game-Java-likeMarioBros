@@ -50,10 +50,13 @@ public class GameWorld implements IDrawable, IUpdateable, IWorldRemoveable<Coin>
         var coinUI = new CoinUIService(canvas.getGraphicsContext2D());
         var healthUI = new HealthUIService(canvas.getGraphicsContext2D());//Player.health
         
-        var enemy = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior, 100, 10);
+        var enemy1 = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior, 100, 10);
+        var enemy2 = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior, 100, 400);
+        var enemy3 = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior, 400, 200);
         var enemies = new ArrayList<EnemyEntity>();
-        enemies.add(enemy);
-        
+        enemies.add(enemy1);
+        enemies.add(enemy2);
+        enemies.add(enemy3);
 
         var player = new PlayerEntity(canvas, factoryTiles, enemies, coins, coinUI, healthUI, inputHandler, playerDrawBehavior);
         camera.setTargetEntity(player);
@@ -68,11 +71,16 @@ public class GameWorld implements IDrawable, IUpdateable, IWorldRemoveable<Coin>
         drawPipeline.add(coinUI);
         drawPipeline.add(healthUI);
         drawPipeline.add(player);
-        drawPipeline.add(enemy);
+        for(EnemyEntity enemy : enemies) {
+        	drawPipeline.add(enemy);
+        }
+       
 
         updatePipeline.add(player);
         updatePipeline.add(camera);
-        updatePipeline.add(enemy);
+        for(EnemyEntity enemy : enemies) {
+        	updatePipeline.add(enemy);
+        }
         
         //destroyPipeline.add(Coins);
         

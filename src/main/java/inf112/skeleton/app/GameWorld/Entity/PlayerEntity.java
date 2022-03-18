@@ -8,6 +8,8 @@ import inf112.skeleton.app.Graphics.HealthUIService;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Rectangle;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Speed;
 import inf112.skeleton.app.DrawBehavior.IDrawBehavior;
+import inf112.skeleton.app.GameSetup.Game;
+import inf112.skeleton.app.GameWorld.GameWorld;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.CollisionBox;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
 import inf112.skeleton.app.Input.IInputHandler;
@@ -48,6 +50,11 @@ public class PlayerEntity extends Entity {
 
     @Override
     public void Update() {
+    	if(healthUI.currentHealth.getHealth() == 0) {
+    		
+    		//Avslutt spill	
+    	}
+    	
         if(inputHandler.isActive(KeyCode.W)) speed.velocityY = 4;
         if(inputHandler.isActive(KeyCode.A)) speed.velocityX = -1;
         else if(inputHandler.isActive(KeyCode.D)) speed.velocityX = 1;
