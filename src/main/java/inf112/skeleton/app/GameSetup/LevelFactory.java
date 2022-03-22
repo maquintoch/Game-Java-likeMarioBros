@@ -1,5 +1,7 @@
 package inf112.skeleton.app.GameSetup;
 
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.GridPosition;
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.TileSize;
 import javafx.scene.canvas.Canvas;
 
 import java.util.ArrayList;

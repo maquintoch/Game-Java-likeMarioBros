@@ -57,10 +57,5 @@ public class AppTest {
 	void addTest(int a, int b, int c) {
 		assertEquals(c, a + b);
 	}
-	
-	@Test
-	void ballTest() {
-		//Ball ball = new Ball(Color.BLACK, 10, null);
-		//assertEquals(10, ball.getRadius());
-	}
+
 }

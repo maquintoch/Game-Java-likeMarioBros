@@ -1,5 +1,11 @@
 package inf112.skeleton.app.GameWorld;
 
+import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.GridPosition;
+import inf112.skeleton.app.GameWorld.Entity.PlayerEntity;
+import inf112.skeleton.app.GameWorld.Tiles.Coin;
+import inf112.skeleton.app.GameWorld.Tiles.TileCollections.CoinCollection;
+import inf112.skeleton.app.GameWorld.Tiles.TileCollections.TileCollection;
+import inf112.skeleton.app.Graphics.CoinUIService;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import java.util.ArrayList;
@@ -13,14 +19,10 @@ import inf112.skeleton.app.DrawBehavior.DrawImageBehavior;
 import inf112.skeleton.app.DrawBehavior.GameBackgroundDrawService;
 import inf112.skeleton.app.DrawBehavior.IDrawable;
 import inf112.skeleton.app.GameWorld.Entity.EnemyEntity;
-import inf112.skeleton.app.GameWorld.Entity.PlayerEntity;
-import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.GridPosition;
+
 import inf112.skeleton.app.GameSetup.LevelFactory;
 import inf112.skeleton.app.Input.IInputHandler;
-import inf112.skeleton.app.GameWorld.Tiles.Coin;
-import inf112.skeleton.app.GameWorld.Tiles.TileCollections.CoinCollection;
-import inf112.skeleton.app.GameWorld.Tiles.TileCollections.TileCollection;
-import inf112.skeleton.app.Graphics.CoinUIService;
+
 import inf112.skeleton.app.Graphics.HealthUIService;
 import javafx.scene.paint.Color;
 
