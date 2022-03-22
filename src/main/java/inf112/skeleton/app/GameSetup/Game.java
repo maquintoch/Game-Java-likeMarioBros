@@ -38,7 +38,7 @@ public class Game extends Application {
 
     private GameWorld gameWorld;
     private IInputHandler inputHandler;
-    private IDrawable healthUI;
+    //private IDrawable healthUI;
     private IDrawable coinUI;
 
     public static void launchGame(String[] args) {
@@ -94,6 +94,7 @@ public class Game extends Application {
             canvas.widthProperty().bind(scene.widthProperty());
             canvas.heightProperty().bind(scene.heightProperty());
             root.getChildren().add(canvas);
+            HealthUIService healthUI = new HealthUIService(canvas.getGraphicsContext2D());
 
             inputHandler = new InputHandler();
 
@@ -106,7 +107,7 @@ public class Game extends Application {
                 var keyCode = event.getCode();
                 inputHandler.setInactive(keyCode);
             });
-            gameWorld = new GameWorld(canvas, inputHandler);
+            gameWorld = new GameWorld(canvas, inputHandler, healthUI);
             var context = canvas.getGraphicsContext2D();
             
 
@@ -122,6 +123,9 @@ public class Game extends Application {
                     // cycling music in background
                     mp.setCycleCount(MediaPlayer.INDEFINITE);
                     mp.play();
+                    if(healthUI.currentHealth.getHealth() == 0) {
+                        //Switch to game over screen. 
+                    }
 
                     gameWorld.Update();
                     gameWorld.Draw();
@@ -134,6 +138,7 @@ public class Game extends Application {
             };
 
             timer.start();
+        
 //		stage.setFullScreen(true);
             stage.show();
 
