@@ -1,6 +1,8 @@
 package inf112.skeleton.app.GameWorld.Entity;
 
 import javafx.scene.canvas.Canvas;
+
+import java.time.LocalTime;
 import java.util.List;
 
 import inf112.skeleton.app.Graphics.CoinUIService;
@@ -16,6 +18,8 @@ import inf112.skeleton.app.Input.IInputHandler;
 import inf112.skeleton.app.GameWorld.Tiles.Tile;
 import inf112.skeleton.app.GameWorld.Tiles.TileCollections.CoinCollection;
 import javafx.scene.input.KeyCode;
+//import jdk.vm.ci.meta.Local;
+import java.time.LocalTime;
 
 import java.util.ArrayList;
 
@@ -29,6 +33,7 @@ public class PlayerEntity extends Entity {
     private CoinUIService coinUI;
     private HealthUIService healthUI;
     private ArrayList<EnemyEntity> enemies;
+    private LocalTime timeSinceCollide;
  
 
     public PlayerEntity(Canvas canvas, ArrayList<Tile> collideables, ArrayList<EnemyEntity> enemies, CoinCollection coins, CoinUIService coinUI, HealthUIService healthUI, IInputHandler inputHandler, IDrawBehavior drawhandler) {
@@ -56,7 +61,10 @@ public class PlayerEntity extends Entity {
 
     	}
 
-        if(inputHandler.isActive(KeyCode.W)) speed.velocityY = 4;
+
+        if(inputHandler.isActive(KeyCode.W) && (timeSinceCollide.plusNanos(90000000).isAfter(LocalTime.now()))){
+            speed.velocityY = 6;
+        }
         if(inputHandler.isActive(KeyCode.A)) speed.velocityX = -1;
         else if(inputHandler.isActive(KeyCode.D)) speed.velocityX = 1;
         else speed.velocityX = 0;
@@ -67,6 +75,7 @@ public class PlayerEntity extends Entity {
         position.x += speed.velocityX;
         for(var collidable : collideableCollection) {
             if (GetCollisionBox().overlap(collidable)) {
+                timeSinceCollide = LocalTime.now();
                 position.x -= speed.velocityX;
                 while(!overlap(collidable)) position.x += Math.signum(speed.velocityX);
                 position.x -= Math.signum(speed.velocityX);
@@ -79,6 +88,7 @@ public class PlayerEntity extends Entity {
         position.y += speed.velocityY;
         for(var collidable : collideableCollection) {
             if (GetCollisionBox().overlap(collidable)) {
+                timeSinceCollide = LocalTime.now();
                 position.y -= speed.velocityY;
                 while(!overlap(collidable)) position.y += Math.signum(speed.velocityY);
                 position.y -= Math.signum(speed.velocityY);
