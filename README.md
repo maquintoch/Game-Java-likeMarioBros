@@ -3,7 +3,7 @@
 
 *"Super Mario ala Sixth-antler, samle pengene og kom deg igjennom nivåene uten å dø!"*
 
-###Medlemmer i Sixth-antler:
+### Medlemmer i Sixth-antler:
 
 - **Jonatan Valen** *(2.året Datateknologi)*
 - **Marco Cardenas** *(3.året Informasjonsvitenskap)*
