@@ -55,12 +55,18 @@ public class GameWorld implements IDrawable, IUpdateable, IWorldRemoveable<Coin>
         
         //Adding enemies to the game:
         var enemy1 = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior, 100, 10);
-        var enemy2 = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior, 100, 400);
-        var enemy3 = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior, 400, 200);
+        var enemy2 = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior, 100, 200);
+        var enemy3 = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior, 100, 400);
+        var enemy4 = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior, 200, 100);
+        var enemy5 = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior, 400, 300);
+        var enemy6 = new EnemyEntity(canvas, factoryTiles, enemyDrawBehavior, 400, 100);
         var enemies = new ArrayList<EnemyEntity>();
         enemies.add(enemy1);
         enemies.add(enemy2);
         enemies.add(enemy3);
+        enemies.add(enemy4);
+        enemies.add(enemy5);
+        enemies.add(enemy6);
 
         //Adding player:
         var player = new PlayerEntity(canvas, factoryTiles, enemies, coins, coinUI, healthUI, inputHandler, playerDrawBehavior);
