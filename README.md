@@ -1,37 +1,81 @@
+<<<<<<< HEAD
 # sixth-ant
 # Obligatorisk oppgave 1: Prosjekt Plattformspill – oppstart
+=======
+# Sixth-antler
+## Prosjekt Plattformspill
+>>>>>>> refactorDev
 
-*«Kurt-Mario er i trøbbel igjen! Han er sent ute til eksamen, han har ikke lest nok – og hvor er egentlig eksamenslokalet? Hjelp Kurt-Mario å hoppe fra etasje til etasje på Høyteknologisenteret, plukke opp viktig kunnskap (og snacks!) på veien og nå frem til eksamen i tide. Men pass opp for de skumle professorene – vi har ikke tid til å høre om flere teoremer nå!»*
+*"Super Mario ala Sixth-antler, samle pengene og kom deg igjennom nivåene uten å dø!"*
 
-Dette semesterets programmeringsprosjekt er å lage et [plattformspill](https://en.wikipedia.org/wiki/Platform_game) – et 2D-spill der du beveger deg rundt ved å gå eller hoppe og samler ting mens du passer deg for fiender. [Her er et populært eksempel på sjangeren](https://supermarioplay.com/) som dere kan prøve – det er sikkert lurt å gjøre grundig «research» før dere setter i gang!
+### Medlemmer i Sixth-antler:
 
-(Dere står fritt til å velge plott til spillet – Kurt-Mario er bare et eksempel.)
+- **Jonatan Valen** *(2.året Datateknologi)*
+- **Marco Cardenas** *(3.året Informasjonsvitenskap)*
+- **Yilin Yuan** *(2.året Datateknologi)*
+- **Daniel Nyvoll** *(2.året Datateknologi)*
+- **Tord Stang** *(3.året Informasjonsvitenskap)*
+- **Lars Vestbo** *(3.året Data Science)*
 
-Her er viktige aspekter å ha med i spillet:
+Dette er en oppgave i regi av emnet INF112 - Innføring i systemutvikling. Ett emne som arrangeres på og av Universitet i Bergen.
 
-* Spillfigur som kan styres – gå til høyre/venstre, hoppe oppover
-* Todimensjonal verden:
-   * Plattform – horisontal flate spilleren kan stå eller gå på (inkludert «bakken»)
-   * Vegg – vertikal flate som spilleren ikke kan gå gjennom
-   * Spilleren beveger seg oppover ved å hoppe, og nedover ved å falle
-* Fiender som beveger seg og er skadelige ved berøring
-* Spilleren kan samle poeng ved å plukke opp ting
-* Utfordringen i spillet er gjerne en eller flere av: å bevege seg gjennom terrenget uten å falle utfor, å samle nok poeng, å bekjempe fiendene, å nå frem til og bekjempe en «big boss» 
+Prosjektet og medlemmene har som mål og kunne presentere ett plattform-spill som er 2D og ved bruk av JavaFX.
 
-Vanlige aspekter dere kan vurdere å ha med:
+Viktige krav og aspekter til spillet er:
 
-* Verden er bygget opp av blokker med fast størrelse
-* Verden har plattformer eller stiger som man kan hoppe opp gjennom
-* Verden er større enn skjermen og scroller horisontalt eller vertikalt
-* Plattformer som beveger seg
-* Spilleren kan drepe fiendene ved å hoppe på dem eller skyte dem
-* «Power-ups» som gir spilleren spesielle krefter
-* Skjulte gjenstander
-* Akrobatikk
+1. Spillfigur som kan styres – gå til høyre/venstre, hoppe oppover
+2. Todimensjonal verden: Plattform – horisontal flate spilleren kan stå eller gå på (inkludert «bakken»). Vegg – vertikal flate som spilleren ikke kan gå gjennom
+   Spilleren beveger seg oppover ved å hoppe, og nedover ved å falle.
+   
+3. Fiender som beveger seg og er skadelige ved berøring
+4. Spilleren kan samle poeng ved å plukke opp ting
 
-Velkjente eksempler er [Donkey Kong (1981)](https://en.wikipedia.org/wiki/Donkey_Kong), [Mario Bros. (1983)](https://en.wikipedia.org/wiki/Mario_Bros.), [Metroid (1986)](https://en.wikipedia.org/wiki/Metroid), [Bubble Bobble (1986)](https://en.wikipedia.org/wiki/Bubble_Bobble), [Castlevania (1986)](https://en.wikipedia.org/wiki/Castlevania), [Sonic the Hedgehog (1991)](https://en.wikipedia.org/wiki/Sonic_the_Hedgehog) – alle disse er fremdeles populære og tilgjengelige i nye utgaver.
 
-Generelle krav:
+### Game Setup with Maven
+This project comes with a working Maven `pom.xml` file. You should be able to import it into Eclipse using *File → Import → Maven → Existing Maven Projects* (or *Check out Maven Projects from SCM* to do Git cloning as well). You can also build the project from the command line with `mvn clean compile` and test it with `mvn clean test`.
+
+Pay attention to these folders:
+* `src/main/java` – Java source files go here (as usual for Maven)
+* `src/main/resources` – data files go here, for example in an `assets` sub-folder
+* `src/test/java` – JUnit tests
+* `target/classes` – compiled Java class files
+
+You should probably edit the `pom.xml` and fill in details such as the project `name` and `artifactId`:
+
+
+```xml
+
+	< !-- FIXME - set group id -->
+	<groupId>inf112.skeleton.app</groupId>
+	< !-- FIXME - set artifact name -->
+	<artifactId>javafx-app</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	< !-- FIXME - set app name -->
+	<name>mvn-app</name>
+	< !-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+```
+
+
+## Running
+You can run the project from Eclipse/IntelliJ, or with Maven using `mvn javafx:run`. Change the main class by modifying the `main.class` setting in `pom.xml`:
+
+```
+		<main.class>inf112.skeleton.app.Main</main.class>
+```
+
+## Jar Files
+
+If you run `mvn package` you get everything bundled up into a `.jar` file + a ‘fat’ Jar file where all the necessary dependencies have been added:
+
+* `target/NAME-VERSION.jar` – your compiled project, packaged in a JAR file
+* `target/NAME-VERSION-fat.jar` – your JAR file packaged with dependencies
+
+Run Jar files with, for example, `java -jar target/javafx-app-1.0-SNAPSHOT-fat.jar`.
+
+### Generelle krav:
 
 * Java: Spillet skal skrives i Java, og dere vil få forslag til og tutorials for grafikkbibliotek.
 * JUnit: For testing skal JUnit 5 brukes
