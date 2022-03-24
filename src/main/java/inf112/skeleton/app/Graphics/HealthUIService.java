@@ -5,8 +5,6 @@ import inf112.skeleton.app.Services.HealthManager;
 import inf112.skeleton.app.Services.IHealthManager;
 import inf112.skeleton.app.DrawBehavior.IDrawable;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Health;
-import javafx.beans.binding.DoubleBinding;
-import javafx.beans.property.DoubleProperty;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 

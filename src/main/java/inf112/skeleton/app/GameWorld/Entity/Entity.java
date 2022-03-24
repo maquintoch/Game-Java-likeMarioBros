@@ -7,8 +7,6 @@ import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.IMoveable;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Rectangle;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 public abstract class Entity implements IDrawable, IUpdateable, IMoveable, ICollideable {
 

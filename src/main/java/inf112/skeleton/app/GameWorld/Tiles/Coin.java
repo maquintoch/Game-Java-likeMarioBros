@@ -10,8 +10,6 @@ import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Rectangle;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.TileSize;
 import inf112.skeleton.app.GameWorld.GameWorld;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Coin implements IDrawable, ICollideable, IDestroyable{
