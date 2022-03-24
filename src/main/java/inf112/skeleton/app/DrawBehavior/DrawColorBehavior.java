@@ -5,7 +5,6 @@ import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Rectangle;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 public class DrawColorBehavior implements IDrawBehavior {

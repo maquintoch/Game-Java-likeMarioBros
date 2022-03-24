@@ -13,18 +13,9 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.Paint;
-import javafx.scene.paint.RadialGradient;
-import javafx.scene.paint.Stop;
-import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.input.KeyEvent;
 
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -39,8 +30,6 @@ public class Game extends Application {
 
     private GameWorld gameWorld;
     private IInputHandler inputHandler;
-    //private IDrawable healthUI;
-    private IDrawable coinUI;
     public int levelCount = 0;
 
     public static void launchGame(String[] args) {
@@ -113,7 +102,6 @@ public class Game extends Application {
                 inputHandler.setInactive(keyCode);
             });
             gameWorld = new GameWorld(canvas, inputHandler, healthUI, coinUI, levelCount);
-            var context = canvas.getGraphicsContext2D();
             
 
             // Add sound of background game and game over

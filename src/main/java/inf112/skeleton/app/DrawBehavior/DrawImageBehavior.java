@@ -6,7 +6,6 @@ import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
 import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Rectangle;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Paint;
 import javafx.scene.image.Image;
 
 public class DrawImageBehavior implements IDrawBehavior {

@@ -3,12 +3,6 @@ package inf112.skeleton.app.GameSetup;
 import javafx.scene.canvas.Canvas;
 
 import java.util.ArrayList;
-import javafx.scene.Scene;
-import java.lang.StringBuilder;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.layout.GridPane;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -115,58 +109,6 @@ public class LevelFactory implements ILevelFactory {
         levels.add(level1);
         levels.add(level2);
         levels.add(level3);
-    }
-    
-    public List<String> removeCoin(List<String> inputLevel, int y, int x){
-    	List<String> newlevel = Arrays.asList(
-                "...............................",
-                "...........ccc.................",
-                "...............................",
-                "................c..............",
-                "...............................",
-                "...............................",
-                ".......bbbbbbbbbbb..bbbbbbb.bbb",
-                "...............................",
-                "..bbb..........cc..............",
-                "...............................",
-                "...........b..c..............bb",
-                ".....c.........................",
-                ".....................bb........",
-                "..................c............",
-                "...............................",
-                "...........bbbb..c.............",
-                "...............................",
-                "...............................",
-                "..bbbbbb.......................",
-                "...b..b.........bbbb...........",
-                "...............................",
-                "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
-                );
-
-    	int i = 0;
-    	for(String s : inputLevel) {
-    		if(i == y && s.charAt(x) == 'c') {
-    			
-    			StringBuilder sb = new StringBuilder(s);
-    			
-    			sb.setCharAt(x, '.');
-    			String newString = sb.toString();
-    			newlevel.set(i, newString);
-    			i++;
-    		
-    		}
-    		else {
-    			newlevel.set(i, s);
-    			i++;
-    			
-    		}
-    		
-    	
-    	}
-    	//Collections.reverse(newlevel);
-    	return newlevel;
-    	
-    	
     }
 
     public ArrayList<Tile> GetTiles(List<String> level) {
