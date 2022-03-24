@@ -4,6 +4,7 @@ import java.io.File;
 
 import inf112.skeleton.app.DrawBehavior.IDrawable;
 import inf112.skeleton.app.GameWorld.GameWorld;
+import inf112.skeleton.app.Graphics.CoinUIService;
 import inf112.skeleton.app.Graphics.HealthUIService;
 import inf112.skeleton.app.Input.IInputHandler;
 import inf112.skeleton.app.Input.InputHandler;
@@ -40,6 +41,7 @@ public class Game extends Application {
     private IInputHandler inputHandler;
     //private IDrawable healthUI;
     private IDrawable coinUI;
+    public int levelCount = 0;
 
     public static void launchGame(String[] args) {
         launch(args);
@@ -95,6 +97,9 @@ public class Game extends Application {
             canvas.heightProperty().bind(scene.heightProperty());
             root.getChildren().add(canvas);
             HealthUIService healthUI = new HealthUIService(canvas.getGraphicsContext2D());
+            CoinUIService coinUI = new CoinUIService(canvas.getGraphicsContext2D());
+
+
 
             inputHandler = new InputHandler();
 
@@ -107,7 +112,7 @@ public class Game extends Application {
                 var keyCode = event.getCode();
                 inputHandler.setInactive(keyCode);
             });
-            gameWorld = new GameWorld(canvas, inputHandler, healthUI);
+            gameWorld = new GameWorld(canvas, inputHandler, healthUI, coinUI, levelCount);
             var context = canvas.getGraphicsContext2D();
             
 
@@ -126,6 +131,12 @@ public class Game extends Application {
                     if(healthUI.currentHealth.getHealth() == 0) {
                         //Switch to game over screen. 
                     }
+                    if(coinUI.currentscore.getScore() == 10){
+                        levelCount++;
+                        coinUI.currentscore.SubtractTenFromScore();
+                       gameWorld =  new GameWorld(canvas, inputHandler, healthUI, coinUI, levelCount);
+                    }
+
 
                     gameWorld.Update();
                     gameWorld.Draw();

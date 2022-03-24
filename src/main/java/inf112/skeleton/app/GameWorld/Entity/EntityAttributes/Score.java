@@ -19,4 +19,6 @@ public class Score {
 		amount--;
 	}
 
+	public void SubtractTenFromScore() { amount = amount -10;
+	}
 }
