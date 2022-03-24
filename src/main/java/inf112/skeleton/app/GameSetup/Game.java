@@ -72,6 +72,38 @@ public class Game extends Application {
         //startGame(stage);
 
     }
+    public void EndScreen(Stage stage){
+
+
+        stage.setTitle("");
+        Button btn = new Button();
+        btn.setText("Prøv igjen");
+
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+
+                try {
+                    startGame(stage);
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Pane root = new Pane();
+        btn.setLayoutX(250);
+        btn.setLayoutY(250);
+        root.getChildren().add(btn);
+        stage.setScene(new Scene(root, 500, 500));
+        stage.show();
+
+
+    }
 
     public void startGame(Stage stage){
 
@@ -117,8 +149,12 @@ public class Game extends Application {
                     mp.setCycleCount(MediaPlayer.INDEFINITE);
                     mp.play();
                     if(healthUI.currentHealth.getHealth() == 0) {
-                        //Switch to game over screen. 
+                        //Switch to game over screen.
+
+
+                        EndScreen(stage);
                     }
+
                     if(coinUI.currentscore.getScore() == 10){
                         levelCount++;
                         coinUI.currentscore.SubtractTenFromScore();
@@ -136,7 +172,11 @@ public class Game extends Application {
 
             };
 
+
+
             timer.start();
+
+
         
 //		stage.setFullScreen(true);
             stage.show();
