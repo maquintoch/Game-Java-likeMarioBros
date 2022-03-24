@@ -1,12 +1,7 @@
 package inf112.skeleton.app.DrawBehavior;
 
-import javafx.scene.canvas.Canvas;
-import javafx.scene.*;
 import javafx.scene.canvas.*;
-import javafx.scene.effect.*;
 import javafx.scene.image.Image;
-import javafx.scene.paint.*;
-import javafx.stage.Stage;
 
 
 public class GameBackgroundDrawService implements IDrawable {
