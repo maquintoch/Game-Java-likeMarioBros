@@ -3,7 +3,7 @@
 
 *"Super Mario ala Sixth-antler, samle pengene og kom deg igjennom nivåene uten å dø!"*
 
-###Medlemmer i Sixth-antler:
+### Medlemmer i Sixth-antler:
 
 - **Jonatan Valen** *(2.året Datateknologi)*
 - **Marco Cardenas** *(3.året Informasjonsvitenskap)*
@@ -11,6 +11,8 @@
 - **Daniel Nyvoll** *(2.året Datateknologi)*
 - **Tord Stang** *(3.året Informasjonsvitenskap)*
 - **Lars Vestbo** *(3.året Data Science)*
+
+Dette er en oppgave i regi av emnet INF112 - Innføring i systemutvikling. Ett emne som arrangeres på og av Universitet i Bergen.
 
 Prosjektet og medlemmene har som mål og kunne presentere ett plattform-spill som er 2D og ved bruk av JavaFX.
 
