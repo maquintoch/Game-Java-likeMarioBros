@@ -6,6 +6,8 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import javafx.scene.paint.Color;
+
 public class AppTest {
 	/**
 	 * Static method run before everything else

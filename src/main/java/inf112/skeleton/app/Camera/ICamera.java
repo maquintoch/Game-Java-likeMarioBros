@@ -1,8 +1,9 @@
-package inf112.skeleton.app.Camera;
+package inf112.skeleton.app.camera;
 
 public interface ICamera {
 	
-	float getx();
-	float gety();
+	public float getX();
+	public float getY();
+	public void update();
 
 }
