@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/jonatanvalen/Documents/Studiefag/INF112/eclipse/OurProject/src/main/java/inf112/skeleton/app</OriginalElement>
+  <nodes>
+    <node x="287.0" y="755.0">inf112.skeleton.app.objects.attributes.Speed</node>
+    <node x="381.0" y="609.0">inf112.skeleton.app.objects.attributes.GridPosition</node>
+    <node x="144.0" y="755.0">inf112.skeleton.app.objects.attributes.Health</node>
+    <node x="429.75" y="78.0">inf112.skeleton.app.draw.DrawImageBehavior</node>
+    <node x="429.0" y="755.0">inf112.skeleton.app.game.Game</node>
+    <node x="706.0" y="755.0">inf112.skeleton.app.Main</node>
+    <node x="194.0" y="458.0">inf112.skeleton.app.camera.ICamera</node>
+    <node x="183.0" y="682.0">inf112.skeleton.app.objects.attributes.Rectangle</node>
+    <node x="510.0" y="682.0">inf112.skeleton.app.objects.attributes.Position</node>
+    <node x="0.0" y="385.0">inf112.skeleton.app.objects.CoinCollection</node>
+    <node x="0.0" y="755.0">inf112.skeleton.app.draw.CoinUI</node>
+    <node x="2.0" y="536.0">inf112.skeleton.app.Input.InputHandler</node>
+    <node x="360.0" y="385.0">inf112.skeleton.app.services.HealthManager</node>
+    <node x="84.75000000000001" y="78.0">inf112.skeleton.app.objects.IPlayer</node>
+    <node x="204.75" y="78.0">inf112.skeleton.app.objects.Coin</node>
+    <node x="0.0" y="234.0">inf112.skeleton.app.objects.PlayerSecond</node>
+    <node x="29.75" y="307.0">inf112.skeleton.app.game.gameworld.IGameWorld</node>
+    <node x="193.0" y="609.0">inf112.skeleton.app.game.LevelFactory</node>
+    <node x="196.0" y="536.0">inf112.skeleton.app.camera.Camera</node>
+    <node x="646.75" y="78.0">inf112.skeleton.app.draw.DrawColorBehavior</node>
+    <node x="351.0" y="458.0">inf112.skeleton.app.Input.MovementVector</node>
+    <node x="557.25" y="0.0">inf112.skeleton.app.draw.IDrawBehavior</node>
+    <node x="570.0" y="307.0">inf112.skeleton.app.objects.ICollisionLogic</node>
+    <node x="572.0" y="385.0">inf112.skeleton.app.objects.CollisionLogic</node>
+    <node x="351.0" y="682.0">inf112.skeleton.app.draw.HealthUI</node>
+    <node x="176.0" y="385.0">inf112.skeleton.app.game.gameworld.GameWorld</node>
+    <node x="568.0" y="755.0">inf112.skeleton.app.objects.attributes.Score</node>
+    <node x="0.0" y="458.0">inf112.skeleton.app.Input.IInputHandler</node>
+    <node x="358.0" y="307.0">inf112.skeleton.app.services.IHealthManager</node>
+    <node x="571.0" y="458.0">inf112.skeleton.app.objects.TileCollection</node>
+    <node x="28.0" y="156.0">inf112.skeleton.app.objects.Player</node>
+    <node x="307.75" y="78.0">inf112.skeleton.app.objects.Tile</node>
+    <node x="0.0" y="609.0">inf112.skeleton.app.services.CoinManager</node>
+    <node x="663.0" y="682.0">inf112.skeleton.app.objects.attributes.TileSize</node>
+    <node x="144.0" y="156.0">inf112.skeleton.app.objects.Enemy</node>
+    <node x="0.0" y="682.0">inf112.skeleton.app.game.gameworld.Background</node>
+    <node x="566.0" y="609.0">inf112.skeleton.app.objects.attributes.CollisionBox</node>
+    <node x="197.5" y="0.0">inf112.skeleton.app.objects.IItem</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="inf112.skeleton.app.draw.DrawImageBehavior" target="inf112.skeleton.app.draw.IDrawBehavior" relationship="REALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="528.25" y="53.0" />
+      <point x="635.25" y="53.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="inf112.skeleton.app.objects.Tile" target="inf112.skeleton.app.objects.IItem" relationship="REALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="346.25" y="58.0" />
+      <point x="296.25" y="58.0" />
+      <point x="296.25" y="48.0" />
+      <point x="262.0" y="48.0" />
+      <point x="21.5" y="14.0" />
+    </edge>
+    <edge source="inf112.skeleton.app.objects.PlayerSecond" target="inf112.skeleton.app.objects.Player" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="inf112.skeleton.app.services.HealthManager" target="inf112.skeleton.app.services.IHealthManager" relationship="REALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="inf112.skeleton.app.objects.IPlayer" target="inf112.skeleton.app.objects.IItem" relationship="INTERFACE_GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="134.75" y="58.0" />
+      <point x="219.0" y="58.0" />
+      <point x="-21.5" y="14.0" />
+    </edge>
+    <edge source="inf112.skeleton.app.objects.CoinCollection" target="inf112.skeleton.app.game.gameworld.IGameWorld" relationship="REALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="78.0" y="360.0" />
+      <point x="161.25" y="360.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="inf112.skeleton.app.objects.Player" target="inf112.skeleton.app.objects.IPlayer" relationship="REALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="76.0" y="131.0" />
+      <point x="134.75" y="131.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="inf112.skeleton.app.draw.DrawColorBehavior" target="inf112.skeleton.app.draw.IDrawBehavior" relationship="REALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="742.25" y="53.0" />
+      <point x="635.25" y="53.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="inf112.skeleton.app.objects.Enemy" target="inf112.skeleton.app.objects.IPlayer" relationship="REALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="193.5" y="131.0" />
+      <point x="134.75" y="131.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="inf112.skeleton.app.camera.Camera" target="inf112.skeleton.app.camera.ICamera" relationship="REALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="inf112.skeleton.app.Input.InputHandler" target="inf112.skeleton.app.Input.IInputHandler" relationship="REALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="inf112.skeleton.app.objects.Coin" target="inf112.skeleton.app.objects.IItem" relationship="REALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="246.25" y="58.0" />
+      <point x="296.25" y="58.0" />
+      <point x="296.25" y="48.0" />
+      <point x="262.0" y="48.0" />
+      <point x="21.5" y="14.0" />
+    </edge>
+    <edge source="inf112.skeleton.app.game.gameworld.GameWorld" target="inf112.skeleton.app.game.gameworld.IGameWorld" relationship="REALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="244.5" y="360.0" />
+      <point x="161.25" y="360.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="inf112.skeleton.app.objects.CollisionLogic" target="inf112.skeleton.app.objects.ICollisionLogic" relationship="REALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.7367472167594814" showDependencies="false" x="380.74390332714546" y="502.45538599565305" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

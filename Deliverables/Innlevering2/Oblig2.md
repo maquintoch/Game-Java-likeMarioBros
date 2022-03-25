@@ -8,7 +8,7 @@
 - Rollene har ikke fungert som vi tenkte opprinnelig. Vi må diskutere og bli enige om vi trenger en endring når det kommer til rollene. Til nå har vi hatt ganske frie roller, der alle har gjort litt av alt. Vi skal ha et møte der vi diskuterer dette og forhåpentligvis finner en bedre løsning.
 
 ## Prosjektmetodikk:
-- Når det kommer til prosjektmetodikk bruker en kombinasjon av Kanban og Scrum. Vi bryter ned arbeidet i små mål som skal fullføres før vi begynner på nye mål. Vi har valgt å gått bort fra Microsoft Planner når det kommer til project board. Vi bruker nå project board i gitlab. Vi oppretter issues der og lager branches for nye issues/features.
+- Når det kommer til prosjektmetodikk bruker vi Scrum. Vi bryter ned arbeidet i små mål som skal fullføres før vi begynner på nye mål. Vi har valgt å gått bort fra Microsoft Planner når det kommer til project board. Vi bruker nå project board i gitlab. Vi oppretter issues der og lager branches for nye issues/features.
 
 ## Gruppedynamikk/kommunikasjon/samarbeid:
 - Gruppedynamikken har fungert bra nok.
@@ -39,9 +39,8 @@
 
 ## Stretch goal
 - Implementering av multiplayer på samme maskin.
-- 
-# MVP og annet
 
+# MVP og annet
 
 Vi har prioritert å bli ferdig med alle mvp-punktene. Dette har vi klart. Vi valgte å implementere multiplayer på samme maskin. Videre vil vi fokusere på:
 
@@ -50,14 +49,20 @@ Vi har prioritert å bli ferdig med alle mvp-punktene. Dette har vi klart. Vi va
 - Lage brikkefigurer for players. 
 - Lage mange flere tester. Dette er noe vi må bli bedre på. 
 
-# Brukerhistorier ligger i filen UserStory_2.med
-Vi har ikke gjort justeringer på kravene fra MVP. 
+Brukerhistorier ligger i filen UserStory_2.med.
+Vi har ikke gjort justeringer på kravene fra MVP. Vi har gjort ferdig alle punktene. 
 
 ## Bugs:
-- Om spiller faller ut forbi brettet faller den bare evig nå. Vi må implementere at spillerne dør og få opp game over skjerm her.
+- Om spiller faller utforbi brettet faller den bare evig nå. Vi må implementere at spillerne dør og får opp game over skjerm her.
 
 # Deloppgave 3: Produkt og kode
 Dette har vi fikset siden sist mtp tilbakemeldinger fra kunden:
-- Skrevet hvilke prosjektmetodikk vi har brukt. 
-- Vi har blitt bedre til å oppdatere project board. 
+- Skrevet hvilke prosjektmetodikk vi har brukt.
+- Vi har blitt bedre til å oppdatere project board.
+- Vi har laget nå et referat dokument hvor det står når vi møtes og avtalene som vi har for å jobbe med oppgaver, planlegging, osv.
+- Vi har oppdatert readme filen til å beskrive teamet vårt og hva vi jobber med. (Vi fikk ikke tid til å forklare godt nok her, mtp sen tilbakemelding fra kunden).
+- Vi har fjernet en hel haug med ubrukt kode, laget bedre mappestruktur og fikset den generelle strukturen på koden vår. Vi er veldig fornøyd med den nye strukturen som gjør det mye lettere å sette seg inn i koden.
+- Vi har testet at spillet kan brukes både på Windows 10, Linux Ubuntu 14.  og Mac OS Monterrey, og Mac OS Big Sur.
+
+For klassediagram se filen klassediagram.uml. 
 
