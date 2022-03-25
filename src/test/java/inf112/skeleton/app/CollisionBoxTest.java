@@ -1,13 +1,15 @@
 package inf112.skeleton.app;
 
+import inf112.skeleton.app.objects.attributes.CollisionBox;
+import inf112.skeleton.app.objects.attributes.Position;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.CollisionBox;
-import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
+//import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.CollisionBox;
+//import inf112.skeleton.app.GameWorld.Entity.EntityAttributes.Position;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

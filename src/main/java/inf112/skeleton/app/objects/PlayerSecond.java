@@ -1,5 +1,6 @@
 package inf112.skeleton.app.objects;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
@@ -26,6 +27,7 @@ public class PlayerSecond extends Player{
     private IDrawBehavior drawHandler;
     protected Position position;
     protected Rectangle boundingBox;
+    private LocalTime timeSinceCollide;
 
 	public PlayerSecond(Canvas canvas) {
 		super(canvas);
@@ -56,8 +58,10 @@ public class PlayerSecond extends Player{
     		
     		//Avslutt spill	
     	}
-    	
-        if(inputHandler.isActive(KeyCode.UP)) speed.velocityY = 4;
+
+        if(inputHandler.isActive(KeyCode.UP) && (speed.velocityY == 0) && (timeSinceCollide.plusNanos(90000000).isAfter(LocalTime.now()))){
+            speed.velocityY = 8;
+        }
         if(inputHandler.isActive(KeyCode.LEFT)) speed.velocityX = -1;
         else if(inputHandler.isActive(KeyCode.RIGHT)) speed.velocityX = 1;
         else speed.velocityX = 0;
@@ -68,6 +72,7 @@ public class PlayerSecond extends Player{
         position.setX(position.getX() + speed.velocityX);
         for(Tile collidable : collideables) {
             if (getCollisionBox().overlap(collidable)) {
+                timeSinceCollide = LocalTime.now();
                 position.setX(position.getX() - speed.velocityX);
                 while(!overlap(collidable)) {
                 	position.setX(position.getX() + Math.signum(speed.velocityX));
@@ -82,6 +87,7 @@ public class PlayerSecond extends Player{
         position.setY(position.getY() + speed.velocityY);
         for(Tile collidable : collideables) {
             if (getCollisionBox().overlap(collidable)) {
+                timeSinceCollide = LocalTime.now();
                 position.setY(position.getY() - speed.velocityY);
                 while(!overlap(collidable)) {
                 	position.setY(position.getY() + Math.signum(speed.velocityY));

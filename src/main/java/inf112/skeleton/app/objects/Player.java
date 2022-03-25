@@ -12,6 +12,7 @@ import inf112.skeleton.app.objects.attributes.CollisionBox;
 import inf112.skeleton.app.objects.attributes.Position;
 import inf112.skeleton.app.objects.attributes.Speed;
 import inf112.skeleton.app.objects.attributes.Rectangle;
+import java.time.LocalTime;
 
 public class Player implements IPlayer {
 
@@ -27,6 +28,7 @@ public class Player implements IPlayer {
     private IDrawBehavior drawHandler;
     protected Position position;
     protected Rectangle boundingBox;
+    private LocalTime timeSinceCollide;
 
 
     public Player(Canvas canvas) {
@@ -58,8 +60,10 @@ public class Player implements IPlayer {
     		
     		//Avslutt spill	
     	}
-    	
-        if(inputHandler.isActive(KeyCode.W)) speed.velocityY = 4;
+
+        if(inputHandler.isActive(KeyCode.W) && (speed.velocityY == 0) && (timeSinceCollide.plusNanos(90000000).isAfter(LocalTime.now()))){
+            speed.velocityY = 8;
+        }
         if(inputHandler.isActive(KeyCode.A)) speed.velocityX = -1;
         else if(inputHandler.isActive(KeyCode.D)) speed.velocityX = 1;
         else speed.velocityX = 0;
@@ -70,6 +74,7 @@ public class Player implements IPlayer {
         position.setX(position.getX() + speed.velocityX);
         for(Tile collidable : collideables) {
             if (getCollisionBox().overlap(collidable)) {
+                timeSinceCollide = LocalTime.now();
                 position.setX(position.getX() - speed.velocityX);
                 while(!overlap(collidable)) {
                 	position.setX(position.getX() + Math.signum(speed.velocityX));
@@ -84,6 +89,7 @@ public class Player implements IPlayer {
         position.setY(position.getY() + speed.velocityY);
         for(Tile collidable : collideables) {
             if (getCollisionBox().overlap(collidable)) {
+                timeSinceCollide = LocalTime.now();
                 position.setY(position.getY() - speed.velocityY);
                 while(!overlap(collidable)) {
                 	position.setY(position.getY() + Math.signum(speed.velocityY));
