@@ -50,7 +50,7 @@ Vi har prioritert å bli ferdig med alle mvp-punktene. Dette har vi klart. Vi va
 - Lage brikkefigurer for players. 
 - Lage mange flere tester. Dette er noe vi må bli bedre på. 
 
-# Brukerhistorier ligger i filen UserStory.med
+# Brukerhistorier ligger i filen UserStory_2.med
 Vi har ikke gjort justeringer på kravene fra MVP. 
 
 ## Bugs:
