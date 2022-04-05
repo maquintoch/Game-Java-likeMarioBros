@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import inf112.skeleton.app.draw.DrawImageBehavior;
 import inf112.skeleton.app.draw.IDrawBehavior;
 import inf112.skeleton.app.objects.Coin;
 import inf112.skeleton.app.objects.Tile;
@@ -17,8 +18,8 @@ import inf112.skeleton.app.objects.attributes.TileSize;
 public class LevelFactory{
 
     private Canvas canvas;
-    private IDrawBehavior coinDrawBehavior;
-    private IDrawBehavior tileDrawBehavior;
+    private DrawImageBehavior coinDrawBehavior;
+    private DrawImageBehavior tileDrawBehavior;
     public List<List<String>> levels = new ArrayList<>();
 
     
@@ -43,7 +44,7 @@ public class LevelFactory{
             "............b..................",
             "..bb..bb.......................",
             "...b..b.........bbbb....b......",
-            "...b.....c........b.....c....b.",
+            "...b....ccccccccc.b.....c....b.",
             "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
     );
     public List<String> level2 = Arrays.asList(
@@ -95,7 +96,7 @@ public class LevelFactory{
             "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
     );
 
-    public LevelFactory(Canvas canvas, IDrawBehavior coinDrawBehavior, IDrawBehavior tileDrawBehavior) {
+    public LevelFactory(Canvas canvas, DrawImageBehavior coinDrawBehavior, DrawImageBehavior tileDrawBehavior) {
         this.canvas = canvas;
         this.coinDrawBehavior = coinDrawBehavior;
         this.tileDrawBehavior = tileDrawBehavior;
