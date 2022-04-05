@@ -17,12 +17,12 @@ public class HealthUI{
         this.currentHealth = healthManager.getHealth();
     }
 
-    public void draw() {
+    public void draw(double x, double y) {
         Health currenthealth = healthManager.getHealth();
         Health maxHealth = healthManager.getMaxHealth();
         context.setFill(Color.RED);
-        context.fillRect(0,0,maxHealth.getHealth(),10);
+        context.fillRect(x,y,maxHealth.getHealth(),10);
         context.setFill(Color.GREEN);
-        context.fillRect(0,0, currenthealth.getHealth(), 10);   
+        context.fillRect(x,y, currenthealth.getHealth(), 10);   
     }
 }

@@ -185,6 +185,7 @@ public class Game extends Application {
             canvas.heightProperty().bind(scene.heightProperty());
             root.getChildren().add(canvas);
             HealthUI healthUI = new HealthUI(canvas.getGraphicsContext2D());
+            HealthUI healthUI2 = new HealthUI(canvas.getGraphicsContext2D());
             CoinUI coinUI = new CoinUI(canvas.getGraphicsContext2D());
 
             inputHandler = new InputHandler();
@@ -198,7 +199,8 @@ public class Game extends Application {
             	KeyCode keyCode = event.getCode();
                 inputHandler.setInactive(keyCode);
             });
-            gameWorld = new GameWorld(canvas, inputHandler, healthUI, coinUI, levelCount, choice);
+
+            gameWorld = new GameWorld(canvas, inputHandler, healthUI, healthUI2, coinUI, levelCount, choice);
 
             // add game music
             String soundGameTheme = "src/main/java/inf112/skeleton/app/assets/GameTheme.mp3";
@@ -211,7 +213,8 @@ public class Game extends Application {
                     // cycling music in background
                     mp.setCycleCount(MediaPlayer.INDEFINITE);
                     mp.play();
-                    if(healthUI.currentHealth.getHealth() == 0) {
+                    
+                    if(healthUI.currentHealth.getHealth() == 0 || healthUI2.currentHealth.getHealth() == 0) {
                         levelCount = 0;
                         mp.stop();
                         EndScreen(stage);
@@ -221,7 +224,9 @@ public class Game extends Application {
                     if(coinUI.currentscore.getScore() == 10){
                         levelCount++;
                         coinUI.currentscore.subtractTenFromScore();
-                       gameWorld =  new GameWorld(canvas, inputHandler, healthUI, coinUI, levelCount, choice);
+
+                       gameWorld =  new GameWorld(canvas, inputHandler, healthUI, healthUI2, coinUI, levelCount, choice);
+
                     }
 
                     gameWorld.update();

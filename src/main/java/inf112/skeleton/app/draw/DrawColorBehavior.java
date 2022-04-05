@@ -29,4 +29,5 @@ public class DrawColorBehavior implements IDrawBehavior {
         		boundingBox.width,boundingBox.height);
         context.restore();
     }
+
 }
