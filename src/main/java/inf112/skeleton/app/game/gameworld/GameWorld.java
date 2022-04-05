@@ -22,6 +22,8 @@ public class GameWorld implements IGameWorld<Coin> {
     private HealthUI healthUI;
     private HealthUI healthUI2;  // health for player 2
     private Camera camera;
+    private Player player;
+    private PlayerSecond player2;
 
     public GameWorld(Canvas canvas, IInputHandler inputHandler, HealthUI healthUI, HealthUI healthUI2, CoinUI coinUI, int levelCount, Boolean choice) {
 
@@ -51,14 +53,14 @@ public class GameWorld implements IGameWorld<Coin> {
         enemies.add(enemy2);
         enemies.add(enemy3);
 
-        Player player = new Player(canvas);
+        player = new Player(canvas);
         player.setUp(factoryTiles, enemies, coins, coinUI, healthUI, inputHandler, camera);
         camera.setTargetEntity(player);
 
         items.add(player);
         //Adding player:
         if(!choice) {
-            PlayerSecond player2 = new PlayerSecond(canvas);
+            player2 = new PlayerSecond(canvas);
             player2.setUp(factoryTiles, enemies, coins, coinUI, healthUI2, inputHandler, camera);
             camera.setTargetEntity(player2);
             items.add(player2);
@@ -104,4 +106,12 @@ public class GameWorld implements IGameWorld<Coin> {
 	public void set(Coin object) {
 		// TODO Auto-generated method stub
 	}
+
+    public Camera getCamera(){
+        return this.camera;
+    }
+
+    public Player getPlayer(){
+        return this.player;
+    }
 }
