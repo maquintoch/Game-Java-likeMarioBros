@@ -27,6 +27,14 @@ public class GameWorld implements IGameWorld<Coin> {
     private HealthUI healthUI;
     private Camera camera;
 
+    /**
+     * Creates the gameworld. Creates players, enemies and other items.
+     * @param canvas
+     * @param inputHandler
+     * @param healthUI
+     * @param coinUI
+     * @param levelCount
+     */
     public GameWorld(Canvas canvas, IInputHandler inputHandler, HealthUI healthUI, CoinUI coinUI, int levelCount) {
     	
     	this.camera = new Camera(canvas);

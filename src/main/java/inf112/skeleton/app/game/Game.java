@@ -37,6 +37,10 @@ public class Game extends Application {
         startScreen(stage);
     }
 
+    /**
+     * Creates a start screen with a menu of buttons you can click on.
+     * @param stage
+     */
     public void startScreen(Stage stage){
         stage.setTitle("Hello Super World!");
         Button btn = new Button();
@@ -74,7 +78,11 @@ public class Game extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    
+
+    /**
+     * Screen for when player dies.
+     * @param stage
+     */
     public void EndScreen(Stage stage){
         stage.setTitle("Game over");
         Button btn = new Button();
@@ -105,6 +113,10 @@ public class Game extends Application {
     }
 
 
+    /**
+     * Creates canvas, stage, scene and gameWorld for our game, and runs the game with an animation timer.
+     * @param stage
+     */
     public void startGame(Stage stage){
             stage.setTitle("Mario");
             double width = 500;
@@ -144,13 +156,15 @@ public class Game extends Application {
                     // cycling music in background
                     mp.setCycleCount(MediaPlayer.INDEFINITE);
                     mp.play();
+                    // Checks if health is 0 and ends the game.
                     if(healthUI.currentHealth.getHealth() == 0) {
                         levelCount = 0;
                         mp.stop();
                         EndScreen(stage);
                         this.stop();
                     }
-
+                    // If player collected 10 coins, we add to the levelcount, reset the coin score
+                    // and create a new gameWorld with a new level.
                     if(coinUI.currentscore.getScore() == 10){
                         levelCount++;
                         coinUI.currentscore.subtractTenFromScore();
