@@ -232,7 +232,12 @@ public class Game extends Application {
                             this.stop();
                         }
                     }
-
+                    if(levelCount == 3){
+                        levelCount = 0;
+                        mp.stop();
+                        winningScreen(stage);
+                        this.stop();
+                    }
                     if(coinUI.currentscore.getScore() == 10){
                         levelCount++;
                         coinUI.currentscore.subtractTenFromScore();
@@ -249,5 +254,48 @@ public class Game extends Application {
             timer.start();
             stage.show();
     }
+
+
+    private void winningScreen(Stage stage) {
+        stage.setTitle("You Won!");
+        Button btn = new Button();
+        btn.setText("Play again?");
+        Button btnExit = new Button();
+        btnExit.setText("Exit");
+
+        btnExit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Platform.exit();
+            }
+        });
+
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+
+                try {
+                    startScreen(stage);
+
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Group root = new Group();
+        btn.setLayoutX(250);
+        btn.setLayoutY(250);
+        btnExit.setLayoutX(250);
+        btnExit.setLayoutY(300);
+        root.getChildren().add(btnExit);
+        root.getChildren().add(btn);
+        stage.setScene(new Scene(root, 500, 500, Color.LIGHTSKYBLUE));
+        stage.show();
+    }
 }
+
 
