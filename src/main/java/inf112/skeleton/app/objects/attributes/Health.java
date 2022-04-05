@@ -10,6 +10,11 @@ public class Health {
     public int getHealth() {
 		return amount;
 	}
+    
+    public void setHealth(int h) {
+    	this.amount = h;
+    }
+    
     public void loseHealth() {
     	amount--;
     }

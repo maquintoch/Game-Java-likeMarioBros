@@ -1,5 +1,6 @@
 package inf112.skeleton.app.objects;
 
+import inf112.skeleton.app.draw.DrawImageBehavior;
 import inf112.skeleton.app.draw.IDrawBehavior;
 import inf112.skeleton.app.objects.attributes.CollisionBox;
 import inf112.skeleton.app.objects.attributes.GridPosition;
@@ -11,7 +12,7 @@ import javafx.scene.image.Image;
 
 public class Tile implements IItem {
 
-    private IDrawBehavior drawHandler;
+    private DrawImageBehavior imageHandler;
     private GridPosition gridPosition;
     private TileSize tileSize;
    
@@ -20,17 +21,17 @@ public class Tile implements IItem {
     private Image image = new Image(imagePath);
    
 
-    public Tile(GridPosition gridPosition, TileSize tileSize, GraphicsContext context, IDrawBehavior drawHandler) {
+    public Tile(GridPosition gridPosition, TileSize tileSize, GraphicsContext context, DrawImageBehavior imageHandler) {
         this.gridPosition = gridPosition;
         this.tileSize = tileSize;
-        this.drawHandler = drawHandler;
+        this.imageHandler = imageHandler;
     }
 
     @Override
     public void draw() {
         var position = new Position(gridPosition, tileSize);
         var boundingBox = new Rectangle(tileSize);
-        drawHandler.draw(position, boundingBox);
+        imageHandler.draw(position, boundingBox, image);
     }
 
     @Override
