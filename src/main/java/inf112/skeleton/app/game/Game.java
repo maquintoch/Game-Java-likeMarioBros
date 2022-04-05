@@ -7,14 +7,18 @@ import inf112.skeleton.app.draw.HealthUI;
 import inf112.skeleton.app.game.gameworld.GameWorld;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -39,14 +43,46 @@ public class Game extends Application {
 
     public void startScreen(Stage stage){
         stage.setTitle("Hello Super World!");
-        Button btn = new Button();
-        btn.setText("Start Spill!");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        Button btnOnePlayer = new Button();
+        btnOnePlayer.setText("One Player");
+        btnOnePlayer.setBackground(null);
+        btnOnePlayer.setStyle("-fx-text-fill: #ffffff;-fx-font-size: 40;");
+        Button btnMultiplayer = new Button();
+        btnMultiplayer.setText("Multiplayer");
+        btnMultiplayer.setBackground(null);
+        btnMultiplayer.setStyle("-fx-text-fill: #ffffff;-fx-font-size: 40;");
+        Button btnExit = new Button();
+        btnExit.setText("Exit");
+        btnExit.setStyle("-fx-text-fill: #ffffff;-fx-font-size: 40;");
+        btnExit.setBackground(null);
+        btnOnePlayer.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    startGame(stage);
+                    Boolean choice = true;
+                    startGame(stage,choice);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+        btnExit.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Platform.exit();
+            }
+        });
+        btnMultiplayer.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    Boolean choice = false;
+                    startGame(stage,choice);
                 }
                 catch (Exception e)
                 {
@@ -64,11 +100,16 @@ public class Game extends Application {
         //Draw image on screen
         gc.drawImage(image, 0, 0, canvasWidth, canvasHeight);
         Group root = new Group();
-
-        btn.setLayoutX(250);
-        btn.setLayoutY(250);
+        btnOnePlayer.setLayoutX(150);
+        btnOnePlayer.setLayoutY(150);
+        btnMultiplayer.setLayoutX(150);
+        btnMultiplayer.setLayoutY(225);
+        btnExit.setLayoutX(150);
+        btnExit.setLayoutY(300);
         root.getChildren().add(canvas);
-        root.getChildren().add(btn);
+        root.getChildren().add(btnOnePlayer);
+        root.getChildren().add(btnMultiplayer);
+        root.getChildren().add(btnExit);
  
         Scene scene = new Scene(root, 500, 500);
         stage.setScene(scene);
@@ -77,16 +118,17 @@ public class Game extends Application {
     
     public void EndScreen(Stage stage){
         stage.setTitle("Game over");
-        Button btn = new Button();
-        btn.setText("Try again");
-
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+        Button btnTryAgain = new Button();
+        btnTryAgain.setText("Try again");
+        Button btnExit = new Button();
+        btnExit.setText("Exit");
+        btnTryAgain.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent event) {
 
                 try {
-                    startGame(stage);
+                    startScreen(stage);
 
                 }
                 catch (Exception e)
@@ -95,17 +137,42 @@ public class Game extends Application {
                 }
             }
         });
+        btnExit.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Platform.exit();
+            }
+        });
+        Canvas canvas = new Canvas(500,500);
+        final GraphicsContext gc = canvas.getGraphicsContext2D();
+        String imagePath = "https://i.pinimg.com/originals/d5/52/85/d55285388e843b575b4b89986ad65ef2.jpg";
+        Image image = new Image(imagePath);
+        double canvasWidth = canvas.getWidth();
+        double canvasHeight = canvas.getHeight();
+
+        //Draw image on screen
+        gc.drawImage(image, 0, 0, canvasWidth, canvasHeight);
+
 
         Group root = new Group();
-        btn.setLayoutX(250);
-        btn.setLayoutY(250);
-        root.getChildren().add(btn);
+        root.getChildren().add(canvas);
+        btnTryAgain.setStyle("-fx-text-fill: #ff0000;-fx-font-size: 40;");
+        btnTryAgain.setBackground(null);
+        btnExit.setStyle("-fx-text-fill: #ff0000;-fx-font-size: 40;");
+        btnExit.setBackground(null);
+        btnTryAgain.setLayoutY(235);
+        btnTryAgain.setLayoutX(150);
+        btnExit.setLayoutX(175);
+        btnExit.setLayoutY(375);
+        root.getChildren().add(btnTryAgain);
+        root.getChildren().add(btnExit);
         stage.setScene(new Scene(root, 500, 500, Color.LIGHTSKYBLUE));
         stage.show();
     }
 
 
-    public void startGame(Stage stage){
+    public void startGame(Stage stage, Boolean choice){
             stage.setTitle("Mario");
             double width = 500;
             double height = 500;
@@ -131,7 +198,7 @@ public class Game extends Application {
             	KeyCode keyCode = event.getCode();
                 inputHandler.setInactive(keyCode);
             });
-            gameWorld = new GameWorld(canvas, inputHandler, healthUI, coinUI, levelCount);            
+            gameWorld = new GameWorld(canvas, inputHandler, healthUI, coinUI, levelCount, choice);
 
             // add game music
             String soundGameTheme = "src/main/java/inf112/skeleton/app/assets/GameTheme.mp3";
@@ -154,7 +221,7 @@ public class Game extends Application {
                     if(coinUI.currentscore.getScore() == 10){
                         levelCount++;
                         coinUI.currentscore.subtractTenFromScore();
-                       gameWorld =  new GameWorld(canvas, inputHandler, healthUI, coinUI, levelCount);
+                       gameWorld =  new GameWorld(canvas, inputHandler, healthUI, coinUI, levelCount, choice);
                     }
 
                     gameWorld.update();

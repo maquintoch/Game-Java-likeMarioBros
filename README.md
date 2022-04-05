@@ -70,5 +70,11 @@ If you run `mvn package` you get everything bundled up into a `.jar` file + a �
 
 Run Jar files with, for example, `java -jar target/javafx-app-1.0-SNAPSHOT-fat.jar`.
 
+### Generelle krav:
 
+* Java: Spillet skal skrives i Java, og dere vil få forslag til og tutorials for grafikkbibliotek.
+* JUnit: For testing skal JUnit 5 brukes
+* Byggesystem:  Dere kan velge mellom Maven og Gradle, men tips og sånt kommer til å være for Maven.
+* Skjelett: Når dere skal begynne å programmere vil dere vil få et skjelettprosjekt dere kan bruke som utgangspunkt, men dere kan også sette opp prosjektet selv.
+* Versjonskontroll: Bruk Git til versjonskontroll, og gjør aktiv bruk av kollaborativ funksjonalitet i GitLab.
 
