@@ -24,6 +24,7 @@ public class GameWorld implements IGameWorld<Coin> {
     private Camera camera;
     private Player player;
     private PlayerSecond player2;
+    private boolean choice;
 
     public GameWorld(Canvas canvas, IInputHandler inputHandler, HealthUI healthUI, HealthUI healthUI2, CoinUI coinUI, int levelCount, Boolean choice) {
 
@@ -36,7 +37,7 @@ public class GameWorld implements IGameWorld<Coin> {
         
         var factoryTiles = levelFactory.getTiles(levelFactory.levels.get(levelCount));
         var factoryCoins = levelFactory.getCoins(levelFactory.levels.get(levelCount));
-        
+        this.choice = choice;
         this.tiles = new TileCollection(factoryTiles);
         this.coins = new CoinCollection(factoryCoins);
         this.background = new Background(canvas);
@@ -77,7 +78,9 @@ public class GameWorld implements IGameWorld<Coin> {
     	coins.draw();
     	coinUI.draw();
     	healthUI.draw(0, 0);
-    	healthUI2.draw(400, 0);
+    	if(!choice) {
+            healthUI2.draw(400, 0);
+        }
     	for (IPlayer item : items) item.draw();
     }
 

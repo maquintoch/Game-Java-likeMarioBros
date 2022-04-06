@@ -214,23 +214,20 @@ public class Game extends Application {
                     mp.setCycleCount(MediaPlayer.INDEFINITE);
                     mp.play();
                     
-                    if(healthUI.currentHealth.getHealth() == 0){ 
-                        if (healthUI2.currentHealth.getHealth() == 0) {
+                    if(healthUI.currentHealth.getHealth() <= 0){
                             levelCount = 0;
                             mp.stop();
                             EndScreen(stage);
                             this.stop();
-                        }
+
                     }
 
                     if(healthUI2.currentHealth.getHealth() == 0){ 
                         gameWorld.getCamera().setTargetEntity (gameWorld.getPlayer());
-                        if (healthUI.currentHealth.getHealth() == 0) {
                             levelCount = 0;
                             mp.stop();
                             EndScreen(stage);
                             this.stop();
-                        }
                     }
                     if(levelCount == 3){
                         levelCount = 0;
