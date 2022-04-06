@@ -19,6 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -229,7 +230,7 @@ public class Game extends Application {
                             EndScreen(stage);
                             this.stop();
                     }
-                    if(levelCount == 3){
+                    if(levelCount == 1){
                         levelCount = 0;
                         mp.stop();
                         winningScreen(stage);
@@ -255,6 +256,10 @@ public class Game extends Application {
 
     private void winningScreen(Stage stage) {
         stage.setTitle("You Won!");
+        Text text = new Text("YOU WON!!!");
+        text.setLayoutX(150);
+        text.setLayoutY(50);
+        text.setStyle("-fx-font-size: 40");
         Button btn = new Button();
         btn.setText("Play again?");
         Button btnExit = new Button();
@@ -288,6 +293,7 @@ public class Game extends Application {
         btn.setLayoutY(250);
         btnExit.setLayoutX(250);
         btnExit.setLayoutY(300);
+        root.getChildren().add(text);
         root.getChildren().add(btnExit);
         root.getChildren().add(btn);
         stage.setScene(new Scene(root, 500, 500, Color.LIGHTSKYBLUE));
