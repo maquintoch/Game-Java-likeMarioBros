@@ -13,7 +13,7 @@ import inf112.skeleton.app.objects.*;
 import inf112.skeleton.app.objects.attributes.GridPosition;
 
 public class GameWorld implements IGameWorld<Coin> {
-    private List<IPlayer> items = new ArrayList<IPlayer>(); 
+    public List<IPlayer> items = new ArrayList<IPlayer>();
     
     private Background background;
     private TileCollection tiles;
@@ -63,7 +63,6 @@ public class GameWorld implements IGameWorld<Coin> {
         if(!choice) {
             player2 = new PlayerSecond(canvas);
             player2.setUp(factoryTiles, enemies, coins, coinUI, healthUI2, inputHandler, camera);
-            camera.setTargetEntity(player2);
             items.add(player2);
         }
 
@@ -116,5 +115,17 @@ public class GameWorld implements IGameWorld<Coin> {
 
     public Player getPlayer(){
         return this.player;
+    }
+
+    public void remove(int i){
+        if(i==1) {
+            items.remove(player);
+            draw();
+            camera.setTargetEntity(player2);
+        }
+        else {
+            items.remove(player2);
+            draw();
+        }
     }
 }
