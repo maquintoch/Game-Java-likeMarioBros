@@ -114,4 +114,8 @@ public class GameWorld implements IGameWorld<Coin> {
     public Player getPlayer(){
         return this.player;
     }
+    
+    public PlayerSecond getPlayer2() {
+    	return this.player2;
+    }
 }
