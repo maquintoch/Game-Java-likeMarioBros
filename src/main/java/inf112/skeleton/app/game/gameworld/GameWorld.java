@@ -26,9 +26,16 @@ public class GameWorld implements IGameWorld<Coin> {
     private PlayerSecond player2;
     private boolean choice;
 
+    /**
+     * Creates the gameworld. Creates players, enemies and other items.
+     * @param canvas
+     * @param inputHandler
+     * @param healthUI
+     * @param coinUI
+     * @param levelCount
+     */
     public GameWorld(Canvas canvas, IInputHandler inputHandler, HealthUI healthUI, HealthUI healthUI2, CoinUI coinUI, int levelCount, Boolean choice) {
 
-    	
     	this.camera = new Camera(canvas);
     	var CoinDrawBehavior = new DrawImageBehavior(canvas, camera);
     	var tileDrawBehavior = new DrawImageBehavior(canvas, camera);

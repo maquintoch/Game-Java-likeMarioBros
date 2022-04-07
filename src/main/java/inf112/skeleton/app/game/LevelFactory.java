@@ -22,7 +22,7 @@ public class LevelFactory{
     private DrawImageBehavior tileDrawBehavior;
     public List<List<String>> levels = new ArrayList<>();
 
-    
+    //Lists for the different levels in the game with coins and tiles.
     public List<String> level1 = Arrays.asList(
             "...............................",
             ".............c.................",
@@ -105,6 +105,10 @@ public class LevelFactory{
         levels.add(level3);
     }
 
+    /**
+     * @param level
+     * @return a list with tiles
+     */
     public ArrayList<Tile> getTiles(List<String> level) {
         Collections.reverse(level);
 
@@ -122,6 +126,11 @@ public class LevelFactory{
         }
         return Tiles;
     }
+
+    /**
+     * @param level
+     * @return list of coins
+     */
     public ArrayList<Coin> getCoins(List<String> level) {
         ArrayList<Coin> Coins = new ArrayList<Coin>();
         for(int y = 0; y < level.size(); y++) {
