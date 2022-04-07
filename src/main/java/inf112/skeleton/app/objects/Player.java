@@ -46,7 +46,7 @@ public class Player implements IPlayer {
     
     public Player(Canvas canvas) {
         this.position = new Position(3, 10);
-        this.boundingBox = new Rectangle(16, 16);
+        this.boundingBox = new Rectangle(14, 14);
         this.speed = new Speed(0, 0);
         this.acceleration = new Speed(0, -0.5f);
         this.level = 0;
