@@ -23,6 +23,7 @@ public class GameWorld implements IGameWorld<Coin> {
     private HealthUI healthUI2;  // health for player 2
     private Camera camera;
     private Player player;
+    private Boolean singlePlayer;  // has player2 or not
     private PlayerSecond player2;
 
     public GameWorld(Canvas canvas, IInputHandler inputHandler, HealthUI healthUI, HealthUI healthUI2, CoinUI coinUI, int levelCount, Boolean choice) {
@@ -42,7 +43,7 @@ public class GameWorld implements IGameWorld<Coin> {
         this.background = new Background(canvas);
         this.coinUI = coinUI;
         this.healthUI = healthUI;  //Player.health
-        this.healthUI2 = healthUI2;  //Player2.health
+        this.singlePlayer = choice;
         
         //Adding enemies to the game:
         var enemy1 = new Enemy(canvas, factoryTiles, enemyDrawBehavior, 100, 10);
@@ -59,7 +60,8 @@ public class GameWorld implements IGameWorld<Coin> {
 
         items.add(player);
         //Adding player:
-        if(!choice) {
+        if(!this.singlePlayer) {
+            this.healthUI2 = healthUI2;  //Player2.health
             player2 = new PlayerSecond(canvas);
             player2.setUp(factoryTiles, enemies, coins, coinUI, healthUI2, inputHandler, camera);
             camera.setTargetEntity(player2);
@@ -77,7 +79,7 @@ public class GameWorld implements IGameWorld<Coin> {
     	coins.draw();
     	coinUI.draw();
     	healthUI.draw(0, 0);
-    	healthUI2.draw(400, 0);
+    	if(!this.singlePlayer) healthUI2.draw(400, 0);
     	for (IPlayer item : items) item.draw();
     }
 
@@ -86,6 +88,10 @@ public class GameWorld implements IGameWorld<Coin> {
     	camera.update();
     }
 
+    public boolean isSinglePlayer() {
+    	return this.singlePlayer;
+    }
+    
 	@Override
 	public void remove(GridPosition position) {
 		// TODO Auto-generated method stub
