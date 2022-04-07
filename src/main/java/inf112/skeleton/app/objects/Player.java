@@ -214,5 +214,10 @@ public class Player implements IPlayer {
     public Position getPosition(){ 
     	return position; 
     }
+    
+    public void beKilled() {
+    	this.position = new Position(-300, -300);
+    	this.speed = new Speed(0, 0);
+    }
 
 }

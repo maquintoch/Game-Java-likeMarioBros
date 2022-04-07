@@ -218,6 +218,12 @@ public class PlayerSecond extends Player{
     public Position getPosition(){ 
     	return position; 
     }
+    
+    @Override
+    public void beKilled() {
+    	this.position = new Position(-300, -300);
+    	this.speed = new Speed(0, 0);
+    }
 }
     
     
