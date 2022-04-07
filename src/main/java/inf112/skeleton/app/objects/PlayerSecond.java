@@ -47,7 +47,7 @@ public class PlayerSecond extends Player{
 	public PlayerSecond(Canvas canvas) {
 		super(canvas);
 		this.position = new Position(20, 16);
-        this.boundingBox = new Rectangle(16, 16);
+        this.boundingBox = new Rectangle(14, 14);
         this.speed = new Speed(0, 0);
         this.acceleration = new Speed(0, -0.5f);
         this.level = 0;

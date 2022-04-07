@@ -216,28 +216,28 @@ public class Game extends Application {
                     mp.play();
 
                     if(!choice){
-                            if (healthUI.currentHealth.getHealth()==0 && healthUI2.currentHealth.getHealth()>0){
+                            if (healthUI.currentHealth.getHealth()<=0 && healthUI2.currentHealth.getHealth()>0){
                                 gameWorld.remove(1);
                                 }
-                            if (healthUI2.currentHealth.getHealth()==0 && healthUI.currentHealth.getHealth()>0){
+                            if (healthUI2.currentHealth.getHealth()<=0 && healthUI.currentHealth.getHealth()>0){
                                 gameWorld.remove(2);
                                 }
 
-                            if(healthUI2.currentHealth.getHealth() == 0 && healthUI.currentHealth.getHealth() == 0){
+                            if(healthUI2.currentHealth.getHealth() <= 0 && healthUI.currentHealth.getHealth() <= 0){
                                 levelCount = 0;
                                 mp.stop();
                                 EndScreen(stage);
                                 this.stop();
                                 }
                         }
-                    else{
-                        if(healthUI.currentHealth.getHealth()==0){
-                            levelCount = 0;
-                            mp.stop();
-                            EndScreen(stage);
-                            this.stop();
-                        }
+
+                    if(healthUI.currentHealth.getHealth()<=0){
+                        levelCount = 0;
+                        mp.stop();
+                        EndScreen(stage);
+                        this.stop();
                     }
+
                     if(levelCount == 3){
                         levelCount = 0;
                         mp.stop();
@@ -246,16 +246,16 @@ public class Game extends Application {
                     }
                     if(coinUI.currentscore.getScore() == 10){
                         levelCount++;
-                    if(!choice) {
-                        if (healthUI.currentHealth.getHealth() == 0) {
-                            gameWorld.items.add(gameWorld.getPlayer());
-                            healthUI.currentHealth.setHealth(10);
+                        if(!choice) {
+                            if (healthUI.currentHealth.getHealth() == 0) {
+                                gameWorld.items.add(gameWorld.getPlayer());
+                                healthUI.currentHealth.setHealth(10);
+                            }
+                            if (healthUI2.currentHealth.getHealth() == 0) {
+                                gameWorld.items.add(gameWorld.getPlayer());
+                                healthUI2.currentHealth.setHealth(10);
+                            }
                         }
-                        if (healthUI2.currentHealth.getHealth() == 0) {
-                            gameWorld.items.add(gameWorld.getPlayer());
-                            healthUI2.currentHealth.setHealth(10);
-                        }
-                    }
                         coinUI.currentscore.subtractTenFromScore();
                         gameWorld =  new GameWorld(canvas, inputHandler, healthUI, healthUI2, coinUI, levelCount, choice);
                     }
