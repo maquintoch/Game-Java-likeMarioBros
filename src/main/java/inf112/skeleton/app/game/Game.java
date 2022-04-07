@@ -215,6 +215,8 @@ public class Game extends Application {
                     mp.play();
                     
                     if(healthUI.currentHealth.getHealth() == 0){ 
+                    	gameWorld.getCamera().setTargetEntity (gameWorld.getPlayer2());
+                    	gameWorld.getPlayer().beKilled();
                         if (healthUI2.currentHealth.getHealth() == 0) {
                             levelCount = 0;
                             mp.stop();
@@ -225,6 +227,7 @@ public class Game extends Application {
 
                     if(healthUI2.currentHealth.getHealth() == 0){ 
                         gameWorld.getCamera().setTargetEntity (gameWorld.getPlayer());
+                        gameWorld.getPlayer2().beKilled();
                         if (healthUI.currentHealth.getHealth() == 0) {
                             levelCount = 0;
                             mp.stop();
