@@ -21,8 +21,8 @@ public class HealthUI{
         Health currenthealth = healthManager.getHealth();
         Health maxHealth = healthManager.getMaxHealth();
         context.setFill(Color.RED);
-        context.fillRect(x,y,maxHealth.getHealth(),10);
+        context.fillRect(x,y, 100,10);
         context.setFill(Color.GREEN);
-        context.fillRect(x,y, currenthealth.getHealth(), 10);   
+        context.fillRect(x,y, ((double)currenthealth.getHealth() / (double)maxHealth.getHealth()) * (double)100, 10);
     }
 }

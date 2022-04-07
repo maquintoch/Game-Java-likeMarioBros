@@ -1,10 +1,10 @@
 package inf112.skeleton.app.objects;
 
-import inf112.skeleton.app.game.gameworld.GameWorld;
 import javafx.scene.input.KeyCode;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import inf112.skeleton.app.Input.IInputHandler;
@@ -16,6 +16,8 @@ import inf112.skeleton.app.objects.attributes.CollisionBox;
 import inf112.skeleton.app.objects.attributes.Position;
 import inf112.skeleton.app.objects.attributes.Speed;
 import inf112.skeleton.app.objects.attributes.Rectangle;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -43,7 +45,14 @@ public class Player implements IPlayer {
     
     private Image[] imageRight = new Image[5]; // right images for different states
     private Image[] imageLeft = new Image[5]; // left images for different states
-    
+    private Image imageBlank;
+    private LocalTime invinsibilityTime = LocalTime.MAX;
+    private boolean isShowingInvinsibilityFrame = false;
+    private MediaPlayer hitHurtMediaPlayer;
+    private MediaPlayer jumpMediaPlayer;
+    private MediaPlayer pickupCoinMediaPlayer;
+    private boolean isStanding;
+
     public Player(Canvas canvas) {
         this.position = new Position(3, 10);
         this.boundingBox = new Rectangle(14, 14);
@@ -65,17 +74,27 @@ public class Player implements IPlayer {
         this.enemies = enemies;
         this.collideables = collideables;
         this.camera = camera;
+
+
+        Media hitHurtUri = new Media(Paths.get("src/main/java/inf112/skeleton/app/assets/audio/hitHurt.wav").toUri().toString());
+        Media jumpUri = new Media(Paths.get("src/main/java/inf112/skeleton/app/assets/audio/jump.wav").toUri().toString());
+        Media pickupCoinUri = new Media(Paths.get("src/main/java/inf112/skeleton/app/assets/audio/pickupCoin.wav").toUri().toString());
+        hitHurtMediaPlayer = new MediaPlayer(hitHurtUri);
+        jumpMediaPlayer = new MediaPlayer(jumpUri);
+        pickupCoinMediaPlayer = new MediaPlayer(pickupCoinUri);
     }
-   
-	private void setPlayerImage() {
+
+    private void setPlayerImage() {
 		try {
 	        for (int k = 0; k < 5; k++) {
 	        	// change the file path if needed
 	    		FileInputStream inputMarioRight = new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/player1/marioRight" + k + "Lvl" + level + ".png");
-	    		FileInputStream inputMarioLeft = new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/player1/marioLeft" + k + "Lvl" + level + ".png");	
-	            imageRight[k] = new Image(inputMarioRight);
+	    		FileInputStream inputMarioLeft = new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/player1/marioLeft" + k + "Lvl" + level + ".png");
+                FileInputStream inputblank = new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/blank.png");
+                imageRight[k] = new Image(inputMarioRight);
 	            imageLeft[k] = new Image(inputMarioLeft);
-	        } 
+                imageBlank = new Image(inputblank);
+	        }
 		}
 		catch(FileNotFoundException  e) {
 			System.out.println("Player image not found!");
@@ -84,6 +103,13 @@ public class Player implements IPlayer {
 	}
     
     public Image getImage() {
+
+        if(isInvinsible() && !isShowingInvinsibilityFrame) {
+            isShowingInvinsibilityFrame = true;
+            return imageBlank;
+        }
+        isShowingInvinsibilityFrame = false;
+
         if (right < 10)
             return imageRight[0];
         else if (right < 20)
@@ -105,7 +131,7 @@ public class Player implements IPlayer {
         else
             return imageLeft[4];
     }
-	
+
     @Override
     public void update() {
     	if (position.getY() < -200) healthUI.currentHealth.setHealth(0);
@@ -114,10 +140,13 @@ public class Player implements IPlayer {
     		//Avslutt spill	
     	}
 
-        if(inputHandler.isActive(KeyCode.W) && (speed.velocityY == 0) 
-        		&& (timeSinceCollide.plusNanos(90000000).isAfter(LocalTime.now()))){
-            speed.velocityY = 8;
+        if(inputHandler.isActive(KeyCode.W) && isStanding){
+            jumpMediaPlayer.play();
+            jumpMediaPlayer.seek(jumpMediaPlayer.getStartTime());
+            speed.velocityY = 10;
+            isStanding = false;
         }
+
         if(inputHandler.isActive(KeyCode.A)) {
         	speed.velocityX = -1;
         	right = 50;
@@ -160,6 +189,9 @@ public class Player implements IPlayer {
         position.setY(position.getY() + speed.velocityY);
         for(Tile collidable : collideables) {
             if (getCollisionBox().overlap(collidable)) {
+                if(position.getY() > collidable.getPosition().getY()) {
+                    isStanding = true;
+                }
                 timeSinceCollide = LocalTime.now();
                 position.setY(position.getY() - speed.velocityY);
                 while(!overlap(collidable)) {
@@ -172,18 +204,33 @@ public class Player implements IPlayer {
         }
         for(Enemy enemy : enemies) {
             if (getCollisionBox().overlap(enemy)) {
-                position.setX(position.getX() - speed.velocityX);
-                position.setY(position.getY() - speed.velocityY);
-                healthUI.currentHealth.loseHealth();
+                if(isFalling()) {
+                    enemy.destory();
+                } else if(!isInvinsible()) {
+                    hitHurtMediaPlayer.play();
+                    hitHurtMediaPlayer.seek(hitHurtMediaPlayer.getStartTime());
+                    healthUI.currentHealth.loseHealth();
+                    invinsibilityTime = LocalTime.now();
+                }
             }
         }
         for(Coin coin : coins.getAll()) {
             if (getCollisionBox().overlap(coin)) {
+                pickupCoinMediaPlayer.play();
+                pickupCoinMediaPlayer.seek(pickupCoinMediaPlayer.getStartTime());
             	coinUI.currentscore.addOneToScore();;
             	coin.destroy();
             	        	
             }
         }
+    }
+
+    private boolean isInvinsible() {
+        return invinsibilityTime.plusSeconds(2).isAfter(LocalTime.now());
+    }
+
+    private boolean isFalling() {
+        return speed.velocityY < 0;
     }
 
     @Override

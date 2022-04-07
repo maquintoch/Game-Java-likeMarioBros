@@ -213,6 +213,7 @@ public class Game extends Application {
                 public void handle(long now) {
                     // cycling music in background
                     mp.setCycleCount(MediaPlayer.INDEFINITE);
+                    mp.setVolume(0.05);
                     mp.play();
 
                     if(!choice){

@@ -1,13 +1,11 @@
 package inf112.skeleton.app.objects;
 
 import java.util.ArrayList;
+
+import inf112.skeleton.app.objects.attributes.*;
 import javafx.scene.canvas.Canvas;
 
 import inf112.skeleton.app.draw.IDrawBehavior;
-import inf112.skeleton.app.objects.attributes.CollisionBox;
-import inf112.skeleton.app.objects.attributes.Position;
-import inf112.skeleton.app.objects.attributes.Rectangle;
-import inf112.skeleton.app.objects.attributes.Speed;
 
 
 public class Enemy implements IPlayer {
@@ -93,5 +91,8 @@ public class Enemy implements IPlayer {
     	return position; 
     }
 
+    public void destory() {
+        this.position = new Position(0, -5000);
+    }
 }
 

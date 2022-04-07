@@ -4,7 +4,7 @@ import inf112.skeleton.app.objects.attributes.Health;
 
 public class HealthManager implements IHealthManager {
 
-    private Health health = new Health(100);
+    private Health health = new Health(3);
 
     @Override
     public Health getHealth() {
@@ -13,6 +13,6 @@ public class HealthManager implements IHealthManager {
 
     @Override
     public Health getMaxHealth() {
-        return new Health(100);
+        return new Health(3);
     }
 }
