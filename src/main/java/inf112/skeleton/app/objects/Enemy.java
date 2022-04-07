@@ -92,5 +92,6 @@ public class Enemy implements IPlayer {
     public Position getPosition(){ 
     	return position; 
     }
+
 }
 

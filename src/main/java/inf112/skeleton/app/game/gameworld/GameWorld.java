@@ -3,6 +3,8 @@ package inf112.skeleton.app.game.gameworld;
 import javafx.scene.canvas.Canvas;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import javafx.scene.paint.Color;
 
 import inf112.skeleton.app.Input.IInputHandler;
@@ -26,16 +28,9 @@ public class GameWorld implements IGameWorld<Coin> {
     private PlayerSecond player2;
     private boolean choice;
 
-    /**
-     * Creates the gameworld. Creates players, enemies and other items.
-     * @param canvas
-     * @param inputHandler
-     * @param healthUI
-     * @param coinUI
-     * @param levelCount
-     */
     public GameWorld(Canvas canvas, IInputHandler inputHandler, HealthUI healthUI, HealthUI healthUI2, CoinUI coinUI, int levelCount, Boolean choice) {
 
+    	
     	this.camera = new Camera(canvas);
     	var CoinDrawBehavior = new DrawImageBehavior(canvas, camera);
     	var tileDrawBehavior = new DrawImageBehavior(canvas, camera);
@@ -44,6 +39,7 @@ public class GameWorld implements IGameWorld<Coin> {
         
         var factoryTiles = levelFactory.getTiles(levelFactory.levels.get(levelCount));
         var factoryCoins = levelFactory.getCoins(levelFactory.levels.get(levelCount));
+        var factoryEnemies = levelFactory.getEnemies(levelFactory.levels.get(levelCount));
         this.choice = choice;
         this.tiles = new TileCollection(factoryTiles);
         this.coins = new CoinCollection(factoryCoins);
@@ -51,15 +47,12 @@ public class GameWorld implements IGameWorld<Coin> {
         this.coinUI = coinUI;
         this.healthUI = healthUI;  //Player.health
         this.healthUI2 = healthUI2;  //Player2.health
-        
-        //Adding enemies to the game:
-        var enemy1 = new Enemy(canvas, factoryTiles, enemyDrawBehavior, 100, 10);
-        var enemy2 = new Enemy(canvas, factoryTiles, enemyDrawBehavior, 100, 400);
-        var enemy3 = new Enemy(canvas, factoryTiles, enemyDrawBehavior, 400, 200);
         var enemies = new ArrayList<Enemy>();
-        enemies.add(enemy1);
-        enemies.add(enemy2);
-        enemies.add(enemy3);
+        for(int i = 0; i<factoryEnemies.size(); i++){
+            for(GridPosition j : factoryEnemies) {
+                enemies.add(new Enemy(canvas, factoryTiles, enemyDrawBehavior, (j.x*16), (j.y*16)));
+            }
+        }
 
         player = new Player(canvas);
         player.setUp(factoryTiles, enemies, coins, coinUI, healthUI, inputHandler, camera);

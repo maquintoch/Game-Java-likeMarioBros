@@ -1,5 +1,6 @@
 package inf112.skeleton.app.objects;
 
+import inf112.skeleton.app.game.gameworld.GameWorld;
 import javafx.scene.input.KeyCode;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -174,7 +175,6 @@ public class Player implements IPlayer {
                 position.setX(position.getX() - speed.velocityX);
                 position.setY(position.getY() - speed.velocityY);
                 healthUI.currentHealth.loseHealth();
-                //position.x = enemy.GetClosestXPosition(position);
             }
         }
         for(Coin coin : coins.getAll()) {
