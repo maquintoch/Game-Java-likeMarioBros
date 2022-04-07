@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.List;
 
 import inf112.skeleton.app.draw.DrawImageBehavior;
-import inf112.skeleton.app.draw.IDrawBehavior;
 import inf112.skeleton.app.objects.Coin;
 import inf112.skeleton.app.objects.Tile;
 import inf112.skeleton.app.objects.attributes.GridPosition;
@@ -29,7 +28,7 @@ public class LevelFactory{
             "...............................",
             "................c..............",
             ".........bb....................",
-            "..b..............b.............",
+            "..b..e.....e.....b.............",
             "..bbbbbbbbbbbbbbbb..bbbbbbb.bbb",
             "...............................",
             "..bbb..........cc..............",
@@ -67,7 +66,7 @@ public class LevelFactory{
             ".b..........c..................",
             "..b.....b...bbbbbbb............",
             "..bb...b....................b..",
-            ".....bbb........bbbb....b...b..",
+            ".....bbb.......bbbb....b...b..",
             "...bbbb..c........b.....c..bbb.",
             "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
     );
@@ -135,5 +134,20 @@ public class LevelFactory{
             }
         }
         return Coins;
+    }
+
+    public ArrayList<GridPosition> getEnemies(List<String> level) {
+        ArrayList<GridPosition> enemies = new ArrayList<GridPosition>();
+        for(int y = 0; y < level.size(); y++) {
+            for(int x = 0; x < level.get(y).length(); x++) {
+                if(level.get(y).charAt(x) == 'e') {
+                    System.out.println("x= "+ x);
+                    System.out.println("y=" + y);
+                    var gridPosition = new GridPosition(x, y);
+                    enemies.add(gridPosition);
+                }
+            }
+        }
+        return enemies;
     }
 }
