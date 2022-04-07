@@ -171,6 +171,12 @@ public class Game extends Application {
         stage.show();
     }
 
+    
+    public void gameOver(MediaPlayer mp, Stage stage){
+		levelCount = 0;
+        mp.stop();
+        EndScreen(stage);
+    }
 
     public void startGame(Stage stage, Boolean choice){
             stage.setTitle("Mario");
@@ -214,28 +220,33 @@ public class Game extends Application {
                     mp.setCycleCount(MediaPlayer.INDEFINITE);
                     mp.play();
                     
-                    if(healthUI.currentHealth.getHealth() == 0){ 
-                    	gameWorld.getCamera().setTargetEntity (gameWorld.getPlayer2());
-                    	gameWorld.getPlayer().beKilled();
-                        if (healthUI2.currentHealth.getHealth() == 0) {
-                            levelCount = 0;
-                            mp.stop();
-                            EndScreen(stage);
-                            this.stop();
-                        }
+                    // process game over with single player
+                    if(gameWorld.isSinglePlayer()) {
+                    	if(healthUI.currentHealth.getHealth() == 0) {
+                    		gameOver(mp, stage);
+                    		this.stop();
+                    	}
                     }
-
-                    if(healthUI2.currentHealth.getHealth() == 0){ 
-                        gameWorld.getCamera().setTargetEntity (gameWorld.getPlayer());
-                        gameWorld.getPlayer2().beKilled();
-                        if (healthUI.currentHealth.getHealth() == 0) {
-                            levelCount = 0;
-                            mp.stop();
-                            EndScreen(stage);
-                            this.stop();
-                        }
+                    // process game over with two player
+                    else {
+	                    if(healthUI.currentHealth.getHealth() == 0){ 
+	                    	gameWorld.getCamera().setTargetEntity (gameWorld.getPlayer2());
+	                    	gameWorld.getPlayer().beKilled();
+	                        if (healthUI2.currentHealth.getHealth() == 0) {
+	                        	gameOver(mp, stage);
+	                        	this.stop();
+	                        }
+	                    }
+	
+	                    if(healthUI2.currentHealth.getHealth() == 0){ 
+	                        gameWorld.getCamera().setTargetEntity (gameWorld.getPlayer());
+	                        gameWorld.getPlayer2().beKilled();
+	                        if (healthUI.currentHealth.getHealth() == 0) {
+	                        	gameOver(mp, stage);
+	                        	this.stop();
+	                        }
+	                    }
                     }
-
                     if(coinUI.currentscore.getScore() == 10){
                         levelCount++;
                         coinUI.currentscore.subtractTenFromScore();
@@ -253,4 +264,3 @@ public class Game extends Application {
             stage.show();
     }
 }
-
