@@ -230,14 +230,14 @@ public class Game extends Application {
                                 this.stop();
                                 }
                         }
-
-                    if(healthUI.currentHealth.getHealth()<=0){
-                        levelCount = 0;
-                        mp.stop();
-                        EndScreen(stage);
-                        this.stop();
+                    else {
+                        if (healthUI.currentHealth.getHealth() <= 0) {
+                            levelCount = 0;
+                            mp.stop();
+                            EndScreen(stage);
+                            this.stop();
+                        }
                     }
-
                     if(levelCount == 3){
                         levelCount = 0;
                         mp.stop();
