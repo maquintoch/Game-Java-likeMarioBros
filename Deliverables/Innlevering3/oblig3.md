@@ -61,4 +61,4 @@ Fullskjerm medfører at når spiller laster inn ny skjerm, blir ikke alle elemen
 Vi fikk tilbakemeldinger fra kunden rett før fristen, så fikk ikke sett på dette før vi leverte. Håper på bedre kontakt med kunden videre:)
 
 ####Manuelle tester:
-Se dokumentet ManuelleTester.docx
+Se dokumentet Manuelle Tester.docx
