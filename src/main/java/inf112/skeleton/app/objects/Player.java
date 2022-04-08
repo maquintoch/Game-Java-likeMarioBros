@@ -28,7 +28,7 @@ public class Player implements IPlayer {
     private CoinCollection coins;
     private CoinUI coinUI;
     private HealthUI healthUI;
-    private ArrayList<Enemy> enemies;
+    public ArrayList<Enemy> enemies;
     
     private DrawImageBehavior imageHandler;
     private Canvas canvas;
@@ -170,12 +170,14 @@ public class Player implements IPlayer {
             }
         }
         for(Enemy enemy : enemies) {
-            if (getCollisionBox().overlap(enemy)) {
+            if (getCollisionBox().overlap(enemy.getCollisionBox())) {
                 position.setX(position.getX() - speed.velocityX);
                 position.setY(position.getY() - speed.velocityY);
-                healthUI.currentHealth.loseHealth();
-                //position.x = enemy.GetClosestXPosition(position);
-            }
+                if(enemy.getSpeed().velocityX==0.5f){
+                    enemy.getSpeed().velocityX = -0.5f;
+                }
+                else{ enemy.getSpeed().velocityX = 0.5f;}
+                healthUI.currentHealth.loseHealth();}
         }
         for(Coin coin : coins.getAll()) {
             if (getCollisionBox().overlap(coin)) {

@@ -16,12 +16,12 @@ public class CollisionBox {
         return this.overlap(collisionBoxB);
     }
 
-    private boolean overlapX(CollisionBox collisionBox) {
+    public boolean overlapX(CollisionBox collisionBox) {
         return this.CornerAPosition.getX() < collisionBox.CornerAPosition.getX() + (collisionBox.getWidth())
                 && this.CornerAPosition.getX() + getWidth() > collisionBox.CornerAPosition.getX();
     }
 
-    private boolean overlapY(CollisionBox collisionBox) {
+    public boolean overlapY(CollisionBox collisionBox) {
         return this.CornerAPosition.getY() < collisionBox.CornerAPosition.getY() + (collisionBox.getHeight())
                 && this.CornerAPosition.getY() + getHeight() > collisionBox.CornerAPosition.getY();
     }

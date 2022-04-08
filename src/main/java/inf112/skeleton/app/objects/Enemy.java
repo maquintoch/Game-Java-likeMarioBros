@@ -1,6 +1,9 @@
 package inf112.skeleton.app.objects;
 
 import java.util.ArrayList;
+
+import inf112.skeleton.app.game.LevelFactory;
+import inf112.skeleton.app.game.gameworld.GameWorld;
 import javafx.scene.canvas.Canvas;
 
 import inf112.skeleton.app.draw.IDrawBehavior;
@@ -50,7 +53,7 @@ public class Enemy implements IPlayer {
 	public void update() {
 		speed.velocityY += acceleration.velocityY;
         speed.velocityX += acceleration.velocityX;
-        
+
 		position.setX(position.getX() + speed.velocityX);
         for(var collidable : collideableCollection) {
             if (getCollisionBox().overlap(collidable)) {
@@ -68,7 +71,6 @@ public class Enemy implements IPlayer {
                 position.setX(collidable.getClosestXPosition(position));
             }
         }
-        
         position.setY(position.getY() + speed.velocityY);
         for(var collidable : collideableCollection) {
             if (getCollisionBox().overlap(collidable)) {

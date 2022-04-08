@@ -43,7 +43,7 @@ public class LevelFactory{
             "............b..................",
             "..bb..bb.......................",
             "...b..b.........bbbb....b......",
-            "...b....ccccccccc.b.....c....b.",
+            "...b.e..ccccccccc.b.....c....b.",
             "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
     );
     public List<String> level2 = Arrays.asList(

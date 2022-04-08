@@ -54,7 +54,6 @@ public class GameWorld implements IGameWorld<Coin> {
                 enemies.add(enemy1);
             }
         }
-
         player = new Player(canvas);
         player.setUp(factoryTiles, enemies, coins, coinUI, healthUI, inputHandler, camera);
         camera.setTargetEntity(player);

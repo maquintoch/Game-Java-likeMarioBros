@@ -16,6 +16,6 @@ public class Health {
     }
     
     public void loseHealth() {
-    	amount--;
+    	amount=amount-5;
     }
 }
