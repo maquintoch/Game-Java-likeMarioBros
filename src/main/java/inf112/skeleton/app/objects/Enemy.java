@@ -91,7 +91,7 @@ public class Enemy implements IPlayer {
     	return position; 
     }
 
-    public void destory() {
+    public void destroy() {
         this.position = new Position(0, -5000);
     }
 }

@@ -205,7 +205,7 @@ public class Player implements IPlayer {
         for(Enemy enemy : enemies) {
             if (getCollisionBox().overlap(enemy)) {
                 if(isFalling()) {
-                    enemy.destory();
+                    enemy.destroy();
                 } else if(!isInvinsible()) {
                     hitHurtMediaPlayer.play();
                     hitHurtMediaPlayer.seek(hitHurtMediaPlayer.getStartTime());
