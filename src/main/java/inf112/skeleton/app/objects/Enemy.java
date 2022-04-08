@@ -91,6 +91,7 @@ public class Enemy implements IPlayer {
                 else {
                     collidable.speed.velocityX = 0.5f;
                 }
+                position.setX(collidable.getClosestXPosition(position));
             }
         }
 
@@ -106,8 +107,42 @@ public class Enemy implements IPlayer {
                 position.setY(collidable.getClosestYPosition(position));
             }
         }
+        for(var collidable : enemies) {
+            if (getCollisionBox().overlap(collidable)) {
+                position.setY(position.getY() - speed.velocityY);
+                while(!overlap(collidable)) {
+                    position.setY(position.getY() + Math.signum(speed.velocityY));
+                }
+                position.setY(position.getY() - Math.signum(speed.velocityY));
+                speed.velocityY = 0;
+                position.setY(collidable.getClosestYPosition(position));
+            }
+        }
 	}
-    
+
+    private double getClosestYPosition(Position position) {
+        var bottomY = position.getY();
+        var topY = position.getY() + boundingBox.height;
+
+        if(Math.abs(bottomY - position.getY()) > Math.abs(topY - position.getY())) {
+            return topY;
+        } else {
+            return bottomY;
+        }
+    }
+
+    private double getClosestXPosition(Position position) {
+        var bottomX = position.getX();
+        var topX = position.getX() + boundingBox.width;
+
+        if(Math.abs(bottomX - position.getX()) > Math.abs(topX - position.getX())) {
+            return topX;
+        } else {
+            return bottomX;
+        }
+    }
+
+
     @Override
     public void draw() {
         drawHandler.draw(position, boundingBox);

@@ -42,7 +42,7 @@ public class LevelFactory{
             "...............................",
             "............b..........bb......",
             "..bb..bb.......................",
-            "...b..b.........bbbb....b......",
+            "...b..b...e.....bbbb....b......",
             "...b..e..ce.......b...e.c..e.b.",
             "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
     );
