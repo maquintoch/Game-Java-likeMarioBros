@@ -48,11 +48,10 @@ public class GameWorld implements IGameWorld<Coin> {
         this.healthUI = healthUI;  //Player.health
         this.healthUI2 = healthUI2;  //Player2.health
         var enemies = new ArrayList<Enemy>();
-        for(int i = 0; i<factoryEnemies.size(); i++){
-            for(GridPosition j : factoryEnemies) {
-                enemies.add(new Enemy(canvas, factoryTiles, enemyDrawBehavior, (j.x*16), (j.y*16)));
-            }
+        for(GridPosition j : factoryEnemies) {
+            enemies.add(new Enemy(canvas, factoryTiles, enemyDrawBehavior, (j.x*16), (j.y*16)));
         }
+
 
         player = new Player(canvas);
         player.setUp(factoryTiles, enemies, coins, coinUI, healthUI, inputHandler, camera);
@@ -65,8 +64,14 @@ public class GameWorld implements IGameWorld<Coin> {
             player2.setUp(factoryTiles, enemies, coins, coinUI, healthUI2, inputHandler, camera);
             items.add(player2);
         }
-
         for(Enemy enemy : enemies) {
+            ArrayList<Enemy> otherEnemies = new ArrayList<Enemy>();
+            for(var otherEnemy : enemies){
+                if(enemy != otherEnemy){
+                    otherEnemies.add(otherEnemy);
+                }
+            }
+            enemy.setOtherEnemies(otherEnemies);
         	items.add(enemy);
         }
     }

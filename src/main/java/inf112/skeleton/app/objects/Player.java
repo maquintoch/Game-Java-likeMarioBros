@@ -135,10 +135,6 @@ public class Player implements IPlayer {
     @Override
     public void update() {
     	if (position.getY() < -200) healthUI.currentHealth.setHealth(0);
-    	
-    	if(healthUI.currentHealth.getHealth() == 0) {
-    		//Avslutt spill	
-    	}
 
         if(inputHandler.isActive(KeyCode.W) && isStanding){
             jumpMediaPlayer.play();

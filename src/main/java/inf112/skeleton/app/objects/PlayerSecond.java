@@ -126,9 +126,6 @@ public class PlayerSecond extends Player{
     public void update() {
         if (position.getY() < -200) healthUI.currentHealth.setHealth(0);
 
-        if(healthUI.currentHealth.getHealth() == 0) {
-            //Avslutt spill
-        }
 
         if(inputHandler.isActive(KeyCode.UP) && isStanding){
             jumpMediaPlayer.play();

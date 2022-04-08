@@ -9,7 +9,8 @@ import inf112.skeleton.app.draw.IDrawBehavior;
 
 
 public class Enemy implements IPlayer {
-	private Speed speed;
+    private final ArrayList<Enemy> enemies = new ArrayList<Enemy>();
+    private Speed speed;
 	private ArrayList<Tile> collideableCollection;
 	private Speed acceleration;
 
@@ -25,6 +26,10 @@ public class Enemy implements IPlayer {
         this.collideableCollection = collideables;
         this.drawHandler = drawHandler;
 	}
+
+	public void setOtherEnemies (ArrayList<Enemy> enemies){
+	    this.enemies.addAll(enemies);
+    }
 
 	@Override
 	public Speed getSpeed() {
@@ -66,7 +71,29 @@ public class Enemy implements IPlayer {
                 position.setX(collidable.getClosestXPosition(position));
             }
         }
-        
+
+        for(var collidable : enemies) {
+            if (getCollisionBox().overlap(collidable)) {
+                position.setX(position.getX() - speed.velocityX);
+                while(!overlap(collidable)) {
+                    position.setX(position.getX() + Math.signum(speed.velocityX));
+                }
+                position.setX(position.getX() - Math.signum(speed.velocityX));
+                if(speed.velocityX == 0.5f) {
+                    speed.velocityX = -0.5f;
+                }
+                else {
+                    speed.velocityX = 0.5f;
+                }
+                if(collidable.speed.velocityX == 0.5f) {
+                    collidable.speed.velocityX = -0.5f;
+                }
+                else {
+                    collidable.speed.velocityX = 0.5f;
+                }
+            }
+        }
+
         position.setY(position.getY() + speed.velocityY);
         for(var collidable : collideableCollection) {
             if (getCollisionBox().overlap(collidable)) {
@@ -94,5 +121,6 @@ public class Enemy implements IPlayer {
     public void destroy() {
         this.position = new Position(0, -5000);
     }
+
 }
 
