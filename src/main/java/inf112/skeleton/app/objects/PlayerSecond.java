@@ -193,6 +193,7 @@ public class PlayerSecond extends Player{
             if (getCollisionBox().overlap(enemy)) {
                 if(isFalling()) {
                     enemy.destroy();
+                    speed.velocityY = 5;
                 } else if(!isInvinsible()) {
                     hitHurtMediaPlayer.play();
                     hitHurtMediaPlayer.seek(hitHurtMediaPlayer.getStartTime());
