@@ -8,4 +8,6 @@ public interface IItem {
 	public void draw();
     public Position getPosition();
     public CollisionBox getCollisionBox();
+
+
 }

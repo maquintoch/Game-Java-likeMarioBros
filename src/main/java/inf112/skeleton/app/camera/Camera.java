@@ -1,12 +1,12 @@
 package inf112.skeleton.app.camera;
 
+import inf112.skeleton.app.objects.IEntity;
 import javafx.scene.canvas.Canvas;
 
-import inf112.skeleton.app.objects.IPlayer;
 import inf112.skeleton.app.objects.attributes.Position;
 
 public class Camera implements ICamera{
-	private IPlayer entity;
+	private IEntity entity;
 	private Canvas canvas;
 	private Position cameraPosition;
 	
@@ -23,7 +23,7 @@ public class Camera implements ICamera{
 		return (float) cameraPosition.getY();
 	}
 	
-	public void setTargetEntity(IPlayer entity) {
+	public void setTargetEntity(IEntity entity) {
 		this.entity = entity;
 		
 	}

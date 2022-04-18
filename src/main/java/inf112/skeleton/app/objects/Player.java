@@ -1,21 +1,12 @@
 package inf112.skeleton.app.objects;
 
+import inf112.skeleton.app.game.gameworld.GameWorld;
+import inf112.skeleton.app.objects.attributes.*;
 import javafx.scene.input.KeyCode;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
-import inf112.skeleton.app.Input.IInputHandler;
-import inf112.skeleton.app.camera.ICamera;
-import inf112.skeleton.app.draw.CoinUI;
-import inf112.skeleton.app.draw.DrawImageBehavior;
-import inf112.skeleton.app.draw.HealthUI;
-import inf112.skeleton.app.objects.attributes.CollisionBox;
-import inf112.skeleton.app.objects.attributes.Position;
-import inf112.skeleton.app.objects.attributes.Speed;
-import inf112.skeleton.app.objects.attributes.Rectangle;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -23,21 +14,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.time.LocalTime;
 
-public class Player implements IPlayer {
+public class Player extends BaseCollidableTile implements IEntity {
     private Speed acceleration;
     private Speed speed;
-    private IInputHandler inputHandler;
-    private ArrayList<Tile> collideables;
-    private CoinCollection coins;
-    private CoinUI coinUI;
-    private HealthUI healthUI;
-    private ArrayList<Enemy> enemies;
-    
-    private DrawImageBehavior imageHandler;
-    private Canvas canvas;
-    private ICamera camera;
-    protected Position position;
-    protected Rectangle boundingBox;
+
     private LocalTime timeSinceCollide;
     private int level;
     private int right = 0; // how long does take one animation to right direction
@@ -53,37 +33,21 @@ public class Player implements IPlayer {
     private MediaPlayer pickupCoinMediaPlayer;
     private boolean isStanding;
 
-    public Player(Canvas canvas) {
-        this.position = new Position(3, 10);
-        this.boundingBox = new Rectangle(14, 14);
+    public Player(GameWorld gameWorld, int xPosition, int yPosition) {
+        super(gameWorld, xPosition, yPosition);
         this.speed = new Speed(0, 0);
-        this.acceleration = new Speed(0, -0.5f);
-        this.level = 0;
-        this.canvas = canvas;
+        this.acceleration = new Speed(0, -0.2f);
+
+        this.boundingBox = new Rectangle(14, 14);
+
         setPlayerImage();
-    }
-       
-    public void setUp(ArrayList<Tile> collideables, ArrayList<Enemy> enemies, 
-    		CoinCollection coins, CoinUI coinUI, HealthUI healthUI, IInputHandler inputHandler, 
-    		ICamera camera) {
-
-        this.inputHandler = inputHandler;
-        this.coins = coins;
-        this.coinUI = coinUI;
-        this.healthUI = healthUI;
-        this.enemies = enemies;
-        this.collideables = collideables;
-        this.camera = camera;
-
 
         Media hitHurtUri = new Media(Paths.get("src/main/java/inf112/skeleton/app/assets/audio/hitHurt.wav").toUri().toString());
         Media jumpUri = new Media(Paths.get("src/main/java/inf112/skeleton/app/assets/audio/jump.wav").toUri().toString());
-        Media pickupCoinUri = new Media(Paths.get("src/main/java/inf112/skeleton/app/assets/audio/pickupCoin.wav").toUri().toString());
         hitHurtMediaPlayer = new MediaPlayer(hitHurtUri);
         jumpMediaPlayer = new MediaPlayer(jumpUri);
-        pickupCoinMediaPlayer = new MediaPlayer(pickupCoinUri);
     }
-
+       
     private void setPlayerImage() {
 		try {
 	        for (int k = 0; k < 5; k++) {
@@ -134,23 +98,24 @@ public class Player implements IPlayer {
 
     @Override
     public void update() {
-    	if (position.getY() < -200) healthUI.currentHealth.setHealth(0);
+    	if (position.getY() < -200) gameWorld.setHealth(0);
 
+        var inputHandler = gameWorld.getInputHandler();
         if(inputHandler.isActive(KeyCode.W) && isStanding){
             jumpMediaPlayer.play();
             jumpMediaPlayer.seek(jumpMediaPlayer.getStartTime());
-            speed.velocityY = 10;
+            speed.velocityY = 7;
             isStanding = false;
         }
 
         if(inputHandler.isActive(KeyCode.A)) {
-        	speed.velocityX = -1;
+        	speed.velocityX = -2;
         	right = 50;
         	left++;
         	if(left>=50) left=10;
         }
         else if(inputHandler.isActive(KeyCode.D)) {
-        	speed.velocityX = 1;
+        	speed.velocityX = 2;
         	left = 50;
         	right++;
         	if(right>=50) right=10;
@@ -167,8 +132,11 @@ public class Player implements IPlayer {
         speed.velocityY += acceleration.velocityY;
         speed.velocityX += acceleration.velocityX;
 
+        var collidables = gameWorld.getCollidables();
+
         position.setX(position.getX() + speed.velocityX);
-        for(Tile collidable : collideables) {
+        for(ICollidable collidable : collidables) {
+            if (collidable.getItemType() != ItemType.Tile) continue;
             if (getCollisionBox().overlap(collidable)) {
                 timeSinceCollide = LocalTime.now();
                 position.setX(position.getX() - speed.velocityX);
@@ -177,13 +145,15 @@ public class Player implements IPlayer {
                 }
                 position.setX(position.getX() - Math.signum(speed.velocityX));
                 speed.velocityX = 0;
-                position.setX(collidable.getClosestXPosition(position));
+
+                position.setX(getClosestXPosition(position));
             }
         }
 
 
         position.setY(position.getY() + speed.velocityY);
-        for(Tile collidable : collideables) {
+        for(ICollidable collidable : collidables) {
+            if (collidable.getItemType() != ItemType.Tile) continue;
             if (getCollisionBox().overlap(collidable)) {
                 if(position.getY() > collidable.getPosition().getY()) {
                     isStanding = true;
@@ -195,29 +165,27 @@ public class Player implements IPlayer {
                 }
                 position.setY(position.getY() - Math.signum(speed.velocityY));
                 speed.velocityY = 0;
-                position.setY(collidable.getClosestYPosition(position));
+                position.setY(getClosestYPosition(position));
             }
         }
-        for(Enemy enemy : enemies) {
-            if (getCollisionBox().overlap(enemy)) {
-                if(isFalling()) {
-                    enemy.destroy();
-                    speed.velocityY = 5;
-                } else if(!isInvinsible()) {
-                    hitHurtMediaPlayer.play();
-                    hitHurtMediaPlayer.seek(hitHurtMediaPlayer.getStartTime());
-                    healthUI.currentHealth.loseHealth();
-                    invinsibilityTime = LocalTime.now();
+
+        for(ICollidable collidable : collidables) {
+            if (!getCollisionBox().overlap(collidable)) continue;
+            if (collidable.getItemType() == ItemType.Enemy) {
+                if (isFalling()) {
+                    collidable.collide(ItemType.Player);
+                    speed.velocityY = 10;
+                } else if (!isInvinsible()) {
+                    this.collide(ItemType.Enemy);
                 }
             }
-        }
-        for(Coin coin : coins.getAll()) {
-            if (getCollisionBox().overlap(coin)) {
-                pickupCoinMediaPlayer.play();
-                pickupCoinMediaPlayer.seek(pickupCoinMediaPlayer.getStartTime());
-            	coinUI.currentscore.addOneToScore();;
-            	coin.destroy();
-            	        	
+            if (collidable.getItemType() == ItemType.Coin) {
+                gameWorld.addScore(1);
+                collidable.collide(ItemType.Player);
+            }
+            if (collidable.getItemType() == ItemType.Trampoline) {
+                this.speed.velocityY += 5;
+                collidable.collide(ItemType.Player);
             }
         }
     }
@@ -228,6 +196,11 @@ public class Player implements IPlayer {
 
     private boolean isFalling() {
         return speed.velocityY < 0;
+    }
+
+    public void draw() {
+        var imageHandler = gameWorld.getDrawImageBehavior();
+        imageHandler.draw(position, boundingBox, getImage());
     }
 
     @Override
@@ -242,21 +215,15 @@ public class Player implements IPlayer {
     }
 
     @Override
-    public CollisionBox getCollisionBox() {
-        Position edgePosition = new Position(this.position);
-        edgePosition.Add(boundingBox);
-        return new CollisionBox(position, edgePosition);
-    }
-    
-    @Override
-    public void draw() {
-    	imageHandler = new DrawImageBehavior(canvas, camera);
-    	imageHandler.draw(position, boundingBox, getImage());
+    public ItemType getItemType() {
+        return ItemType.Player;
     }
 
     @Override
-    public Position getPosition(){ 
-    	return position; 
+    public void collide(ItemType itemType) {
+        hitHurtMediaPlayer.play();
+        hitHurtMediaPlayer.seek(hitHurtMediaPlayer.getStartTime());
+        gameWorld.addHealth(-1);
+        invinsibilityTime = LocalTime.now();
     }
-
 }

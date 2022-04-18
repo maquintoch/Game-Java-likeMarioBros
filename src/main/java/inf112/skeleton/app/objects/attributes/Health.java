@@ -15,7 +15,7 @@ public class Health {
     	this.amount = h;
     }
     
-    public void loseHealth() {
-    	amount--;
+    public void addHealth(int points) {
+        this.amount += points;
     }
 }

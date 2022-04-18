@@ -201,7 +201,7 @@ public class Game extends Application {
                 inputHandler.setInactive(keyCode);
             });
 
-            gameWorld = new GameWorld(canvas, inputHandler, healthUI, healthUI2, coinUI, levelCount, choice);
+            gameWorld = new GameWorld(canvas, inputHandler, healthUI, coinUI, levelCount);
 
             // add game music
             String soundGameTheme = "src/main/java/inf112/skeleton/app/assets/GameTheme.mp3";
@@ -217,12 +217,6 @@ public class Game extends Application {
                     mp.play();
 
                     if(!choice){
-                            if (healthUI.currentHealth.getHealth()<=0 && healthUI2.currentHealth.getHealth()>0){
-                                gameWorld.remove(1);
-                                }
-                            if (healthUI2.currentHealth.getHealth()<=0 && healthUI.currentHealth.getHealth()>0){
-                                gameWorld.remove(2);
-                                }
 
                             if(healthUI2.currentHealth.getHealth() <= 0 && healthUI.currentHealth.getHealth() <= 0){
                                 levelCount = 0;
@@ -247,18 +241,8 @@ public class Game extends Application {
                     }
                     if(coinUI.currentscore.getScore() == 10){
                         levelCount++;
-                        if(!choice) {
-                            if (healthUI.currentHealth.getHealth() == 0) {
-                                gameWorld.items.add(gameWorld.getPlayer());
-                                healthUI.currentHealth.setHealth(10);
-                            }
-                            if (healthUI2.currentHealth.getHealth() == 0) {
-                                gameWorld.items.add(gameWorld.getPlayer());
-                                healthUI2.currentHealth.setHealth(10);
-                            }
-                        }
-                        coinUI.currentscore.subtractTenFromScore();
-                        gameWorld =  new GameWorld(canvas, inputHandler, healthUI, healthUI2, coinUI, levelCount, choice);
+                        coinUI.currentscore.addScore(-10);
+                        gameWorld =  new GameWorld(canvas, inputHandler, healthUI, coinUI, levelCount);
                     }
 
                     gameWorld.update();

@@ -11,16 +11,7 @@ public class Score {
 		return amount;
 	}
 	
-	public void addOneToScore() {
-		this.amount++;
+	public void addScore(int score) {
+		this.amount += score;
 	}
-	
-	public void subtractOneFromScore() {
-		this.amount--;
-	}
-	
-	public void subtractTenFromScore() { 
-		this.amount -= 10;
-	}
-
 }
