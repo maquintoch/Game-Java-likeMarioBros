@@ -2,6 +2,9 @@ package inf112.skeleton.app.objects;
 
 import inf112.skeleton.app.Input.IInputHandler;
 import inf112.skeleton.app.Input.InputHandler;
+import inf112.skeleton.app.draw.CoinUI;
+import inf112.skeleton.app.draw.HealthUI;
+import inf112.skeleton.app.draw.IDrawBehavior;
 import inf112.skeleton.app.game.gameworld.GameWorld;
 import inf112.skeleton.app.objects.attributes.*;
 import javafx.scene.input.KeyCode;
@@ -143,10 +146,11 @@ public class Player extends BaseCollidableTile implements IEntity {
 
     @Override
     public void update() {
-    	if (position.getY() < -200) gameWorld.setHealth(0);
+
+    	if (position.getY() < -200) gameWorld.setHealth(0); //If player falls off map set health to 0.
 
         var inputHandler = gameWorld.getInputHandler();
-        checkKeyCode(inputHandler); //Move player
+        checkKeyCode(inputHandler); //Move player based on keycode pressed.
 
         speed.velocityY += acceleration.velocityY;
         speed.velocityX += acceleration.velocityX;
@@ -159,8 +163,8 @@ public class Player extends BaseCollidableTile implements IEntity {
         position.setY(position.getY() + speed.velocityY);
         tileCollisionY(collidables);
 
-        //Check if player collide with enemies:
-        enemyCollision(collidables);
+        //Check if player collide with another item (enemy, coin or trampoline):
+        itemCollision(collidables);
     }
 
     public void tileCollisionX(ArrayList<ICollidable> collidables){
@@ -198,7 +202,7 @@ public class Player extends BaseCollidableTile implements IEntity {
         }
 
     }
-    public void enemyCollision(ArrayList<ICollidable> collidables){
+    public void itemCollision(ArrayList<ICollidable> collidables){
         for(ICollidable collidable : collidables) {
             if (!getCollisionBox().overlap(collidable)) continue;
             if (collidable.getItemType() == ItemType.Enemy) {
