@@ -29,10 +29,11 @@ public class Game extends Application {
     private GameWorld gameWorld;
     private IInputHandler inputHandler;
     public int levelCount = 0;
-    public HealthUI healthUI;
-    public HealthUI healthUI2;
-    public Boolean choice;
-    private Stage stage;
+    private HealthUI healthUI;
+    private HealthUI healthUI2;
+    public CoinUI coinUI;
+    private Boolean choice;
+    public Stage stage;
     private MediaPlayer mp;
 
     public static void launchGame(String[] args) {
@@ -222,17 +223,14 @@ public class Game extends Application {
                         endGame();
                         this.stop();
                     }
-                    if(levelCount == 3){
-                        levelCount = 0;
+                    if(finishedAllLevels(levelCount)){
                         mp.stop();
                         winningScreen(stage);
                         this.stop();
                     }
-                    if(coinUI.currentscore.getScore() == 10){
-                        levelCount++;
-                        coinUI.currentscore.addScore(-10);
+                    if(allCoinsCollected(coinUI)){
                         gameWorld =  new GameWorld(canvas, inputHandler, healthUI, coinUI, levelCount);
-                    }
+                    };
 
                     gameWorld.update();
                     gameWorld.draw();
@@ -242,17 +240,31 @@ public class Game extends Application {
             timer.start();
             stage.show();
     }
+    public boolean finishedAllLevels(int lc){
+        if(lc == 3){
+            levelCount = 0;
+            return true;
+        }
+        return false;
+    }
+    public boolean allCoinsCollected(CoinUI coinUI){
+        if(coinUI.currentscore.getScore() == 10){
+            levelCount++;
+            coinUI.currentscore.addScore(-10);
+            return true;
+        }
+        return false;
+
+    }
     private void endGame(){
         levelCount = 0;
         mp.stop();
         EndScreen(stage);
     }
 
-    public boolean isGameOver(){
-        if(!choice){
-            if(healthUI2.currentHealth.getHealth() <= 0 && healthUI.currentHealth.getHealth() <= 0){
-                return true;
-            }
+    private boolean isGameOver(){
+        if(healthUI2.currentHealth.getHealth() <= 0 && healthUI.currentHealth.getHealth() <= 0 && !choice){
+            return true;
         }
         if(healthUI.currentHealth.getHealth() <= 0 && choice){
             return true;
