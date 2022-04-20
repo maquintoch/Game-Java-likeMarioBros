@@ -12,7 +12,7 @@ public class Tile extends BaseCollidableTile {
     public Tile(GameWorld gameWorld, int xPosition, int yPosition) {
         super(gameWorld, xPosition, yPosition);
         try {
-            image = new Image(new FileInputStream("src\\main\\java\\inf112\\skeleton\\app\\assets\\image\\brick.jpg"));
+            image = new Image(new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/brick.jpg"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

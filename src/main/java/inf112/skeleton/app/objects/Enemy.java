@@ -21,7 +21,7 @@ public class Enemy extends BaseCollidableTile implements IEntity {
         this.acceleration = new Speed(0, -0.5f);
 
         try {
-            image = new Image(new FileInputStream("src\\main\\java\\inf112\\skeleton\\app\\assets\\image\\enemy.png"));
+            image = new Image(new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/enemy.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

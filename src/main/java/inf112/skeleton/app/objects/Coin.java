@@ -18,7 +18,7 @@ public class Coin extends BaseCollidableTile {
         super(gameWorld, xPosition, yPosition);
 
         try {
-            image = new Image(new FileInputStream("src\\main\\java\\inf112\\skeleton\\app\\assets\\image\\coin.png"));
+            image = new Image(new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/coin.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
