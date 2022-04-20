@@ -37,7 +37,7 @@ public class Player extends BaseCollidableTile implements IEntity {
     private MediaPlayer hitHurtMediaPlayer;
     private MediaPlayer jumpMediaPlayer;
     private MediaPlayer pickupCoinMediaPlayer;
-    private boolean isStanding;
+    public boolean isStanding;
 
     public Player(GameWorld gameWorld, int xPosition, int yPosition) {
         super(gameWorld, xPosition, yPosition);
@@ -122,14 +122,14 @@ public class Player extends BaseCollidableTile implements IEntity {
         }
     }
 
-    private void moveRight() {
+    public void moveRight() {
         speed.velocityX = 2;
         left = 50;
         right++;
         if(right>=50) right=10;
     }
 
-    private void moveLeft() {
+    public void moveLeft() {
         speed.velocityX = -2;
         right = 50;
         left++;
@@ -137,7 +137,7 @@ public class Player extends BaseCollidableTile implements IEntity {
 
     }
 
-    private void jump() {
+    public void jump() {
         jumpMediaPlayer.play();
         jumpMediaPlayer.seek(jumpMediaPlayer.getStartTime());
         speed.velocityY = 7;
