@@ -13,12 +13,9 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -32,6 +29,11 @@ public class Game extends Application {
     private GameWorld gameWorld;
     private IInputHandler inputHandler;
     public int levelCount = 0;
+    private HealthUI healthUI;
+    private HealthUI healthUI2;
+    private Boolean choice;
+    private Stage stage;
+    private MediaPlayer mp;
 
     public static void launchGame(String[] args) {
         launch(args);
@@ -61,7 +63,7 @@ public class Game extends Application {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    Boolean choice = true;
+                    choice = true;
                     startGame(stage,choice);
                 }
                 catch (Exception e)
@@ -82,7 +84,7 @@ public class Game extends Application {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
-                    Boolean choice = false;
+                    choice = false;
                     startGame(stage,choice);
                 }
                 catch (Exception e)
@@ -174,6 +176,7 @@ public class Game extends Application {
 
 
     public void startGame(Stage stage, Boolean choice){
+            this.stage = stage;
             stage.setTitle("Mario");
             double width = 500;
             double height = 500;
@@ -185,8 +188,8 @@ public class Game extends Application {
             canvas.widthProperty().bind(scene.widthProperty());
             canvas.heightProperty().bind(scene.heightProperty());
             root.getChildren().add(canvas);
-            HealthUI healthUI = new HealthUI(canvas.getGraphicsContext2D());
-            HealthUI healthUI2 = new HealthUI(canvas.getGraphicsContext2D());
+            healthUI = new HealthUI(canvas.getGraphicsContext2D());
+            healthUI2 = new HealthUI(canvas.getGraphicsContext2D());
             CoinUI coinUI = new CoinUI(canvas.getGraphicsContext2D());
 
             inputHandler = new InputHandler();
@@ -206,7 +209,7 @@ public class Game extends Application {
             // add game music
             String soundGameTheme = "src/main/java/inf112/skeleton/app/assets/GameTheme.mp3";
             Media media = new Media(new File(soundGameTheme).toURI().toString());
-            MediaPlayer mp = new MediaPlayer(media);
+            mp = new MediaPlayer(media);
 
             AnimationTimer timer = new AnimationTimer() {
                 @Override
@@ -215,23 +218,9 @@ public class Game extends Application {
                     mp.setCycleCount(MediaPlayer.INDEFINITE);
                     mp.setVolume(0.05);
                     mp.play();
-
-                    if(!choice){
-
-                            if(healthUI2.currentHealth.getHealth() <= 0 && healthUI.currentHealth.getHealth() <= 0){
-                                levelCount = 0;
-                                mp.stop();
-                                EndScreen(stage);
-                                this.stop();
-                                }
-                        }
-                    else {
-                        if (healthUI.currentHealth.getHealth() <= 0) {
-                            levelCount = 0;
-                            mp.stop();
-                            EndScreen(stage);
-                            this.stop();
-                        }
+                    if(isGameOver()){
+                        endGame();
+                        this.stop();
                     }
                     if(levelCount == 3){
                         levelCount = 0;
@@ -253,7 +242,21 @@ public class Game extends Application {
             timer.start();
             stage.show();
     }
+    private void endGame(){
+        levelCount = 0;
+        mp.stop();
+        EndScreen(stage);
+    }
 
+    private boolean isGameOver(){
+        if(healthUI2.currentHealth.getHealth() <= 0 && healthUI.currentHealth.getHealth() <= 0 && !choice){
+            return true;
+        }
+        if(healthUI.currentHealth.getHealth() <= 0 && choice){
+            return true;
+        }
+        return false;
+    }
 
     private void winningScreen(Stage stage) {
         stage.setTitle("You Won!");
