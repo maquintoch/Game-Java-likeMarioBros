@@ -1,5 +1,7 @@
 package inf112.skeleton.app.objects;
 
+import inf112.skeleton.app.Input.IInputHandler;
+import inf112.skeleton.app.Input.InputHandler;
 import inf112.skeleton.app.game.gameworld.GameWorld;
 import inf112.skeleton.app.objects.attributes.*;
 import javafx.scene.input.KeyCode;
@@ -13,6 +15,7 @@ import javafx.scene.media.MediaPlayer;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Player extends BaseCollidableTile implements IEntity {
     private Speed acceleration;
@@ -96,52 +99,78 @@ public class Player extends BaseCollidableTile implements IEntity {
             return imageLeft[4];
     }
 
+    public void checkKeyCode(IInputHandler inputHandler){
+        if(inputHandler.isActive(KeyCode.W) && isStanding){
+            jump();
+        }
+        if(inputHandler.isActive(KeyCode.A)){
+            moveLeft();
+        }
+        else if(inputHandler.isActive(KeyCode.D)){
+            moveRight();
+        }
+        else{
+            if (left == 50) // last move was in right side
+                right = 0;
+            else // last move was in left side
+                left = 0;
+            speed.velocityX = 0;
+
+        }
+    }
+
+    private void moveRight() {
+        speed.velocityX = 2;
+        left = 50;
+        right++;
+        if(right>=50) right=10;
+    }
+
+    private void moveLeft() {
+        speed.velocityX = -2;
+        right = 50;
+        left++;
+        if(left>=50) left=10;
+
+    }
+
+    private void jump() {
+        jumpMediaPlayer.play();
+        jumpMediaPlayer.seek(jumpMediaPlayer.getStartTime());
+        speed.velocityY = 7;
+        isStanding = false;
+    }
+
     @Override
     public void update() {
     	if (position.getY() < -200) gameWorld.setHealth(0);
 
         var inputHandler = gameWorld.getInputHandler();
-        if(inputHandler.isActive(KeyCode.W) && isStanding){
-            jumpMediaPlayer.play();
-            jumpMediaPlayer.seek(jumpMediaPlayer.getStartTime());
-            speed.velocityY = 7;
-            isStanding = false;
-        }
-
-        if(inputHandler.isActive(KeyCode.A)) {
-        	speed.velocityX = -2;
-        	right = 50;
-        	left++;
-        	if(left>=50) left=10;
-        }
-        else if(inputHandler.isActive(KeyCode.D)) {
-        	speed.velocityX = 2;
-        	left = 50;
-        	right++;
-        	if(right>=50) right=10;
-
-        }
-        else {
-            if (left == 50) // last move was in right side
-                right = 0;
-            else // last move was in left side
-                left = 0;
-        	speed.velocityX = 0;
-        }
+        checkKeyCode(inputHandler); //Move player
 
         speed.velocityY += acceleration.velocityY;
         speed.velocityX += acceleration.velocityX;
 
         var collidables = gameWorld.getCollidables();
 
+        //Check if player collide with tiles:
         position.setX(position.getX() + speed.velocityX);
+        tileCollisionX(collidables);
+        position.setY(position.getY() + speed.velocityY);
+        tileCollisionY(collidables);
+
+        //Check if player collide with enemies:
+        enemyCollision(collidables);
+    }
+
+    public void tileCollisionX(ArrayList<ICollidable> collidables){
         for(ICollidable collidable : collidables) {
             if (collidable.getItemType() != ItemType.Tile) continue;
             if (getCollisionBox().overlap(collidable)) {
                 timeSinceCollide = LocalTime.now();
                 position.setX(position.getX() - speed.velocityX);
                 while(!overlap(collidable)) {
-                	position.setX(position.getX() + Math.signum(speed.velocityX));
+                    position.setX(position.getX() + Math.signum(speed.velocityX));
                 }
                 position.setX(position.getX() - Math.signum(speed.velocityX));
                 speed.velocityX = 0;
@@ -149,9 +178,8 @@ public class Player extends BaseCollidableTile implements IEntity {
                 position.setX(getClosestXPosition(position));
             }
         }
-
-
-        position.setY(position.getY() + speed.velocityY);
+    }
+    public void tileCollisionY(ArrayList<ICollidable> collidables){
         for(ICollidable collidable : collidables) {
             if (collidable.getItemType() != ItemType.Tile) continue;
             if (getCollisionBox().overlap(collidable)) {
@@ -161,7 +189,7 @@ public class Player extends BaseCollidableTile implements IEntity {
                 timeSinceCollide = LocalTime.now();
                 position.setY(position.getY() - speed.velocityY);
                 while(!overlap(collidable)) {
-                	position.setY(position.getY() + Math.signum(speed.velocityY));
+                    position.setY(position.getY() + Math.signum(speed.velocityY));
                 }
                 position.setY(position.getY() - Math.signum(speed.velocityY));
                 speed.velocityY = 0;
@@ -169,6 +197,8 @@ public class Player extends BaseCollidableTile implements IEntity {
             }
         }
 
+    }
+    public void enemyCollision(ArrayList<ICollidable> collidables){
         for(ICollidable collidable : collidables) {
             if (!getCollisionBox().overlap(collidable)) continue;
             if (collidable.getItemType() == ItemType.Enemy) {
