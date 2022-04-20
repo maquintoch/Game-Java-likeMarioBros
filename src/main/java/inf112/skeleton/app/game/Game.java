@@ -29,10 +29,10 @@ public class Game extends Application {
     private GameWorld gameWorld;
     private IInputHandler inputHandler;
     public int levelCount = 0;
-    private HealthUI healthUI;
-    private HealthUI healthUI2;
+    public HealthUI healthUI;
+    public HealthUI healthUI2;
     public CoinUI coinUI;
-    private Boolean choice;
+    public Boolean choice;
     public Stage stage;
     private MediaPlayer mp;
 
@@ -262,7 +262,7 @@ public class Game extends Application {
         EndScreen(stage);
     }
 
-    private boolean isGameOver(){
+    public boolean isGameOver(){
         if(healthUI2.currentHealth.getHealth() <= 0 && healthUI.currentHealth.getHealth() <= 0 && !choice){
             return true;
         }
