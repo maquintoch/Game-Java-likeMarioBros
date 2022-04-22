@@ -9,8 +9,10 @@ import inf112.skeleton.app.objects.Player;
 import inf112.skeleton.app.objects.Tile;
 import inf112.skeleton.app.objects.attributes.ICollidable;
 import inf112.skeleton.app.objects.attributes.ItemType;
+import javafx.application.Platform;
 import javafx.scene.canvas.Canvas;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -73,13 +75,5 @@ public class HealthUITest {
         Assertions.assertEquals(game.isGameOver(),false);
         healthUI2.currentHealth.setHealth(0);
         Assertions.assertEquals(game.isGameOver(),true);
-    }
-
-    @Test
-    public void takeDamageWhenHitEnemy(){
-        GameWorld gw = mock(GameWorld.class);
-        Player player = new Player(gw, 0,0);
-        player.collide(ItemType.Enemy);
-        Mockito.verify(gw, Mockito.times(1)).addHealth(-1);
     }
 }

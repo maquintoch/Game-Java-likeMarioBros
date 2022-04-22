@@ -1,5 +1,4 @@
 package inf112.skeleton.app;
-import de.saxsys.javafx.test.JfxRunner;
 import inf112.skeleton.app.Input.IInputHandler;
 import inf112.skeleton.app.Input.InputHandler;
 import inf112.skeleton.app.draw.CoinUI;
@@ -16,12 +15,9 @@ import inf112.skeleton.app.objects.attributes.Rectangle;
 import javafx.application.Platform;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.media.MediaPlayer;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
