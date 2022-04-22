@@ -74,7 +74,6 @@ public class Enemy extends BaseCollidableTile implements IEntity {
                 }
                 position.setX(position.getX() - Math.signum(speed.velocityX));
                 this.collide(ItemType.Enemy);
-                //collidable.collide(ItemType.Enemy);
                 position.setX(getClosestXPosition(position));
             }
         }
