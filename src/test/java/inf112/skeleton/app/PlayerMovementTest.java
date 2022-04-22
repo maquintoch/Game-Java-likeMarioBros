@@ -1,4 +1,5 @@
 package inf112.skeleton.app;
+import de.saxsys.javafx.test.JfxRunner;
 import inf112.skeleton.app.Input.IInputHandler;
 import inf112.skeleton.app.Input.InputHandler;
 import inf112.skeleton.app.draw.CoinUI;
@@ -12,8 +13,15 @@ import inf112.skeleton.app.objects.attributes.CollisionBox;
 import inf112.skeleton.app.objects.attributes.ICollidable;
 import inf112.skeleton.app.objects.attributes.Position;
 import inf112.skeleton.app.objects.attributes.Rectangle;
+import javafx.application.Platform;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.media.MediaPlayer;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
@@ -23,11 +31,15 @@ import static javafx.beans.binding.Bindings.when;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-
 public class PlayerMovementTest {
 
+    @BeforeAll
+    public static void setup() {
+        Platform.startup(()->{});
+    }
+
     @Test
-    public void testPlayer() {
+    public void testPlayerCanMove() {
 
         GameWorld gw = Mockito.mock(GameWorld.class);
 
@@ -39,22 +51,16 @@ public class PlayerMovementTest {
         assertTrue(player.getSpeed().velocityX > 0);
         player.moveLeft();
         assertTrue(player.getSpeed().velocityX < 0);
-
-
-
-
     }
 
     @Test
     public void testPlayerIsStanding() {
         GameWorld gw = Mockito.mock(GameWorld.class);
 
-
         var collidables = new ArrayList<ICollidable>();
         collidables.add(new Tile(gw, 0, -16));
         Mockito.when(gw.getCollidables()).thenReturn(collidables);
         Mockito.when(gw.getInputHandler()).thenReturn(mock(InputHandler.class));
-
 
         Player player = new Player(gw, 0,0);
         assertTrue(!player.isStanding);
@@ -70,8 +76,8 @@ public class PlayerMovementTest {
         Mockito.when(gw.getCollidables()).thenReturn(collidables);
         Mockito.when(gw.getInputHandler()).thenReturn(mock(InputHandler.class));
 
-
         Player player = new Player(gw, 0,0);
+
         assertEquals(0, player.getPosition().getY());
         player.update();
         assertTrue(player.getPosition().getY() < 0);
@@ -81,14 +87,12 @@ public class PlayerMovementTest {
     public void testPlayerWalkRight() {
         GameWorld gw = Mockito.mock(GameWorld.class);
 
-
         var collidables = new ArrayList<ICollidable>();
         collidables.add(new Tile(gw, 0, -16));
         collidables.add(new Tile(gw, 16, -16));
 
         Mockito.when(gw.getCollidables()).thenReturn(collidables);
         Mockito.when(gw.getInputHandler()).thenReturn(mock(InputHandler.class));
-
 
         Player player = new Player(gw, 0,0);
         assertTrue(player.getPosition().getX() == 0);
@@ -101,14 +105,12 @@ public class PlayerMovementTest {
     public void testPlayerNotWalkThroughBlockRight() {
         GameWorld gw = Mockito.mock(GameWorld.class);
 
-
         var collidables = new ArrayList<ICollidable>();
         collidables.add(new Tile(gw, 0, -16));
-        collidables.add(new Tile(gw, 16, 0));
+        collidables.add(new Tile(gw, 14, 0));
 
         Mockito.when(gw.getCollidables()).thenReturn(collidables);
         Mockito.when(gw.getInputHandler()).thenReturn(mock(InputHandler.class));
-
 
         Player player = new Player(gw, 0,0);
         assertTrue(player.getPosition().getX() == 0);
