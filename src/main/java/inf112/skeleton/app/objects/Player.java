@@ -1,19 +1,11 @@
 package inf112.skeleton.app.objects;
 
 import inf112.skeleton.app.Input.IInputHandler;
-import inf112.skeleton.app.Input.InputHandler;
-import inf112.skeleton.app.draw.CoinUI;
-import inf112.skeleton.app.draw.HealthUI;
-import inf112.skeleton.app.draw.IDrawBehavior;
 import inf112.skeleton.app.game.gameworld.GameWorld;
 import inf112.skeleton.app.objects.attributes.*;
+import inf112.skeleton.app.services.AudioPlayer;
 import javafx.scene.input.KeyCode;
 import javafx.scene.image.Image;
-
-import java.nio.file.Paths;
-
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,9 +26,8 @@ public class Player extends BaseCollidableTile implements IEntity {
     private Image imageBlank;
     private LocalTime invinsibilityTime = LocalTime.MAX;
     private boolean isShowingInvinsibilityFrame = false;
-    private MediaPlayer hitHurtMediaPlayer;
-    private MediaPlayer jumpMediaPlayer;
-    private MediaPlayer pickupCoinMediaPlayer;
+    public AudioPlayer hurtAudioPlayer;
+    public AudioPlayer jumpAudioPlayer;
     public boolean isStanding;
 
     public Player(GameWorld gameWorld, int xPosition, int yPosition) {
@@ -48,10 +39,8 @@ public class Player extends BaseCollidableTile implements IEntity {
 
         setPlayerImage();
 
-        Media hitHurtUri = new Media(Paths.get("src/main/java/inf112/skeleton/app/assets/audio/hitHurt.wav").toUri().toString());
-        Media jumpUri = new Media(Paths.get("src/main/java/inf112/skeleton/app/assets/audio/jump.wav").toUri().toString());
-        hitHurtMediaPlayer = new MediaPlayer(hitHurtUri);
-        jumpMediaPlayer = new MediaPlayer(jumpUri);
+        hurtAudioPlayer = new AudioPlayer("src/main/java/inf112/skeleton/app/assets/audio/hitHurt.wav");
+        jumpAudioPlayer = new AudioPlayer("src/main/java/inf112/skeleton/app/assets/audio/jump.wav");
     }
        
     private void setPlayerImage() {
@@ -117,8 +106,6 @@ public class Player extends BaseCollidableTile implements IEntity {
                 right = 0;
             else // last move was in left side
                 left = 0;
-            speed.velocityX = 0;
-
         }
     }
 
@@ -138,8 +125,7 @@ public class Player extends BaseCollidableTile implements IEntity {
     }
 
     public void jump() {
-        jumpMediaPlayer.play();
-        jumpMediaPlayer.seek(jumpMediaPlayer.getStartTime());
+        jumpAudioPlayer.play();
         speed.velocityY = 7;
         isStanding = false;
     }
@@ -154,6 +140,9 @@ public class Player extends BaseCollidableTile implements IEntity {
 
         speed.velocityY += acceleration.velocityY;
         speed.velocityX += acceleration.velocityX;
+
+        speed.velocityY += -Math.signum(speed.velocityY) * Math.min(0.1, Math.abs(speed.velocityY));
+        speed.velocityX += -Math.signum(speed.velocityX) * Math.min(0.1, Math.abs(speed.velocityX));
 
         var collidables = gameWorld.getCollidables();
 
@@ -255,8 +244,7 @@ public class Player extends BaseCollidableTile implements IEntity {
 
     @Override
     public void collide(ItemType itemType) {
-        hitHurtMediaPlayer.play();
-        hitHurtMediaPlayer.seek(hitHurtMediaPlayer.getStartTime());
+        hurtAudioPlayer.play();
         gameWorld.addHealth(-1);
         invinsibilityTime = LocalTime.now();
     }
