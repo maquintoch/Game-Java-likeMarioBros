@@ -1,8 +1,8 @@
 package inf112.skeleton.app.draw;
 
 import inf112.skeleton.app.camera.ICamera;
+import inf112.skeleton.app.objects.attributes.GameObjectSize;
 import inf112.skeleton.app.objects.attributes.Position;
-import inf112.skeleton.app.objects.attributes.Rectangle;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Paint;
@@ -21,7 +21,7 @@ public class DrawColorBehavior implements IDrawBehavior {
     }
 
     @Override
-    public void draw(Position position, Rectangle boundingBox) {
+    public void draw(Position position, GameObjectSize boundingBox) {
         context.save();
         context.setFill(color);
         context.fillRect(position.getX() - camera.getX(), 

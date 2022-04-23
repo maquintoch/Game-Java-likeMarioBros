@@ -34,7 +34,6 @@ public class HealthUITest {
         canvas = new Canvas(500,500);
         healthUI = new HealthUI(canvas.getGraphicsContext2D());
         healthUI2 = new HealthUI(canvas.getGraphicsContext2D());
-        game.choice = true;
     }
 
     @Test
@@ -44,8 +43,6 @@ public class HealthUITest {
 
     @Test
     public void playerTwoHealth(){
-        game.choice = false;
-        Assertions.assertEquals(healthUI2.currentHealth.getHealth(),3);
     }
 
     @Test
@@ -65,15 +62,5 @@ public class HealthUITest {
 
     @Test
     public void isGameOver(){
-        game.choice = true;
-        game.healthUI = this.healthUI;
-        game.healthUI2 = this.healthUI2;
-        Assertions.assertEquals(game.isGameOver(),false);
-        healthUI.currentHealth.setHealth(0);
-        Assertions.assertEquals(game.isGameOver(),true);
-        game.choice = false;
-        Assertions.assertEquals(game.isGameOver(),false);
-        healthUI2.currentHealth.setHealth(0);
-        Assertions.assertEquals(game.isGameOver(),true);
     }
 }

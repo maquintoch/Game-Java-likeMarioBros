@@ -1,9 +1,8 @@
 package inf112.skeleton.app.objects.attributes;
 
-import inf112.skeleton.app.objects.IItem;
+import inf112.skeleton.app.objects.IGameObject;
 
-public interface ICollidable extends IItem {
-    ItemType getItemType();
-    void collide(ItemType itemType);
-
+public interface ICollidable {
+    CollisionBox getCollisionBox();
+    void collide(IGameObject gameObject);
 }

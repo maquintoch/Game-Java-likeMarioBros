@@ -7,23 +7,32 @@ import javafx.scene.image.Image;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class Trampoline extends BaseCollidableTile {
+public class Trampoline extends GameObjectBase {
 
-    public Trampoline(GameWorld gameWorld, int xPosition, int yPosition) {
-        super(gameWorld, xPosition, yPosition);
+    private Image image;
+
+    public Trampoline(Position position) {
+        super(position);
         try {
             image = new Image(new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/spring.png"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
+
     @Override
     public ItemType getItemType() {
         return ItemType.Trampoline;
     }
 
     @Override
-    public void collide(ItemType itemType) {
+    public void collide(IGameObject gameObject) {
 
+    }
+
+    @Override
+    public void draw(GameWorld gameWorld) {
+        var drawBehavior = gameWorld.getDrawImageBehavior();
+        drawBehavior.draw(position, size, image);
     }
 }

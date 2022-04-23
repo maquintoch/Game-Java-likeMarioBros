@@ -5,93 +5,41 @@ import inf112.skeleton.app.game.gameworld.GameWorld;
 import inf112.skeleton.app.objects.attributes.*;
 import inf112.skeleton.app.services.AudioPlayer;
 import javafx.scene.input.KeyCode;
-import javafx.scene.image.Image;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.time.LocalTime;
-import java.util.ArrayList;
+import java.util.List;
 
-public class Player extends BaseCollidableTile implements IEntity {
-    private Speed acceleration;
-    private Speed speed;
+public class Player extends EntityBase {
+    private final AudioPlayer hurtAudioPlayer = new AudioPlayer("src/main/java/inf112/skeleton/app/assets/audio/hitHurt.wav");
+    private final AudioPlayer jumpAudioPlayer = new AudioPlayer("src/main/java/inf112/skeleton/app/assets/audio/jump.wav");
+    private final IInputHandler inputHandler;
 
-    private LocalTime timeSinceCollide;
-    private int level;
-    private int right = 0; // how long does take one animation to right direction
-    private int left = 0; // how long does take one animation to left direction
-    
-    private Image[] imageRight = new Image[5]; // right images for different states
-    private Image[] imageLeft = new Image[5]; // left images for different states
-    private Image imageBlank;
+    private PlayerSprite sprite = new PlayerSprite();
+
     private LocalTime invinsibilityTime = LocalTime.MAX;
-    private boolean isShowingInvinsibilityFrame = false;
-    public AudioPlayer hurtAudioPlayer;
-    public AudioPlayer jumpAudioPlayer;
-    public boolean isStanding;
+    private boolean isStanding;
+    private float jumpSpeed = 7f;
+    private float movementSpeed = 2f;
 
-    public Player(GameWorld gameWorld, int xPosition, int yPosition) {
-        super(gameWorld, xPosition, yPosition);
-        this.speed = new Speed(0, 0);
+    public Player(Position position, IInputHandler inputHandler) {
+        super(position);
+
+        this.inputHandler = inputHandler;
+
+        this.velocity = new Speed(0, 0);
         this.acceleration = new Speed(0, -0.2f);
 
-        this.boundingBox = new Rectangle(14, 14);
+        this.size = new GameObjectSize(14, 14);
 
-        setPlayerImage();
+        airDragAmountX = 0.1f;
+        airDragAmountY = 0f;
 
-        hurtAudioPlayer = new AudioPlayer("src/main/java/inf112/skeleton/app/assets/audio/hitHurt.wav");
-        jumpAudioPlayer = new AudioPlayer("src/main/java/inf112/skeleton/app/assets/audio/jump.wav");
+        maxSpeedX = 10f;
+        maxSpeedY = 10f;
     }
        
-    private void setPlayerImage() {
-		try {
-	        for (int k = 0; k < 5; k++) {
-	        	// change the file path if needed
-	    		FileInputStream inputMarioRight = new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/player1/marioRight" + k + "Lvl" + level + ".png");
-	    		FileInputStream inputMarioLeft = new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/player1/marioLeft" + k + "Lvl" + level + ".png");
-                FileInputStream inputblank = new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/blank.png");
-                imageRight[k] = new Image(inputMarioRight);
-	            imageLeft[k] = new Image(inputMarioLeft);
-                imageBlank = new Image(inputblank);
-	        }
-		}
-		catch(FileNotFoundException  e) {
-			System.out.println("Player image not found!");
-			e.printStackTrace();
-		}
-	}
-    
-    public Image getImage() {
 
-        if(isInvinsible() && !isShowingInvinsibilityFrame) {
-            isShowingInvinsibilityFrame = true;
-            return imageBlank;
-        }
-        isShowingInvinsibilityFrame = false;
-
-        if (right < 10)
-            return imageRight[0];
-        else if (right < 20)
-            return imageRight[1];
-        else if (right < 30)
-            return imageRight[2];
-        else if (right < 40)
-            return imageRight[3];
-        else if (right < 50)
-            return imageRight[4];
-        else if (left < 10)
-            return imageLeft[0];
-        else if (left < 20)
-            return imageLeft[1];
-        else if (left < 30)
-            return imageLeft[2];
-        else if (left < 40)
-            return imageLeft[3];
-        else
-            return imageLeft[4];
-    }
-
-    public void checkKeyCode(IInputHandler inputHandler){
+    public void checkKeyCode(){
         if(inputHandler.isActive(KeyCode.W) && isStanding){
             jump();
         }
@@ -101,140 +49,51 @@ public class Player extends BaseCollidableTile implements IEntity {
         else if(inputHandler.isActive(KeyCode.D)){
             moveRight();
         }
-        else{
-            if (left == 50) // last move was in right side
-                right = 0;
-            else // last move was in left side
-                left = 0;
-        }
     }
 
     public void moveRight() {
-        speed.velocityX = 2;
-        left = 50;
-        right++;
-        if(right>=50) right=10;
+        this.velocity.velocityX = Math.max(movementSpeed, Math.abs(velocity.velocityX));
+        this.sprite.moveRight();
     }
 
     public void moveLeft() {
-        speed.velocityX = -2;
-        right = 50;
-        left++;
-        if(left>=50) left=10;
+        this.velocity.velocityX = -Math.max(movementSpeed, Math.abs(velocity.velocityX));
+        this.sprite.moveLeft();
 
     }
 
     public void jump() {
-        jumpAudioPlayer.play();
-        speed.velocityY = 7;
+        velocity.velocityY = jumpSpeed;
         isStanding = false;
+        jumpAudioPlayer.play();
     }
 
     @Override
-    public void update() {
+    public void update(List<IGameObject> gameObjects) {
 
-    	if (position.getY() < -200) gameWorld.setHealth(0); //If player falls off map set health to 0.
+    	//if (position.getY() < -200) updateFrame.setHealth(0); //If player falls off map set health to 0.
 
-        var inputHandler = gameWorld.getInputHandler();
-        checkKeyCode(inputHandler); //Move player based on keycode pressed.
+        checkKeyCode(); //Move player based on keycode pressed.
 
-        speed.velocityY += acceleration.velocityY;
-        speed.velocityX += acceleration.velocityX;
+        updateAnimation();
 
-        speed.velocityY += -Math.signum(speed.velocityY) * Math.min(0.1, Math.abs(speed.velocityY));
-        speed.velocityX += -Math.signum(speed.velocityX) * Math.min(0.1, Math.abs(speed.velocityX));
-
-        var collidables = gameWorld.getCollidables();
-
-        //Check if player collide with tiles:
-        position.setX(position.getX() + speed.velocityX);
-        tileCollisionX(collidables);
-        position.setY(position.getY() + speed.velocityY);
-        tileCollisionY(collidables);
-
-        //Check if player collide with another item (enemy, coin or trampoline):
-        itemCollision(collidables);
+        //Do base collisions
+        super.update(gameObjects);
     }
 
-    public void tileCollisionX(ArrayList<ICollidable> collidables){
-        for(ICollidable collidable : collidables) {
-            if (collidable.getItemType() != ItemType.Tile) continue;
-            if (getCollisionBox().overlap(collidable)) {
-                timeSinceCollide = LocalTime.now();
-                position.setX(position.getX() - speed.velocityX);
-                while(!overlap(collidable)) {
-                    position.setX(position.getX() + Math.signum(speed.velocityX));
-                }
-                position.setX(position.getX() - Math.signum(speed.velocityX));
-                speed.velocityX = 0;
-
-                position.setX(getClosestXPosition(position));
-            }
-        }
-    }
-    public void tileCollisionY(ArrayList<ICollidable> collidables){
-        for(ICollidable collidable : collidables) {
-            if (collidable.getItemType() != ItemType.Tile) continue;
-            if (getCollisionBox().overlap(collidable)) {
-                if(position.getY() > collidable.getPosition().getY()) {
-                    isStanding = true;
-                }
-                timeSinceCollide = LocalTime.now();
-                position.setY(position.getY() - speed.velocityY);
-                while(!overlap(collidable)) {
-                    position.setY(position.getY() + Math.signum(speed.velocityY));
-                }
-                position.setY(position.getY() - Math.signum(speed.velocityY));
-                speed.velocityY = 0;
-                position.setY(getClosestYPosition(position));
-            }
+    private void updateAnimation() {
+        if(Math.abs(this.velocity.velocityX) > 0 && !this.sprite.isRunning()) {
+            this.sprite.start();
         }
 
-    }
-    public void itemCollision(ArrayList<ICollidable> collidables){
-        for(ICollidable collidable : collidables) {
-            if (!getCollisionBox().overlap(collidable)) continue;
-            if (collidable.getItemType() == ItemType.Enemy) {
-                if (isFalling()) {
-                    collidable.collide(ItemType.Player);
-                    speed.velocityY = 10;
-                } else if (!isInvinsible()) {
-                    this.collide(ItemType.Enemy);
-                }
-            }
-            if (collidable.getItemType() == ItemType.Coin) {
-                gameWorld.addScore(1);
-                collidable.collide(ItemType.Player);
-            }
-            if (collidable.getItemType() == ItemType.Trampoline) {
-                this.speed.velocityY += 5;
-                collidable.collide(ItemType.Player);
-            }
+        if(this.velocity.velocityX == 0){
+            this.sprite.stop();
         }
     }
 
-    private boolean isInvinsible() {
-        return invinsibilityTime.plusSeconds(2).isAfter(LocalTime.now());
-    }
-
-    private boolean isFalling() {
-        return speed.velocityY < 0;
-    }
-
-    public void draw() {
+    public void draw(GameWorld gameWorld) {
         var imageHandler = gameWorld.getDrawImageBehavior();
-        imageHandler.draw(position, boundingBox, getImage());
-    }
-
-    @Override
-    public boolean overlap(IItem collidable) {
-        var collisionBox = getCollisionBox();
-        return collisionBox.overlap(collidable);
-    }
-
-    @Override
-    public Speed getSpeed() {
-        return speed;
+        imageHandler.draw(position, size, sprite.getImage());
     }
 
     @Override
@@ -243,9 +102,26 @@ public class Player extends BaseCollidableTile implements IEntity {
     }
 
     @Override
-    public void collide(ItemType itemType) {
-        hurtAudioPlayer.play();
-        gameWorld.addHealth(-1);
-        invinsibilityTime = LocalTime.now();
+    public void collide(IGameObject gameObject) {
+        var itemType = gameObject.getItemType();
+        switch(itemType) {
+            case Tile:
+                if(this.isAbove(gameObject)) {
+                    isStanding = true;
+                }
+                break;
+            case Enemy:
+                if(this.isAbove(gameObject)) {
+                    this.velocity.velocityY += jumpSpeed/2f;
+                } else if (false){
+                    hurtAudioPlayer.play();
+                    //gameWorld.addHealth(-1);
+                    invinsibilityTime = LocalTime.now();
+                }
+        }
+    }
+
+    public boolean isStanding() {
+        return isStanding;
     }
 }

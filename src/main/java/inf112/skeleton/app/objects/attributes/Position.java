@@ -24,7 +24,7 @@ public class Position {
         this.y += speed.velocityY;
     }
 
-    public void Add(Rectangle boundingBox) {
+    public void Add(GameObjectSize boundingBox) {
         this.x += boundingBox.width;
         this.y += boundingBox.height;
     }

@@ -1,6 +1,6 @@
 package inf112.skeleton.app.objects.attributes;
 
-import inf112.skeleton.app.objects.IItem;
+import inf112.skeleton.app.objects.IGameObject;
 
 public class CollisionBox {
     private Position CornerAPosition;
@@ -11,7 +11,7 @@ public class CollisionBox {
         this.CornerBPosition = positionB;
     }
 
-    public boolean overlap(IItem collideable) {
+    public boolean overlap(IGameObject collideable) {
     	CollisionBox collisionBoxB = collideable.getCollisionBox();
         return this.overlap(collisionBoxB);
     }

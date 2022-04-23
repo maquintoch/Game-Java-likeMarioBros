@@ -7,10 +7,12 @@ import javafx.scene.image.Image;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class Tile extends BaseCollidableTile {
+public class Tile extends GameObjectBase {
 
-    public Tile(GameWorld gameWorld, int xPosition, int yPosition) {
-        super(gameWorld, xPosition, yPosition);
+    private Image image;
+
+    public Tile(Position position) {
+        super(position);
         try {
             image = new Image(new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/brick.jpg"));
         } catch (FileNotFoundException e) {
@@ -24,7 +26,13 @@ public class Tile extends BaseCollidableTile {
     }
 
     @Override
-    public void collide(ItemType itemType) {
+    public void collide(IGameObject gameObject) {
 
+    }
+
+    @Override
+    public void draw(GameWorld gameWorld) {
+        var drawBehavior = gameWorld.getDrawImageBehavior();
+        drawBehavior.draw(position, size, image);
     }
 }
