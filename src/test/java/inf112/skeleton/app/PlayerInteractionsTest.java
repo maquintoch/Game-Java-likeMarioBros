@@ -17,6 +17,7 @@ import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 
 public class PlayerInteractionsTest {
@@ -25,21 +26,22 @@ public class PlayerInteractionsTest {
     private IInputHandler inputHandler;
 
     @ExtendWith({BeforeAllTestsExtension.class})
-    /**
-    @BeforeAll
-    public static void setup() {
-        //Platform.startup(()->{});
-    }**/
+
     @BeforeEach
     public void setUp(){
         inputHandler = new InputHandler();
         player = new Player(new Position(0,0), inputHandler);
     }
-/**
+
+    /**
     @Test
     public void takeDamageWhenHitEnemy(){
-        player.collide(ItemType.Enemy);
-        Mockito.verify(gw, Mockito.times(1)).addHealth(-1);
+        var gameObjects = new ArrayList<IGameObject>();
+        Enemy enemy = new Enemy(new Position(-16,0));
+        gameObjects.add(enemy)
+        player.collide(enemy);
+        player.update(gameObjects);
+        assertTrue(player.health() == 2);
     }
 **/
     @Test

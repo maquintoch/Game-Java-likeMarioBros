@@ -31,11 +31,6 @@ public class PlayerMovementTest {
 
     @ExtendWith({BeforeAllTestsExtension.class})
 
-    @BeforeAll
-    public static void setup() {
-
-        //Platform.startup(()->{});
-    }
     @BeforeEach
     public void setUp(){
         InputHandler inputHandler = new InputHandler();
