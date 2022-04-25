@@ -43,6 +43,7 @@ public class Enemy extends EntityBase {
     }
 
     @Override
+
     public void collide(IGameObject gameObject) {
         var itemType = gameObject.getItemType();
         if(itemType == ItemType.Player && gameObject.isAbove(this)) {
