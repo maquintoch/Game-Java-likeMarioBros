@@ -37,6 +37,10 @@ public class Enemy extends EntityBase {
         drawBehavior.draw(position, size, image);
     }
 
+    public Speed getSpeed(){
+        return movementSpeed;
+    }
+
     @Override
     public ItemType getItemType() {
         return ItemType.Enemy;

@@ -4,11 +4,13 @@ import inf112.skeleton.app.Input.InputHandler;
 
 import inf112.skeleton.app.game.gameworld.GameWorld;
 
+import inf112.skeleton.app.objects.IGameObject;
 import inf112.skeleton.app.objects.Player;
 import inf112.skeleton.app.objects.Tile;
 
 import inf112.skeleton.app.objects.attributes.ICollidable;
 
+import inf112.skeleton.app.objects.attributes.Position;
 import javafx.application.Platform;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -23,81 +25,80 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class PlayerMovementTest {
+
+
     private Player player;
-    private GameWorld gw;
+
     @BeforeAll
     public static void setup() {
 
-      //  Platform.startup(()->{});
+        Platform.startup(()->{});
     }
     @BeforeEach
     public void setUp(){
-        gw = Mockito.mock(GameWorld.class);
-        player = new Player(gw, 0,0);
+        InputHandler inputHandler = new InputHandler();
+        player = new Player(new Position(0,0), inputHandler);
     }
 
     @Test
     public void testPlayerCanMove() {
         assertEquals(0, player.getPosition().getX());
-        assertTrue(player.getSpeed().velocityX == 0);
+        assertTrue(player.getVelocity().velocityX == 0);
         player.moveRight();
-        assertTrue(player.getSpeed().velocityX > 0);
+        assertTrue(player.getVelocity().velocityX > 0);
         player.moveLeft();
-        assertTrue(player.getSpeed().velocityX < 0);
+        assertTrue(player.getVelocity().velocityX < 0);
     }
 
     @Test
     public void testPlayerIsStanding() {
-        var collidables = new ArrayList<ICollidable>();
-        collidables.add(new Tile(gw, 0, -16));
-        Mockito.when(gw.getCollidables()).thenReturn(collidables);
-        Mockito.when(gw.getInputHandler()).thenReturn(mock(InputHandler.class));
-        assertTrue(!player.isStanding);
-        player.update();
-        assertTrue(player.isStanding);
+        var gameObjects = new ArrayList<IGameObject>();
+        gameObjects.add(new Tile(new Position(0, -16)));
+
+        assertTrue(!player.isStanding());
+        player.update(gameObjects);
+        assertTrue(player.isStanding());
     }
 
     @Test
     public void testPlayerGravity() {
 
-        var collidables = new ArrayList<ICollidable>();
-        Mockito.when(gw.getCollidables()).thenReturn(collidables);
-        Mockito.when(gw.getInputHandler()).thenReturn(mock(InputHandler.class));
+        var gameObjects = new ArrayList<IGameObject>();
 
         assertEquals(0, player.getPosition().getY());
-        player.update();
+
+        player.update(gameObjects);
+
         assertTrue(player.getPosition().getY() < 0);
     }
 
     @Test
     public void testPlayerWalkRight() {
-
-        var collidables = new ArrayList<ICollidable>();
-        collidables.add(new Tile(gw, 0, -16));
-        collidables.add(new Tile(gw, 16, -16));
-
-        Mockito.when(gw.getCollidables()).thenReturn(collidables);
-        Mockito.when(gw.getInputHandler()).thenReturn(mock(InputHandler.class));
+        var gameObjects = new ArrayList<IGameObject>();
+        gameObjects.add(new Tile(new Position(0, -16)));
+        gameObjects.add(new Tile(new Position(16, -16)));
 
         assertTrue(player.getPosition().getX() == 0);
+
         player.moveRight();
-        player.update();
+        player.update(gameObjects);
+
         assertTrue(player.getPosition().getX() != 0);
     }
 
     @Test
     public void testPlayerNotWalkThroughBlockRight() {
 
-        var collidables = new ArrayList<ICollidable>();
-        collidables.add(new Tile(gw, 0, -16));
-        collidables.add(new Tile(gw, 14, 0));
+        var gameObjects = new ArrayList<IGameObject>();
+        gameObjects.add(new Tile(new Position(0, -16)));
+        gameObjects.add(new Tile(new Position(14, 0)));
 
-        Mockito.when(gw.getCollidables()).thenReturn(collidables);
-        Mockito.when(gw.getInputHandler()).thenReturn(mock(InputHandler.class));
 
         assertTrue(player.getPosition().getX() == 0);
+
         player.moveRight();
-        player.update();
+        player.update(gameObjects);
+
         assertTrue(player.getPosition().getX() == 0);
     }
 }

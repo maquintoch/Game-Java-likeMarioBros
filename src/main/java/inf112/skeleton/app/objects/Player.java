@@ -118,6 +118,9 @@ public class Player extends EntityBase {
                     //gameWorld.addHealth(-1);
                     invinsibilityTime = LocalTime.now();
                 }
+            case Trampoline:
+                this.velocity.velocityY += 5;
+
         }
     }
 
