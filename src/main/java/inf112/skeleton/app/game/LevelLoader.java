@@ -54,7 +54,7 @@ public class LevelLoader {
             "...b.ecb.......bb...........b..",
             "b...bbbb..bbbbb..bb....b....b..",
             "...b.e...c.e....ceb....ec..bbb.",
-            "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
     );
     private final List<String> level3 = Arrays.asList(
             "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
