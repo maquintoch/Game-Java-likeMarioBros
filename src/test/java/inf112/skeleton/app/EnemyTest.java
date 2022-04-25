@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 
 
 public class EnemyTest {
-
+/**
     @BeforeAll
     public static void setup() {
         Platform.startup(()->{});
@@ -96,5 +96,5 @@ public class EnemyTest {
 
 
     }
-
+**/
 }
