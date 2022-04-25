@@ -9,8 +9,10 @@ import inf112.skeleton.app.objects.Tile;
 import inf112.skeleton.app.objects.attributes.ICollidable;
 import inf112.skeleton.app.objects.attributes.Position;
 import javafx.application.Platform;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import static org.mockito.Mockito.*;
 
 
 public class EnemyTest {
+    @ExtendWith({BeforeAllTestsExtension.class})
 
     @BeforeAll
     public static void setup() {
