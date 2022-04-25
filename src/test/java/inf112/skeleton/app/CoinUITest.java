@@ -24,24 +24,6 @@ public class CoinUITest {
 
     @Test
     void levelCountTest(){
-        Canvas canvas = new Canvas(500,500);
-        Game g = new Game();
-        assertEquals(0,g.levelCount);
-        g.coinUI = new CoinUI(canvas.getGraphicsContext2D());
-        g.coinUI.currentscore.addScore(10);
-        g.allCoinsCollected(g.coinUI);
-        assertEquals(1, g.levelCount);
-
-        g.coinUI.currentscore.addScore(10);
-        g.allCoinsCollected(g.coinUI);
-        assertEquals(2, g.levelCount);
-
-        g.coinUI.currentscore.addScore(10);
-        g.allCoinsCollected(g.coinUI);
-        assertEquals(3, g.levelCount);
-
-        g.finishedAllLevels(g.levelCount);
-        assertEquals(0,g.levelCount);
 
     }
 }

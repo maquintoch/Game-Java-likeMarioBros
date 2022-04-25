@@ -2,13 +2,13 @@ package inf112.skeleton.app.game;
 
 import inf112.skeleton.app.game.gameworld.GameWorld;
 import inf112.skeleton.app.objects.*;
-import inf112.skeleton.app.objects.attributes.ICollidable;
+import inf112.skeleton.app.objects.attributes.Position;
 
 import java.util.*;
 
-public class Level {
+public class LevelLoader {
 
-    public final List<String> level1 = Arrays.asList(
+    private final List<String> level1 = Arrays.asList(
             "...............................",
             "...............................",
             "...............................",
@@ -32,7 +32,7 @@ public class Level {
             "...b..e..ce..t.........bc..e.b.",
             "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
     );
-    public final List<String> level2 = Arrays.asList(
+    private final List<String> level2 = Arrays.asList(
             "...........................c...",
             ".........................eb....",
             "........................bbb....",
@@ -56,7 +56,7 @@ public class Level {
             "...b.e...c.e....ceb....ec..bbb.",
             "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
     );
-    public final List<String> level3 = Arrays.asList(
+    private final List<String> level3 = Arrays.asList(
             "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
             "b...........e........e........b",
             "b.............................b",
@@ -81,51 +81,47 @@ public class Level {
             "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
     );
 
-    public final ArrayList<IEntity> entities = new ArrayList<IEntity>();
-    public final ArrayList<ICollidable> collidables = new ArrayList<ICollidable>();
-    public final ArrayList<List<String>> levels = new ArrayList<List<String>>() {{
+    private final ArrayList<List<String>> levels = new ArrayList<List<String>>() {{
         add(level1);
         add(level2);
         add(level3);
     }};
 
-    public Level(GameWorld gameWorld, int levelCount) {
-        var level = levels.get(levelCount);
+    public ArrayList<IGameObject> getLevelGameObjects(int levelIndex) {
+        var gameObjects = new ArrayList<IGameObject>();
+        var level = levels.get(levelIndex);
         Collections.reverse(level);
         for(int y = 0; y < level.size(); y++) {
             for (int x = 0; x < level.get(y).length(); x++) {
                 char character = level.get(y).charAt(x);
                 var xPosition = x * 16;
                 var yPosition = y * 16;
+                var position = new Position(xPosition, yPosition);
                 switch (character) {
                     case 'b':
-                        var tile = new Tile(gameWorld, xPosition, yPosition);
-                        collidables.add(tile);
+                        var tile = new Tile(position);
+                        gameObjects.add(tile);
                         break;
                     case 'e':
-                        var enemy = new Enemy(gameWorld, xPosition, yPosition);
-                        collidables.add(enemy);
-                        entities.add(enemy);
+                        var enemy = new Enemy(position);
+                        gameObjects.add(enemy);
                         break;
                     case 'c':
-                        var coin = new Coin(gameWorld, xPosition, yPosition);
-                        collidables.add(coin);
+                        var coin = new Coin(position);
+                        gameObjects.add(coin);
                         break;
                     case 't':
-                        var trampline = new Trampoline(gameWorld, xPosition, yPosition);
-                        collidables.add(trampline);
+                        var trampline = new Trampoline(position);
+                        gameObjects.add(trampline);
                         break;
 
                 }
             }
         }
+        return gameObjects;
     }
 
-    public ArrayList<ICollidable> getCollidables() {
-        return collidables;
-    }
-
-    public ArrayList<IEntity> getEntities() {
-        return entities;
+    public boolean levelExists(int levelIndex) {
+        return this.levels.size() > levelIndex;
     }
 }

@@ -1,12 +1,13 @@
 package inf112.skeleton.app.draw;
 
+import inf112.skeleton.app.game.gameworld.IHealthObserver;
 import inf112.skeleton.app.objects.attributes.Health;
 import inf112.skeleton.app.services.HealthManager;
 import inf112.skeleton.app.services.IHealthManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class HealthUI{
+public class HealthUI implements IHealthObserver {
     private GraphicsContext context;
     private IHealthManager healthManager;
     public Health currentHealth;
@@ -24,5 +25,10 @@ public class HealthUI{
         context.fillRect(x,y, 100,10);
         context.setFill(Color.GREEN);
         context.fillRect(x,y, ((double)currenthealth.getHealth() / (double)maxHealth.getHealth()) * (double)100, 10);
+    }
+
+    @Override
+    public void setHealth(int amount) {
+        currentHealth.setHealth(amount);
     }
 }

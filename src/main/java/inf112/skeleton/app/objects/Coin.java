@@ -10,12 +10,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
 
-public class Coin extends BaseCollidableTile {
+public class Coin extends GameObjectBase {
 
+    private Image image;
     private final MediaPlayer pickupCoinMediaPlayer;
 
-    public Coin(GameWorld gameWorld, int xPosition, int yPosition) {
-        super(gameWorld, xPosition, yPosition);
+    public Coin(Position position) {
+        super(position);
 
         try {
             image = new Image(new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/coin.png"));
@@ -33,8 +34,19 @@ public class Coin extends BaseCollidableTile {
     }
 
     @Override
-    public void collide(ItemType itemType) {
-        gameWorld.removeCollidable(this);
-        pickupCoinMediaPlayer.play();
+    public void collide(IGameObject gameObject) {
+        var itemType = gameObject.getItemType();
+        switch(itemType) {
+            case Player:
+                pickupCoinMediaPlayer.play();
+                this.gameWorldObservers.forEach(observer -> observer.addScore(1));
+                destory();
+        }
+    }
+
+    @Override
+    public void draw(GameWorld gameWorld) {
+        var drawBehavior = gameWorld.getDrawImageBehavior();
+        drawBehavior.draw(position, size, image);
     }
 }
