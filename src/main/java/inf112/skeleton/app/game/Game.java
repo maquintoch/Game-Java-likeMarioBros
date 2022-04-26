@@ -5,6 +5,7 @@ import inf112.skeleton.app.Input.InputHandler;
 import inf112.skeleton.app.draw.CoinUI;
 import inf112.skeleton.app.draw.HealthUI;
 import inf112.skeleton.app.game.gameworld.GameWorld;
+import inf112.skeleton.app.objects.Player;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -74,6 +75,8 @@ public class Game extends Application implements IGameObserver {
             gameWorld = new GameWorld(canvas, levelLoader, inputHandler);
             gameWorld.addScoreObserver(coinUI);
             gameWorld.addHealthObserver(healthUI);
+            gameWorld.addPlayerObserver(healthUI);
+            healthUI.addPlayer(gameWorld.);
 
         // add game music
             String soundGameTheme = "src/main/java/inf112/skeleton/app/assets/GameTheme.mp3";
@@ -122,6 +125,8 @@ public class Game extends Application implements IGameObserver {
             timer.start();
             stage.show();
     }
+
+
     private void endGame(){
         levelCount = 0;
         mp.stop();

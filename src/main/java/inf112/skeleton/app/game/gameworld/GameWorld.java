@@ -16,6 +16,7 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
     private final LevelLoader levelLoader;
     private IInputHandler inputHandler;
     private Canvas canvas;
+    private final LinkedList<IPlayersObserver> playerobservers = new LinkedList<IPlayersObserver>();
 
     private int score = 0;
     private int health = 10;
@@ -71,6 +72,11 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
     }
 
     @Override
+    public void addPlayer(Player player) {
+        this.gameObjects.add(player);
+    }
+
+    @Override
     public void addScoreObserver(ScoreObserver observer) {
         this.scoreObservers.add(observer);
     }
@@ -87,6 +93,7 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
     public int getHealth() {
         return health;
     }
+
     public void Load(int levelIndex) {
         this.gameObjects.clear();
         this.score = 0;
@@ -101,5 +108,12 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
         gameObjects.add(player);
 
         gameObjects.forEach(gameObject -> gameObject.addGameWorldObserver(this));
+        playerobservers.forEach(observer -> observer.addPlayer(player));
+    }
+
+    public void addPlayerObserver(IPlayersObserver observer){
+        playerobservers.add(observer);
+
+
     }
 }

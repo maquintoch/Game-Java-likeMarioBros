@@ -111,8 +111,8 @@ public class LevelLoader {
                         gameObjects.add(coin);
                         break;
                     case 't':
-                        var trampline = new Trampoline(position);
-                        gameObjects.add(trampline);
+                        var trampoline = new Trampoline(position);
+                        gameObjects.add(trampoline);
                         break;
 
                 }
