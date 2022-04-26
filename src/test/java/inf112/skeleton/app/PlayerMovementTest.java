@@ -25,11 +25,11 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith({BeforeAllTestsExtension.class})
 public class PlayerMovementTest {
 
     private Player player;
 
-    @ExtendWith({BeforeAllTestsExtension.class})
 
     @BeforeEach
     public void setUp(){

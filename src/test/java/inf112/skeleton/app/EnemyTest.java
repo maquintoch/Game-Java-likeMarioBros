@@ -22,14 +22,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
-
+@ExtendWith({BeforeAllTestsExtension.class})
 public class EnemyTest {
-    @ExtendWith({BeforeAllTestsExtension.class})
-
-    @BeforeAll
-    public static void setup() {
-        Platform.startup(()->{});
-    }
 
     @Test
     public void enemyMovestest(){

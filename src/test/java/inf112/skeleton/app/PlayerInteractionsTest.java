@@ -19,13 +19,12 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
-
+@ExtendWith({BeforeAllTestsExtension.class})
 public class PlayerInteractionsTest {
 
     private Player player;
     private IInputHandler inputHandler;
 
-    @ExtendWith({BeforeAllTestsExtension.class})
 
     @BeforeEach
     public void setUp(){
