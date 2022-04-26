@@ -7,15 +7,23 @@ import java.nio.file.Paths;
 
 public class AudioPlayer {
 
-    private final MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer;
 
     public AudioPlayer(String path) {
-        Media uri = new Media(Paths.get(path).toUri().toString());
-        mediaPlayer = new MediaPlayer(uri);
+        try {
+            Media uri = new Media(Paths.get(path).toUri().toString());
+            mediaPlayer = new MediaPlayer(uri);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void play() {
-        mediaPlayer.play();
-        mediaPlayer.seek(mediaPlayer.getStartTime());
+        try {
+            mediaPlayer.play();
+            mediaPlayer.seek(mediaPlayer.getStartTime());
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }

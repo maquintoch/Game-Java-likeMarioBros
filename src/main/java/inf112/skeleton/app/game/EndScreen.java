@@ -16,14 +16,14 @@ import java.util.LinkedList;
 
 public class EndScreen implements IStartGameSubject {
 
-    private final Stage stage;
+    private final GameMenu gameMenu;
     private final LinkedList<IGameObserver> startGameObservers = new LinkedList<IGameObserver>();
 
-    public EndScreen(Stage stage) {
-        this.stage = stage;
+    public EndScreen(GameMenu gameMenu) {
+        this.gameMenu = gameMenu;
     }
 
-    public void show() {
+    public void show(Stage stage) {
         stage.setTitle("Game over");
         Button btnTryAgain = new Button();
         btnTryAgain.setText("Try again");

@@ -2,6 +2,7 @@ package inf112.skeleton.app.objects;
 
 import inf112.skeleton.app.game.gameworld.GameWorld;
 import inf112.skeleton.app.objects.attributes.*;
+import inf112.skeleton.app.services.AudioPlayer;
 import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -13,7 +14,7 @@ import java.nio.file.Paths;
 public class Coin extends GameObjectBase {
 
     private Image image;
-    private final MediaPlayer pickupCoinMediaPlayer;
+    private final AudioPlayer pickupCoinMediaPlayer =  new AudioPlayer("src/main/java/inf112/skeleton/app/assets/audio/pickupCoin.wav");
 
     public Coin(Position position) {
         super(position);
@@ -23,9 +24,6 @@ public class Coin extends GameObjectBase {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        Media pickupCoinUri = new Media(Paths.get("src/main/java/inf112/skeleton/app/assets/audio/pickupCoin.wav").toUri().toString());
-        pickupCoinMediaPlayer = new MediaPlayer(pickupCoinUri);
     }
 
     @Override

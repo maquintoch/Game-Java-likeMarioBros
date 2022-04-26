@@ -8,27 +8,29 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.util.LinkedList;
 
-public class StartScreen implements IStartGameSubject {
+public class MultiplayerScreen implements IStartGameSubject {
     private final GameMenu gameMenu;
     private final LinkedList<IGameObserver> startGameObservers = new LinkedList<IGameObserver>();
 
-    public StartScreen(GameMenu gameMenu) {
+    public MultiplayerScreen(GameMenu gameMenu) {
         this.gameMenu = gameMenu;
     }
 
     public void show(Stage stage) {
         stage.setTitle("Hello Super World!");
+        TextField textField = new TextField();
         Button btnOnePlayer = new Button();
-        btnOnePlayer.setText("One Player");
+        btnOnePlayer.setText("Join Server");
         btnOnePlayer.setBackground(null);
         btnOnePlayer.setStyle("-fx-text-fill: #ffffff;-fx-font-size: 40;");
         Button btnMultiplayer = new Button();
-        btnMultiplayer.setText("Multiplayer");
+        btnMultiplayer.setText("Host Server");
         btnMultiplayer.setBackground(null);
         btnMultiplayer.setStyle("-fx-text-fill: #ffffff;-fx-font-size: 40;");
         Button btnExit = new Button();
@@ -40,7 +42,7 @@ public class StartScreen implements IStartGameSubject {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    startGameObservers.forEach(observer -> observer.startGame());
+                    startGameObservers.forEach(observer -> observer.joinServer(textField.getText()));
                 }
                 catch (Exception e)
                 {
@@ -60,7 +62,8 @@ public class StartScreen implements IStartGameSubject {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
-                    gameMenu.multiplayerScreen.show(stage);
+
+                    startGameObservers.forEach(observer -> observer.hostServer());
                 }
                 catch (Exception e)
                 {
@@ -78,6 +81,8 @@ public class StartScreen implements IStartGameSubject {
         //Draw image on screen
         gc.drawImage(image, 0, 0, canvasWidth, canvasHeight);
         Group root = new Group();
+        textField.setLayoutX(150);
+        textField.setLayoutY(100);
         btnOnePlayer.setLayoutX(150);
         btnOnePlayer.setLayoutY(150);
         btnMultiplayer.setLayoutX(150);
@@ -85,6 +90,7 @@ public class StartScreen implements IStartGameSubject {
         btnExit.setLayoutX(150);
         btnExit.setLayoutY(300);
         root.getChildren().add(canvas);
+        root.getChildren().add(textField);
         root.getChildren().add(btnOnePlayer);
         root.getChildren().add(btnMultiplayer);
         root.getChildren().add(btnExit);

@@ -94,12 +94,19 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
         var factoryCollidables = levelLoader.getLevelGameObjects(levelIndex);
         gameObjects.addAll(factoryCollidables);
 
-        var startPosition = new Position(0, 0);
-        var player = new Player(startPosition, inputHandler);
-        camera.setTargetEntity(player);
-
-        gameObjects.add(player);
-
         gameObjects.forEach(gameObject -> gameObject.addGameWorldObserver(this));
+    }
+
+    public void addTargetPlayer(Player player) {
+        camera.setTargetEntity(player);
+        gameObjects.add(player);
+    }
+
+    public void addGameObject(IGameObject gameObject) {
+        this.gameObjects.add(gameObject);
+    }
+
+    public IInputHandler getInputHandler() {
+        return inputHandler;
     }
 }

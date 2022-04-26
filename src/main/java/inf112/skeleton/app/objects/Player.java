@@ -40,6 +40,7 @@ public class Player extends EntityBase {
        
 
     public void checkKeyCode(){
+        if (inputHandler == null) { return; }
         if(inputHandler.isActive(KeyCode.W) && isStanding){
             jump();
         }

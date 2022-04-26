@@ -13,14 +13,14 @@ import javafx.stage.Stage;
 import java.util.LinkedList;
 
 public class WinningScreen implements IStartGameSubject {
-    private final Stage stage;
+    private final GameMenu gameMenu;
     private final LinkedList<IGameObserver> startGameObservers = new LinkedList<IGameObserver>();
 
-    public WinningScreen(Stage stage) {
-        this.stage = stage;
+    public WinningScreen(GameMenu gameMenu) {
+        this.gameMenu = gameMenu;
     }
 
-    public void show() {
+    public void show(Stage stage) {
         stage.setTitle("You Won!");
         Text text = new Text("YOU WON!!!");
         text.setLayoutX(150);

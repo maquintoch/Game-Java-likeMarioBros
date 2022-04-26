@@ -30,6 +30,7 @@ public class Camera implements ICamera{
 	}
 	@Override
 	public void update() {
+		if(gameObject == null) { return; }
 		double newX = cameraPosition.getX() + ((gameObject.getPosition().getX()
 				- (canvas.getWidth()/2)) - cameraPosition.getX()) * 0.1;
 		cameraPosition.setX(newX);
