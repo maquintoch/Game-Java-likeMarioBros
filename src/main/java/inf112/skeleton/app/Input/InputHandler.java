@@ -4,7 +4,7 @@ import javafx.scene.input.KeyCode;
 
 import java.util.HashSet;
 
-public class InputHandler implements IInputHandler {
+public class InputHandler {
 
     private final HashSet<KeyCode> activeKeys;
 
@@ -12,17 +12,14 @@ public class InputHandler implements IInputHandler {
         this.activeKeys = new HashSet<KeyCode>();
     }
 
-    @Override
     public boolean isActive(KeyCode keyCode) {
         return activeKeys.contains(keyCode);
     }
 
-    @Override
     public void setActive(KeyCode keyCode) {
         activeKeys.add(keyCode);
     }
 
-    @Override
     public void setInactive(KeyCode keyCode) {
         activeKeys.remove(keyCode);
     }

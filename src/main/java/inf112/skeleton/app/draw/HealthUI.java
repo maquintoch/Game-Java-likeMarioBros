@@ -3,13 +3,12 @@ package inf112.skeleton.app.draw;
 import inf112.skeleton.app.game.gameworld.IHealthObserver;
 import inf112.skeleton.app.objects.attributes.Health;
 import inf112.skeleton.app.services.HealthManager;
-import inf112.skeleton.app.services.IHealthManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 public class HealthUI implements IHealthObserver {
     private GraphicsContext context;
-    private IHealthManager healthManager;
+    private HealthManager healthManager;
     public Health currentHealth;
 
     public HealthUI(GraphicsContext context) {

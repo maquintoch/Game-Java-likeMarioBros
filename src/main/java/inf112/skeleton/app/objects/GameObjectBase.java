@@ -48,7 +48,6 @@ public abstract class GameObjectBase implements IGameObject {
         return velocity;
     }
 
-    @Override
     public Speed getAcceleration() {
         return acceleration;
     }

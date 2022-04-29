@@ -1,6 +1,5 @@
 package inf112.skeleton.app.game.gameworld;
 
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.*;
 import javafx.scene.image.Image;
 

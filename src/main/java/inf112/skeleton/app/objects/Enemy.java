@@ -2,7 +2,6 @@ package inf112.skeleton.app.objects;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.time.LocalTime;
 
 import inf112.skeleton.app.game.gameworld.GameWorld;
 import inf112.skeleton.app.objects.attributes.*;

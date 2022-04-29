@@ -1,6 +1,5 @@
 package inf112.skeleton.app.game;
 
-import inf112.skeleton.app.game.gameworld.GameWorld;
 import inf112.skeleton.app.objects.*;
 import inf112.skeleton.app.objects.attributes.Position;
 

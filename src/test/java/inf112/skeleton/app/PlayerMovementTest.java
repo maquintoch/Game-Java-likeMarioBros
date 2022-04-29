@@ -2,28 +2,20 @@ package inf112.skeleton.app;
 
 import inf112.skeleton.app.Input.InputHandler;
 
-import inf112.skeleton.app.game.gameworld.GameWorld;
-
 import inf112.skeleton.app.objects.IGameObject;
 import inf112.skeleton.app.objects.Player;
 import inf112.skeleton.app.objects.Tile;
 
-import inf112.skeleton.app.objects.attributes.ICollidable;
-
 import inf112.skeleton.app.objects.attributes.Position;
-import javafx.application.Platform;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @ExtendWith({BeforeAllTestsExtension.class})
 public class PlayerMovementTest {

@@ -6,18 +6,13 @@ import inf112.skeleton.app.objects.Enemy;
 import inf112.skeleton.app.objects.IGameObject;
 import inf112.skeleton.app.objects.Player;
 import inf112.skeleton.app.objects.Tile;
-import inf112.skeleton.app.objects.attributes.ICollidable;
 import inf112.skeleton.app.objects.attributes.Position;
-import javafx.application.Platform;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
-import static javafx.beans.binding.Bindings.when;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 

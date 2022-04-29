@@ -1,12 +1,11 @@
 package inf112.skeleton.app.camera;
 
-import inf112.skeleton.app.objects.IEntity;
 import inf112.skeleton.app.objects.IGameObject;
 import javafx.scene.canvas.Canvas;
 
 import inf112.skeleton.app.objects.attributes.Position;
 
-public class Camera implements ICamera{
+public class Camera {
 	private IGameObject gameObject;
 	private Canvas canvas;
 	private Position cameraPosition;
@@ -15,11 +14,11 @@ public class Camera implements ICamera{
 		this.canvas = canvas;
 		cameraPosition = new Position(0,0);
 	}
-	@Override
+
 	public float getX() {
 		return (float) cameraPosition.getX();
 	}
-	@Override
+
 	public float getY() {
 		return (float) cameraPosition.getY();
 	}
@@ -28,7 +27,7 @@ public class Camera implements ICamera{
 		this.gameObject = gameObject;
 		
 	}
-	@Override
+
 	public void update() {
 		double newX = cameraPosition.getX() + ((gameObject.getPosition().getX()
 				- (canvas.getWidth()/2)) - cameraPosition.getX()) * 0.1;

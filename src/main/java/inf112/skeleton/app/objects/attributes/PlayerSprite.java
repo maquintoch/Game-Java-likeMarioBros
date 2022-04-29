@@ -1,27 +1,22 @@
 package inf112.skeleton.app.objects.attributes;
 
-import inf112.skeleton.app.game.gameworld.GameWorld;
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
-import javafx.scene.media.MediaPlayer;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class PlayerSprite {
 
-    private boolean isShowingInvinsibilityFrame = false;
-
     private final int spriteCount = 5;
 
     private Image[] imageRight = new Image[spriteCount]; // right images for different states
     private Image[] imageLeft = new Image[spriteCount]; // left images for different states
-    private Image imageBlank;
+
 
     private int moveIndex = 0;
 
     private boolean movingRight;
-    private boolean movingLeft;
 
     private AnimationTimer timer;
     private boolean running;
@@ -36,7 +31,7 @@ public class PlayerSprite {
                 FileInputStream inputblank = new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/blank.png");
                 imageRight[k] = new Image(inputMarioRight);
                 imageLeft[k] = new Image(inputMarioLeft);
-                imageBlank = new Image(inputblank);
+
             }
         }
         catch(FileNotFoundException e) {

@@ -1,6 +1,6 @@
 package inf112.skeleton.app.objects;
 
-import inf112.skeleton.app.Input.IInputHandler;
+import inf112.skeleton.app.Input.InputHandler;
 import inf112.skeleton.app.game.gameworld.GameWorld;
 import inf112.skeleton.app.objects.attributes.*;
 import inf112.skeleton.app.services.AudioPlayer;
@@ -12,7 +12,7 @@ import java.util.List;
 public class Player extends EntityBase {
     private final AudioPlayer hurtAudioPlayer = new AudioPlayer("src/main/java/inf112/skeleton/app/assets/audio/hitHurt.wav");
     private final AudioPlayer jumpAudioPlayer = new AudioPlayer("src/main/java/inf112/skeleton/app/assets/audio/jump.wav");
-    private final IInputHandler inputHandler;
+    private final InputHandler inputHandler;
     private boolean isSecondPlayer = false;
 
     private PlayerSprite sprite = new PlayerSprite();
@@ -22,7 +22,7 @@ public class Player extends EntityBase {
     private float jumpSpeed = 7f;
     private float movementSpeed = 2f;
 
-    public Player(Position position, IInputHandler inputHandler) {
+    public Player(Position position, InputHandler inputHandler) {
         super(position);
 
         this.inputHandler = inputHandler;
@@ -39,7 +39,7 @@ public class Player extends EntityBase {
         maxSpeedY = 10f;
     }
 
-    public Player(Position position, IInputHandler inputHandler, boolean isSecondPlayer) {
+    public Player(Position position, InputHandler inputHandler, boolean isSecondPlayer) {
         super(position);
 
         this.inputHandler = inputHandler;

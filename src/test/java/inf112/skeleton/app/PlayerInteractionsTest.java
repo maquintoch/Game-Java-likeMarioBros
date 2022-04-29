@@ -1,15 +1,10 @@
 package inf112.skeleton.app;
 
-import inf112.skeleton.app.Input.IInputHandler;
 import inf112.skeleton.app.Input.InputHandler;
 import inf112.skeleton.app.game.gameworld.GameWorld;
 import inf112.skeleton.app.objects.*;
-import inf112.skeleton.app.objects.attributes.ICollidable;
-import inf112.skeleton.app.objects.attributes.ItemType;
 import inf112.skeleton.app.objects.attributes.Position;
-import javafx.application.Platform;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,13 +12,12 @@ import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 @ExtendWith({BeforeAllTestsExtension.class})
 public class PlayerInteractionsTest {
 
     private Player player;
-    private IInputHandler inputHandler;
+    private InputHandler inputHandler;
 
 
     @BeforeEach

@@ -9,13 +9,12 @@ import javafx.scene.canvas.Canvas;
 
 import java.util.LinkedList;
 
-import inf112.skeleton.app.Input.IInputHandler;
 import inf112.skeleton.app.camera.*;
 import inf112.skeleton.app.draw.*;
 
-public class GameWorld implements GameWorldObserver, GameWorldSubject {
+public class GameWorld implements GameWorldObserver {
     private final LevelLoader levelLoader;
-    private IInputHandler inputHandler;
+    private InputHandler inputHandler;
     private Canvas canvas;
 
     private int score = 0;
@@ -31,11 +30,8 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
     private final LinkedList<IGameObject> gameObjects = new LinkedList<IGameObject>();
     private boolean isMultiplayer = false;
 
-    public LinkedList<IGameObject> getGameObjects() {
-        return gameObjects;
-    }
 
-    public GameWorld(Canvas canvas, LevelLoader levelLoader, IInputHandler inputHandler) {
+    public GameWorld(Canvas canvas, LevelLoader levelLoader, InputHandler inputHandler) {
 
     	this.canvas = canvas;
         this.background = new Background(canvas);
@@ -47,7 +43,7 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
         Load(0);
     }
 
-    public GameWorld(Canvas canvas, LevelLoader levelLoader, IInputHandler inputHandler, boolean isMultiplayer) {
+    public GameWorld(Canvas canvas, LevelLoader levelLoader, InputHandler inputHandler, boolean isMultiplayer) {
 
         this.canvas = canvas;
         this.background = new Background(canvas);
@@ -97,15 +93,14 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
         this.healthObservers.forEach(observer -> observer.setHealth(this.health));
     }
 
-    @Override
     public void addScoreObserver(ScoreObserver observer) {
         this.scoreObservers.add(observer);
     }
 
-    @Override
     public void addHealthObserver(IHealthObserver observer) {
         this.healthObservers.add(observer);
     }
+
 
     public int getScore() {
         return score;

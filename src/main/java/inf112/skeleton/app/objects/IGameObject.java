@@ -7,7 +7,6 @@ public interface IGameObject extends IDrawable, IUpdateable, ICollidable {
     ItemType getItemType();
     Position getPosition();
     Speed getVelocity();
-    Speed getAcceleration();
     GameObjectSize getSize();
 
     boolean overlap(IGameObject gameObject);

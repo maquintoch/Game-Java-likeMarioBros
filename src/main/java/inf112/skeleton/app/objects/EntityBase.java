@@ -2,8 +2,6 @@ package inf112.skeleton.app.objects;
 
 import inf112.skeleton.app.objects.attributes.*;
 
-import java.util.ArrayList;
-
 public abstract class EntityBase extends GameObjectBase {
     public EntityBase(Position position) {
         super(position);

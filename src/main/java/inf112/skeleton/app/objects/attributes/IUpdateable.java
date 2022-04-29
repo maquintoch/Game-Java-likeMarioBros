@@ -1,6 +1,5 @@
 package inf112.skeleton.app.objects.attributes;
 
-import inf112.skeleton.app.game.gameworld.GameWorld;
 import inf112.skeleton.app.objects.IGameObject;
 
 import java.util.List;

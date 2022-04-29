@@ -9,8 +9,4 @@ public class GameObjectSize {
         this.height = height;
     }
 
-    public GameObjectSize(TileSize tileSize) {
-        this.width = tileSize.width;
-        this.height = tileSize.height;
-    }
 }

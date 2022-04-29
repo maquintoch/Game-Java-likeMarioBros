@@ -1,6 +1,5 @@
 package inf112.skeleton.app.game;
 
-import inf112.skeleton.app.Input.IInputHandler;
 import inf112.skeleton.app.Input.InputHandler;
 import inf112.skeleton.app.draw.CoinUI;
 import inf112.skeleton.app.draw.HealthUI;
@@ -22,11 +21,9 @@ public class Game extends Application implements IGameObserver {
 
     private GameMenu gameMenu;
     private GameWorld gameWorld;
-    private IInputHandler inputHandler;
+    private InputHandler inputHandler;
 
     public int levelCount = 0;
-    public HealthUI healthUI;
-    public CoinUI coinUI;
     public Stage stage;
     private MediaPlayer mp;
 
@@ -55,7 +52,7 @@ public class Game extends Application implements IGameObserver {
             canvas.heightProperty().bind(scene.heightProperty());
             root.getChildren().add(canvas);
 
-            healthUI = new HealthUI(canvas.getGraphicsContext2D());
+            HealthUI healthUI = new HealthUI(canvas.getGraphicsContext2D());
             CoinUI coinUI = new CoinUI(canvas.getGraphicsContext2D());
 
             inputHandler = new InputHandler();
