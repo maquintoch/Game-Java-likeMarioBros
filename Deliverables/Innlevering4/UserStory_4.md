@@ -20,5 +20,5 @@
 | Som en spiller ønsker jeg å få en bounce når jeg hopper på enemy for å hoppe høyere. | Spiller får bounce når den hopper på enemy. | Fix bounce when jumping on enemy. | #31
 | Som en spiller ønsker jeg å dø når jeg detter ut av spillbrettet for å ikke falle evig. | Spiller dør når den faller utfor spillbrettet. | Spiller dør når den faller utfor brettet. | #33
 | Som en spiller ønsker jeg et liv-UI for å se at jeg mister liv når jeg kommer i kontakt med fiender.   | Et UI for liv viser at spilleren mister liv            | Fikse UI for liv                        | #46                      |
-| Som en utvikler vil jeg at koden ikke skal inneholde kode som ikke brukes for at det skal være lett å lese gjennom koden.               | Spillet inneholder ikke kode som ikke brukes            | Sjekk og fjern kode som ikke har hensikt                        | #44                      |
+| Som en utvikler vil jeg at spillet ikke skal inneholde kode som ikke brukes for at det skal være lett å lese gjennom koden.               | Spillet inneholder ikke kode som ikke brukes            | Sjekk og fjern kode som ikke har hensikt                        | #44                      |
    
