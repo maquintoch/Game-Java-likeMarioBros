@@ -18,6 +18,7 @@ public class EndScreen implements IStartGameSubject {
 
     private final Stage stage;
     private final LinkedList<IGameObserver> startGameObservers = new LinkedList<IGameObserver>();
+    Image image;
 
     public EndScreen(Stage stage) {
         this.stage = stage;
@@ -53,8 +54,11 @@ public class EndScreen implements IStartGameSubject {
         });
         Canvas canvas = new Canvas(500,500);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
-        String imagePath = "https://i.pinimg.com/originals/d5/52/85/d55285388e843b575b4b89986ad65ef2.jpg";
-        Image image = new Image(imagePath);
+        try {
+            image = new Image(new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/endScreen.png"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }  
         double canvasWidth = canvas.getWidth();
         double canvasHeight = canvas.getHeight();
 
