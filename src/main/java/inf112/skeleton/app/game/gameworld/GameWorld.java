@@ -1,11 +1,13 @@
 package inf112.skeleton.app.game.gameworld;
 
 import inf112.skeleton.app.game.LevelLoader;
+import inf112.skeleton.app.net.packets.PositionPacket;
 import inf112.skeleton.app.objects.IGameObject;
 import inf112.skeleton.app.objects.Player;
 import inf112.skeleton.app.objects.attributes.Position;
 import javafx.scene.canvas.Canvas;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import inf112.skeleton.app.Input.IInputHandler;
@@ -32,7 +34,6 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
         return gameObjects;
     }
 
-
     public GameWorld(Canvas canvas, LevelLoader levelLoader, IInputHandler inputHandler) {
 
     	this.canvas = canvas;
@@ -51,7 +52,9 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
     }
 
     public void update() {
-        gameObjects.forEach(updateable -> {updateable.update(this.gameObjects);});
+        gameObjects.forEach(updateable -> {
+            updateable.update(this.gameObjects);
+        });
     	camera.update();
     }
 
@@ -87,6 +90,7 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
     public int getHealth() {
         return health;
     }
+
     public void Load(int levelIndex) {
         this.gameObjects.clear();
         this.score = 0;
@@ -108,5 +112,21 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
 
     public IInputHandler getInputHandler() {
         return inputHandler;
+    }
+
+    public void setPosition(int entityId, Position entityPosition) {
+        gameObjects.forEach(gameObject -> {
+            if(gameObject.getId() == entityId) {
+                gameObject.setPosition(entityPosition);
+            }
+        });
+    }
+
+    public void unload() {
+        this.gameObjects.clear();
+    }
+
+    public void removeGameObject(int gameObjectId) {
+        this.gameObjects.removeIf(gameObject -> gameObject.getId() == gameObjectId);
     }
 }

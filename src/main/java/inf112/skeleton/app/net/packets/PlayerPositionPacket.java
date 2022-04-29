@@ -6,26 +6,20 @@ import inf112.skeleton.app.objects.attributes.Position;
 
 import java.nio.ByteBuffer;
 
-public class PositionPacket extends Packet {
+public class PlayerPositionPacket extends Packet {
 
-    private int entityId;
-    private Position position;
-
-    public int getEntityId() {
-        return entityId;
-    }
+    private Position position = new Position(0, 0);
 
     public Position getPosition() {
         return position;
     }
 
-    public PositionPacket(int entityId, Position position) {
-        super(PacketType.POSITION.getId());
-        this.entityId = entityId;
+    public PlayerPositionPacket(Position position) {
+        super(PacketType.PLAYER_POSITION.getId());
         this.position = position;
     }
 
-    public PositionPacket(byte[] data) {
+    public PlayerPositionPacket(byte[] data) {
         super(PacketType.LOGIN.getId());
         readData(data);
     }
@@ -44,7 +38,6 @@ public class PositionPacket extends Packet {
     public void readData(byte[] data) {
         ByteBuffer buffer = ByteBuffer.wrap(data);
         buffer.position(1);
-        entityId = buffer.getInt();
         var positionX = buffer.getDouble();
         var positionY = buffer.getDouble();
         position = new Position(positionX, positionY);
@@ -53,16 +46,15 @@ public class PositionPacket extends Packet {
     @Override
     public byte[] getPacketData() {
         ByteBuffer buffer = ByteBuffer.allocate(getPacketLength());
-        buffer.put(this.packetId).putInt(entityId).putDouble(position.getX()).putDouble(position.getY());
+        buffer.put(this.packetId).putDouble(position.getX()).putDouble(position.getY());
         return buffer.array();
     }
 
     public int getPacketLength() {
         int packetIdSize = 1;
-        int entityIdSize = 4;
         var xPositionSize = 8;
         var yPositionSize = 8;
-        return packetIdSize + entityIdSize + xPositionSize + yPositionSize;
+        return packetIdSize + xPositionSize + yPositionSize;
     }
 
 }

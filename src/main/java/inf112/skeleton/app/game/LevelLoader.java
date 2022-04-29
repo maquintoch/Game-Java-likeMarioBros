@@ -9,7 +9,7 @@ import java.util.*;
 public class LevelLoader {
 
     private final List<String> level1 = Arrays.asList(
-            "...............................",
+            "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
             "...............................",
             "...............................",
             ".......ee......................",

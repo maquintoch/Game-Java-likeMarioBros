@@ -7,12 +7,13 @@ import inf112.skeleton.app.services.AudioPlayer;
 import javafx.scene.input.KeyCode;
 
 import java.time.LocalTime;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Player extends EntityBase {
     private final AudioPlayer hurtAudioPlayer = new AudioPlayer("src/main/java/inf112/skeleton/app/assets/audio/hitHurt.wav");
     private final AudioPlayer jumpAudioPlayer = new AudioPlayer("src/main/java/inf112/skeleton/app/assets/audio/jump.wav");
-    private final IInputHandler inputHandler;
+    private IInputHandler inputHandler;
 
     private PlayerSprite sprite = new PlayerSprite();
 
@@ -20,6 +21,8 @@ public class Player extends EntityBase {
     private boolean isStanding;
     private float jumpSpeed = 7f;
     private float movementSpeed = 2f;
+
+    private final LinkedList<IPlayerObserver> playerObservers = new LinkedList<IPlayerObserver>();
 
     public Player(Position position, IInputHandler inputHandler) {
         super(position);
@@ -80,6 +83,8 @@ public class Player extends EntityBase {
 
         //Do base collisions
         super.update(gameObjects);
+
+        this.playerObservers.forEach(observer -> observer.updatePosition(this.position));
     }
 
     private void updateAnimation() {
@@ -124,5 +129,13 @@ public class Player extends EntityBase {
 
     public boolean isStanding() {
         return isStanding;
+    }
+
+    public void addObserver(IPlayerObserver gameClient) {
+        this.playerObservers.add(gameClient);
+    }
+
+    public void setInputHandler(IInputHandler inputHandler) {
+        this.inputHandler = inputHandler;
     }
 }

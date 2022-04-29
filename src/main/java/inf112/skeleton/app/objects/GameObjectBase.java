@@ -1,13 +1,30 @@
 package inf112.skeleton.app.objects;
 
+import inf112.skeleton.app.Input.IInputHandler;
 import inf112.skeleton.app.game.gameworld.GameWorld;
 import inf112.skeleton.app.game.gameworld.GameWorldObserver;
 import inf112.skeleton.app.objects.attributes.*;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public abstract class GameObjectBase implements IGameObject {
+
+    private final static Iterator<Integer> iterator = new Iterator<Integer>()
+    {
+        private int i = 0;
+
+        @Override
+        public boolean hasNext() {
+            return true;
+        }
+
+        @Override
+        public Integer next() {
+            return i++;
+        }
+    };
 
     protected Position position;
     protected GameObjectSize size;
@@ -25,8 +42,10 @@ public abstract class GameObjectBase implements IGameObject {
 
     protected float maxSpeedX;
     protected float maxSpeedY;
+    protected int id;
 
     public GameObjectBase(Position position) {
+        this.id = iterator.next();
         this.position = position;
         this.size = new GameObjectSize(16, 16);
 
@@ -188,5 +207,20 @@ public abstract class GameObjectBase implements IGameObject {
     @Override
     public void addGameWorldObserver(GameWorldObserver observer) {
         this.gameWorldObservers.add(observer);
+    }
+
+    @Override
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 }

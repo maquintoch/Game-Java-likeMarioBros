@@ -8,6 +8,7 @@ import inf112.skeleton.app.game.gameworld.GameWorld;
 import inf112.skeleton.app.net.GameClient;
 import inf112.skeleton.app.net.GameServer;
 import inf112.skeleton.app.net.packets.LoginPacket;
+import inf112.skeleton.app.objects.MultiplayerPlayer;
 import inf112.skeleton.app.objects.Player;
 import inf112.skeleton.app.objects.attributes.Position;
 import javafx.animation.AnimationTimer;
@@ -176,6 +177,10 @@ public class Game extends Application implements IGameObserver {
         var loginPacket = new LoginPacket("Lars andreas");
         client.sendData(loginPacket.getPacketData());
 
+        Player player = new Player(new Position(10, 5), gameWorld.getInputHandler());
+        player.addObserver(client);
+        gameWorld.addTargetPlayer(player);
+
         // add game music
         String soundGameTheme = "src/main/java/inf112/skeleton/app/assets/GameTheme.mp3";
         Media media = new Media(new File(soundGameTheme).toURI().toString());
@@ -254,11 +259,12 @@ public class Game extends Application implements IGameObserver {
             inputHandler.setInactive(keyCode);
         });
 
-        var levelLoader = new LevelLoader();
-        gameWorld = new GameWorld(canvas, levelLoader, inputHandler);
-        var server = new GameServer(new GameWorld(canvas, levelLoader, inputHandler), 1331);
+        var levelLoaderServer = new LevelLoader();
+        var server = new GameServer(new GameWorld(new Canvas(), levelLoaderServer, null), 1331);
         server.start();
 
+        var levelLoaderClient = new LevelLoader();
+        gameWorld = new GameWorld(canvas, levelLoaderClient, inputHandler);
         GameClient client = null;
         try {
             client = new GameClient(gameWorld, InetAddress.getLocalHost().getHostAddress(), 1331);
@@ -269,6 +275,10 @@ public class Game extends Application implements IGameObserver {
         client.start();
         var loginPacket = new LoginPacket("Lars andreas");
         client.sendData(loginPacket.getPacketData());
+
+        Player player = new Player(new Position(5, 10), gameWorld.getInputHandler());
+        player.addObserver(client);
+        gameWorld.addTargetPlayer(player);
 
         gameWorld.addScoreObserver(coinUI);
         gameWorld.addHealthObserver(healthUI);
@@ -299,7 +309,7 @@ public class Game extends Application implements IGameObserver {
 
                     if(gameWorld.getScore() == 3) {
                         levelCount++;
-                        if(levelLoader.levelExists(levelCount)) {
+                        if(levelLoaderServer.levelExists(levelCount)) {
                             gameWorld.Load(levelCount);
                         } else {
                             gameMenu.winningScreen.show(stage);

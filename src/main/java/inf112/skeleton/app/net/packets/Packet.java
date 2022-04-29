@@ -9,7 +9,11 @@ public abstract class Packet {
         LOGIN(0x01),
         DISCONNECT(0x02),
         LOGIN_COMPLETE(0x03),
-        POSITION(0x04);
+        POSITION(0x04),
+        LOAD_MAP(0x05),
+        ADD_GAMEOBJECT(0x06),
+        REMOVE_GAMEOBJECT(0x07),
+        PLAYER_POSITION(0x08);
 
         private int packetId;
         private PacketType(int packetId) {
