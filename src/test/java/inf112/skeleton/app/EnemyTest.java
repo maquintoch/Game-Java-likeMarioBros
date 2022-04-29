@@ -9,6 +9,7 @@ import inf112.skeleton.app.objects.attributes.ICollidable;
 import javafx.application.Platform;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -18,13 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
-
+@ExtendWith({BeforeAllTestsExtension.class})
 public class EnemyTest {
-
- @BeforeAll
- public static void setup() {
- Platform.startup(()->{});
- }
 
  @Test
  public void enemyMovestest(){

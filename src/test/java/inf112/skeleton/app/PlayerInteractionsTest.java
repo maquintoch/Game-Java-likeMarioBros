@@ -13,19 +13,18 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.mock;
 
+@ExtendWith({BeforeAllTestsExtension.class})
 public class PlayerInteractionsTest {
     private Player player;
     private GameWorld gw;
-    @BeforeAll
-    public static void setup() {
-        Platform.startup(()->{});
-    }
+
     @BeforeEach
     public void setUp(){
         gw = mock(GameWorld.class);

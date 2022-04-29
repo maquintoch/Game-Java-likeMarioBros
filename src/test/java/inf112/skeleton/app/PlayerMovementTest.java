@@ -18,6 +18,7 @@ import javafx.scene.media.MediaPlayer;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
@@ -27,12 +28,8 @@ import static javafx.beans.binding.Bindings.when;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith({BeforeAllTestsExtension.class})
 public class PlayerMovementTest {
-
-    @BeforeAll
-    public static void setup() {
-        Platform.startup(()->{});
-    }
 
     @Test
     public void testPlayerCanMove() {
