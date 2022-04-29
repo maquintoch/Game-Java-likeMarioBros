@@ -9,45 +9,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
-
-import java.util.LinkedList;
-
-public class StartScreen implements IStartGameSubject {
-    private final Stage stage;
-    private final LinkedList<IGameObserver> startGameObservers = new LinkedList<IGameObserver>();
-
-    public StartScreen(Stage stage) {
-        this.stage = stage;
-    }
-
-    public void show() {
-        stage.setTitle("Hello Super World!");
-        Button btnOnePlayer = new Button();
-        btnOnePlayer.setText("One Player");
-        btnOnePlayer.setBackground(null);
-        btnOnePlayer.setStyle("-fx-text-fill: #ffffff;-fx-font-size: 40;");
-        Button btnMultiplayer = new Button();
-        btnMultiplayer.setText("Multiplayer");
-        btnMultiplayer.setBackground(null);
-        btnMultiplayer.setStyle("-fx-text-fill: #ffffff;-fx-font-size: 40;");
-        Button btnExit = new Button();
-        btnExit.setText("Exit");
-        btnExit.setStyle("-fx-text-fill: #ffffff;-fx-font-size: 40;");
-        btnExit.setBackground(null);
-        btnOnePlayer.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Overridepackage inf112.skeleton.app.game;
-
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
