@@ -122,12 +122,12 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
         gameObjects.addAll(factoryCollidables);
 
         if(isMultiplayer) {
-            var startPosition2 = new Position(16, 16);
+            var startPosition2 = new Position(14, 0);
             var player2 = new Player(startPosition2, inputHandler, true);
             gameObjects.add(player2);
         }
 
-        var startPosition = new Position(0, 16);
+        var startPosition = new Position(0, 0);
         var player = new Player(startPosition, inputHandler);
         camera.setTargetEntity(player);
 
