@@ -35,7 +35,6 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
         return gameObjects;
     }
 
-
     public GameWorld(Canvas canvas, LevelLoader levelLoader, IInputHandler inputHandler) {
 
     	this.canvas = canvas;
@@ -89,6 +88,12 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
     @Override
     public void addHealth(int health) {
         this.health += health;
+        this.healthObservers.forEach(observer -> observer.setHealth(this.health));
+    }
+
+    @Override
+    public void setHealth(int health) {
+        this.health = health;
         this.healthObservers.forEach(observer -> observer.setHealth(this.health));
     }
 

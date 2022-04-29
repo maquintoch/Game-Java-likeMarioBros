@@ -105,6 +105,9 @@ public class Game extends Application implements IGameObserver {
                                 gameWorld.Load(levelCount);
                             } else {
                                 gameMenu.winningScreen.show();
+                                levelCount = 0;
+                                mp.stop();
+                                this.stop();
                             }
                         }
 

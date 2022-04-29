@@ -42,10 +42,6 @@ public class HealthUITest {
     }
 
     @Test
-    public void playerTwoHealth(){
-    }
-
-    @Test
     public void addHealth(){
         healthUI.currentHealth.addHealth(3);
         Assertions.assertEquals(healthUI.currentHealth.getHealth(),6);
@@ -60,7 +56,4 @@ public class HealthUITest {
         Assertions.assertEquals(healthUI.currentHealth.getHealth(),0);
     }
 
-    @Test
-    public void isGameOver(){
-    }
 }

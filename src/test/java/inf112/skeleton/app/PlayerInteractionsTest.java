@@ -32,17 +32,20 @@ public class PlayerInteractionsTest {
         player = new Player(new Position(0,0), inputHandler);
     }
 
-    /**
     @Test
     public void takeDamageWhenHitEnemy(){
-        var gameObjects = new ArrayList<IGameObject>();
+        //arrange
         Enemy enemy = new Enemy(new Position(-16,0));
-        gameObjects.add(enemy)
+        GameWorld gw = mock(GameWorld.class);
+        player.addGameWorldObserver(gw);
+
+        //act
         player.collide(enemy);
-        player.update(gameObjects);
-        assertTrue(player.health() == 2);
+
+        //assert
+        Mockito.verify(gw,Mockito.times(1)).addHealth(-1);
     }
-**/
+
     @Test
     public void playerJumpsWhenHitTrampoline(){
         Assertions.assertEquals(player.getVelocity().velocityY,0);
@@ -52,27 +55,34 @@ public class PlayerInteractionsTest {
 
         player.collide(trampoline);
         player.update(gameObjects);
-        Assertions.assertEquals(Math.round(player.getVelocity().velocityY),5);
+        Assertions.assertTrue(player.getVelocity().velocityY > 5);
     }
-/**
     @Test
     public void playerGetsScoreWhenHitCoin(){
+        //arrange
         GameWorld gw = mock(GameWorld.class);
-        var gameObjects = new ArrayList<IGameObject>();
         Coin coin = new Coin(new Position(0, -16));
-        gameObjects.add(coin);
-        gameObjects.add(player);
-        coin.collide(player);
-        player.update(gameObjects);
+        coin.addGameWorldObserver(gw);
 
+        //act
+        coin.collide(player);
+
+        //assert
         Mockito.verify(gw, Mockito.times(1)).addScore(1);
     }
 
     @Test
     public void playerDiesWhenFallingOfMap(){
+        //arrange
+        GameWorld gw = mock(GameWorld.class);
+        player.addGameWorldObserver(gw);
+        var collidables = new ArrayList<IGameObject>();
         player.getPosition().setY(-201);
-        Mockito.when(gw.getInputHandler()).thenReturn(mock(InputHandler.class));
-        player.update();
+
+        //act
+        player.update(collidables);
+
+        //assert
         Mockito.verify(gw,Mockito.times(1)).setHealth(0);
-    }**/
+    }
 }

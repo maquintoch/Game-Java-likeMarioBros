@@ -27,6 +27,7 @@ public class EnemyTest {
 
     @Test
     public void enemyMovestest(){
+        //arrange
         Position enemyPos = new Position(0,0);
         Enemy enemy = new Enemy(enemyPos);
         var collidables = new ArrayList<IGameObject>();
@@ -34,44 +35,44 @@ public class EnemyTest {
         collidables.add(new Tile(new Position(16,-16)));
         collidables.add(new Tile(new Position(32,-16)));
 
+        //act
         enemy.update(collidables);
 
+        //assert
         assertTrue(enemy.getPosition().getX() != 0);
 
     }
-/**
+
     @Test
     public void EnemyDisappearWhenPlayerJumpOnIt(){
-        InputHandler inputHandler = new InputHandler();
-        var gameObjects = new ArrayList<IGameObject>();
+        //arrange
+        GameWorld gw = mock(GameWorld.class);
         Enemy enemy = new Enemy(new Position(0,0));
-        Player player = new Player(new Position(0,16), inputHandler);
-        gameObjects.add(new Tile(new Position(0,-16)));
-        gameObjects.add(enemy);
+        enemy.addGameWorldObserver(gw);
+        InputHandler inputHandler = new InputHandler();
+        Player player = new Player(new Position(0,32), inputHandler);
 
-        assertTrue(gameObjects.contains(enemy));
+        //act
+        enemy.collide(player);
 
-        player.update(gameObjects);
-
-        assertTrue(!gameObjects.contains(enemy));
-
-        //Mockito.verify(gw, Mockito.times(1)).removeEntity(enemy);
+        //assert
+        Mockito.verify(gw, Mockito.times(1)).removeGameObject(enemy);
     }
-**/
+
 
     @Test
     public void EnemySwitchDirectionWhenCollideWall(){
-
+        //arrange
         var gameObjects = new ArrayList<IGameObject>();
-
         Enemy enemy = new Enemy(new Position(0,0));
         gameObjects.add(new Tile(new Position(0, -16)));
         gameObjects.add(new Tile(new Position(16, 0)));
-
         var previousSpeed = enemy.getSpeed().velocityX;
 
+        //act
         enemy.update(gameObjects);
 
+        //assert
         assertTrue(Math.signum(enemy.getSpeed().velocityX) != Math.signum(previousSpeed));
 
 
@@ -79,6 +80,7 @@ public class EnemyTest {
 
     @Test
     public void EnemySwitchDirectionWhenCollidewithAnotherEnemy(){
+        //arrange
         var gameObjects = new ArrayList<IGameObject>();
         Enemy enemy = new Enemy(new Position(0,0));
         Enemy enemy2 = new Enemy(new Position(16,0));
@@ -87,8 +89,10 @@ public class EnemyTest {
         gameObjects.add(enemy2);
         var previousSpeedEnemy = enemy.getSpeed().velocityX;
 
+        //act
         enemy.update(gameObjects);
 
+        //assert
         assertTrue(Math.signum(enemy.getSpeed().velocityX) != Math.signum(previousSpeedEnemy));
 
 

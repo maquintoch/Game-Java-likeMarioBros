@@ -22,8 +22,4 @@ public class CoinUITest {
         assertEquals(5, score.getScore());
     }
 
-    @Test
-    void levelCountTest(){
-
-    }
 }

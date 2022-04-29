@@ -103,7 +103,7 @@ public class Player extends EntityBase {
     @Override
     public void update(List<IGameObject> gameObjects) {
 
-    	//if (position.getY() < -200) updateFrame.setHealth(0); //If player falls off map set health to 0.
+    	if (position.getY() < -1) { gameWorldObservers.forEach(observer -> observer.setHealth(0)); }
 
         checkKeyCode(); //Move player based on keycode pressed.
 

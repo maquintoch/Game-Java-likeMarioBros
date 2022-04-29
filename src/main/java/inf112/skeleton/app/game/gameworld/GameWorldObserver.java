@@ -7,4 +7,6 @@ public interface GameWorldObserver {
     void addScore(int amount);
 
     void addHealth(int health);
+
+    void setHealth(int health);
 }
