@@ -13,6 +13,7 @@ public class Player extends EntityBase {
     private final AudioPlayer hurtAudioPlayer = new AudioPlayer("src/main/java/inf112/skeleton/app/assets/audio/hitHurt.wav");
     private final AudioPlayer jumpAudioPlayer = new AudioPlayer("src/main/java/inf112/skeleton/app/assets/audio/jump.wav");
     private final IInputHandler inputHandler;
+    private boolean isSecondPlayer = false;
 
     private PlayerSprite sprite = new PlayerSprite();
 
@@ -37,17 +38,48 @@ public class Player extends EntityBase {
         maxSpeedX = 10f;
         maxSpeedY = 10f;
     }
-       
+
+    public Player(Position position, IInputHandler inputHandler, boolean isSecondPlayer) {
+        super(position);
+
+        this.inputHandler = inputHandler;
+        this.isSecondPlayer = isSecondPlayer;
+
+        this.velocity = new Speed(0, 0);
+        this.acceleration = new Speed(0, -0.2f);
+
+        this.size = new GameObjectSize(14, 14);
+
+        airDragAmountX = 0.1f;
+        airDragAmountY = 0f;
+
+        maxSpeedX = 10f;
+        maxSpeedY = 10f;
+    }
+
 
     public void checkKeyCode(){
-        if(inputHandler.isActive(KeyCode.W) && isStanding){
-            jump();
-        }
-        if(inputHandler.isActive(KeyCode.A)){
-            moveLeft();
-        }
-        else if(inputHandler.isActive(KeyCode.D)){
-            moveRight();
+        if(isSecondPlayer) {
+            if(inputHandler.isActive(KeyCode.UP) && isStanding){
+                jump();
+            }
+            if(inputHandler.isActive(KeyCode.LEFT)){
+                moveLeft();
+            }
+            else if(inputHandler.isActive(KeyCode.RIGHT)){
+                moveRight();
+            }
+
+        } else {
+            if(inputHandler.isActive(KeyCode.W) && isStanding){
+                jump();
+            }
+            if(inputHandler.isActive(KeyCode.A)){
+                moveLeft();
+            }
+            else if(inputHandler.isActive(KeyCode.D)){
+                moveRight();
+            }
         }
     }
 
@@ -113,14 +145,15 @@ public class Player extends EntityBase {
             case Enemy:
                 if(this.isAbove(gameObject)) {
                     this.velocity.velocityY += jumpSpeed/2f;
-                } else if (false){
+                } else if (LocalTime.now().isAfter(invinsibilityTime.plusNanos(500000000))) {
                     hurtAudioPlayer.play();
-                    //gameWorld.addHealth(-1);
+                    gameWorldObservers.forEach(observer -> observer.addHealth(-1));
                     invinsibilityTime = LocalTime.now();
                 }
+                break;
             case Trampoline:
-                this.velocity.velocityY += 5;
-
+                this.velocity.velocityY += jumpSpeed * 1.2;
+                break;
         }
     }
 

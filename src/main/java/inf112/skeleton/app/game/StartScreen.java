@@ -40,7 +40,7 @@ public class StartScreen implements IStartGameSubject {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    startGameObservers.forEach(observer -> observer.startGame());
+                    startGameObservers.forEach(observer -> observer.startGame(false));
                 }
                 catch (Exception e)
                 {
@@ -60,7 +60,7 @@ public class StartScreen implements IStartGameSubject {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
-                    startGameObservers.forEach(observer -> observer.startGame());
+                    startGameObservers.forEach(observer -> observer.startGame(true));
                 }
                 catch (Exception e)
                 {

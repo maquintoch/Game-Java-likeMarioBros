@@ -42,7 +42,7 @@ public class Game extends Application implements IGameObserver {
         this.gameMenu.addGameObserver(this);
     }
 
-    public void startGame(){
+    public void startGame(boolean isMultiplayer){
             stage.setTitle("Mario");
             double width = 500;
             double height = 500;
@@ -71,7 +71,7 @@ public class Game extends Application implements IGameObserver {
             });
 
             var levelLoader = new LevelLoader();
-            gameWorld = new GameWorld(canvas, levelLoader, inputHandler);
+            gameWorld = new GameWorld(canvas, levelLoader, inputHandler, isMultiplayer);
             gameWorld.addScoreObserver(coinUI);
             gameWorld.addHealthObserver(healthUI);
 

@@ -2,6 +2,7 @@ package inf112.skeleton.app.objects;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.time.LocalTime;
 
 import inf112.skeleton.app.game.gameworld.GameWorld;
 import inf112.skeleton.app.objects.attributes.*;
@@ -50,8 +51,15 @@ public class Enemy extends EntityBase {
 
     public void collide(IGameObject gameObject) {
         var itemType = gameObject.getItemType();
-        if(itemType == ItemType.Player && gameObject.isAbove(this)) {
-            this.destory();
+        switch (itemType) {
+            case Player:
+                if (gameObject.isAbove(this)) {
+                    this.destory();
+                }
+                break;
+            case Trampoline:
+                this.velocity.velocityY += 1;
+                break;
         }
     }
 }

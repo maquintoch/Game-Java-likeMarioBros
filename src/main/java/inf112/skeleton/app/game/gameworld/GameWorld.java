@@ -1,5 +1,6 @@
 package inf112.skeleton.app.game.gameworld;
 
+import inf112.skeleton.app.Input.InputHandler;
 import inf112.skeleton.app.game.LevelLoader;
 import inf112.skeleton.app.objects.IGameObject;
 import inf112.skeleton.app.objects.Player;
@@ -18,7 +19,7 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
     private Canvas canvas;
 
     private int score = 0;
-    private int health = 10;
+    private int health = 3;
 
     private Background background;
 
@@ -28,6 +29,8 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
     private final LinkedList<IHealthObserver> healthObservers = new LinkedList<IHealthObserver>();
 
     private final LinkedList<IGameObject> gameObjects = new LinkedList<IGameObject>();
+    private boolean isMultiplayer = false;
+
     public LinkedList<IGameObject> getGameObjects() {
         return gameObjects;
     }
@@ -41,6 +44,19 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
         this.levelLoader = levelLoader;
 
     	this.camera = new Camera(canvas);
+
+        Load(0);
+    }
+
+    public GameWorld(Canvas canvas, LevelLoader levelLoader, IInputHandler inputHandler, boolean isMultiplayer) {
+
+        this.canvas = canvas;
+        this.background = new Background(canvas);
+        this.inputHandler = inputHandler;
+        this.levelLoader = levelLoader;
+        this.isMultiplayer = isMultiplayer;
+
+        this.camera = new Camera(canvas);
 
         Load(0);
     }
@@ -71,6 +87,12 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
     }
 
     @Override
+    public void addHealth(int health) {
+        this.health += health;
+        this.healthObservers.forEach(observer -> observer.setHealth(this.health));
+    }
+
+    @Override
     public void addScoreObserver(ScoreObserver observer) {
         this.scoreObservers.add(observer);
     }
@@ -94,7 +116,13 @@ public class GameWorld implements GameWorldObserver, GameWorldSubject {
         var factoryCollidables = levelLoader.getLevelGameObjects(levelIndex);
         gameObjects.addAll(factoryCollidables);
 
-        var startPosition = new Position(0, 0);
+        if(isMultiplayer) {
+            var startPosition2 = new Position(16, 16);
+            var player2 = new Player(startPosition2, inputHandler, true);
+            gameObjects.add(player2);
+        }
+
+        var startPosition = new Position(0, 16);
         var player = new Player(startPosition, inputHandler);
         camera.setTargetEntity(player);
 

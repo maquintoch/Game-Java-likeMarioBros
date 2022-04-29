@@ -9,7 +9,7 @@ public enum ItemType {
     JumpPowerup(true),
     ResistancePowerup(true),
     GravityPowerup(true),
-    Trampoline(true);
+    Trampoline(false);
 
     private final boolean solid;
 
