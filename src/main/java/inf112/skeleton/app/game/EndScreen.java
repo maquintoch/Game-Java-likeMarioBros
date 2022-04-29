@@ -35,7 +35,8 @@ public class EndScreen implements IStartGameSubject {
             public void handle(ActionEvent event) {
 
                 try {
-                    startGameObservers.forEach(observer -> observer.startGame(false));
+                    new Game().start(stage);
+//                    startGameObservers.forEach(observer -> observer.startGame(false));
                 }
                 catch (Exception e)
                 {
