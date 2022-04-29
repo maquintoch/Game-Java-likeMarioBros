@@ -29,31 +29,6 @@ Viktige krav og aspekter til spillet er:
 ### Game Setup with Maven
 This project comes with a working Maven `pom.xml` file. You should be able to import it into Eclipse using *File → Import → Maven → Existing Maven Projects* (or *Check out Maven Projects from SCM* to do Git cloning as well). You can also build the project from the command line with `mvn clean compile` and test it with `mvn clean test`.
 
-Pay attention to these folders:
-* `src/main/java` – Java source files go here (as usual for Maven)
-* `src/main/resources` – data files go here, for example in an `assets` sub-folder
-* `src/test/java` – JUnit tests
-* `target/classes` – compiled Java class files
-
-You should probably edit the `pom.xml` and fill in details such as the project `name` and `artifactId`:
-
-
-```xml
-
-	< !-- FIXME - set group id -->
-	<groupId>inf112.skeleton.app</groupId>
-	< !-- FIXME - set artifact name -->
-	<artifactId>javafx-app</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
-
-	< !-- FIXME - set app name -->
-	<name>mvn-app</name>
-	< !-- FIXME change it to the project's website -->
-	<url>http://www.example.com</url>
-```
-
-
 ## Running
 You can run the project from Eclipse/IntelliJ, or with Maven using `mvn javafx:run`. Change the main class by modifying the `main.class` setting in `pom.xml`:
 
