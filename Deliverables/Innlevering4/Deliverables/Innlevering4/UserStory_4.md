@@ -1,0 +1,3 @@
+| Brukerhistorier                                                              | Akseptanskriterierer                                    | Arbeidsoppgaver                               |  Issues  |
+| -----------------------------------------------------------------------------| --------------------------------------------------------|-----------------------------------------------| --------------------------------------------------------|
+| Som en spiller ønsker jeg å flytte spillerbrikken min for å komme i målet.   | Spillerbrikken flytter seg i forventet retning          | Bevege Spiller Entity                         | #5                      |
