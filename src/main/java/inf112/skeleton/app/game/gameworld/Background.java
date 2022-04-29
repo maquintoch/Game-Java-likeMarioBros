@@ -1,5 +1,10 @@
 package inf112.skeleton.app.game.gameworld;
 
+import javafx.scene.canvas.Canvas;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import javafx.scene.canvas.*;
 import javafx.scene.image.Image;
 
@@ -9,8 +14,11 @@ public class Background{
     
     public Background(Canvas canvas) {
         this.canvas = canvas;
-        String imagePath = "https://previews.123rf.com/images/vitaliyvill/vitaliyvill1609/vitaliyvill160900011/62999356-seamless-game-background-flat-style-2d-game-application.jpg?fbclid=IwAR3RCBjcR9G8fWr7rEk2YYcwQ5N_LlzQq6XVwgJ5yG0-j-QL0sQJLF4wmAA";
-        this.image = new Image(imagePath);
+        try {
+            image = new Image(new FileInputStream("src/main/java/inf112/skeleton/app/assets/image/background.png"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }  
     }
 
     public void draw() {
