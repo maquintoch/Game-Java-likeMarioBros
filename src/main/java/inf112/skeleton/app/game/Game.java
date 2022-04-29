@@ -96,7 +96,7 @@ public class Game extends Application implements IGameObserver {
                     }
                     if (System.currentTimeMillis() > next_game_tick) {
 
-                        if(gameWorld.getScore() == 3) {
+                        if(gameWorld.getScore() == 10) {
                             levelCount++;
                             if(levelLoader.levelExists(levelCount)) {
                                 gameWorld.Load(levelCount);
